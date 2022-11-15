@@ -1,0 +1,12 @@
+strings:
+  email: почта
+  password: пароль
+labels:
+  login: Вход
+titles:
+  login: Вход
+  home: Главная
+tooltips:
+  caps: Caps lock включен
+buttons:
+  login: Войти

@@ -1,0 +1,12 @@
+strings:
+  email: e-mail
+  password: password
+labels:
+  login: Log in
+titles:
+  login: Login
+  home: Home
+tooltips:
+  caps: Caps lock is On
+buttons:
+  login: Login

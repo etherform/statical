@@ -1,0 +1,29 @@
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $font-family: (
+    '': inherit,
+  ),
+  $colors: (
+    'white': #fcfcfc,
+    'black': #000000,
+    'primary': (
+      /* 'base': #409eff, */ 'base': #3a71a8,
+    ),
+    'success': (
+      /* 'base': #67c23a, */ 'base': #30b08f,
+    ),
+    'warning': (
+      /* 'base': #e6a23c, */ 'base': #fec171,
+    ),
+    'danger': (
+      /* 'base': #f56c6c, */ 'base': #fa0206,
+    ),
+    'error': (
+      /* 'base': #f56c6c, */ 'base': #fa0206,
+    ),
+    'info': (
+      'base': #909399,
+    ),
+  )
+);
+
+@use 'element-plus/theme-chalk/src/index.scss' as *;

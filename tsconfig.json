@@ -1,21 +1,30 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "baseUrl": ".",
     "module": "ESNext",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "jsx": "preserve",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "baseUrl": "./",
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"],
     "strict": true,
-    "paths": {},
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": [
+      "vite/client",
+      "vue/ref-macros",
+      "vite-plugin-pages/client",
+      "vite-plugin-vue-layouts/client",
+      "vite-electron-plugin/electron-env"
+    ],
+    "typeRoots": ["node_modules/@types"],
+    "paths": {
+      "~/*": ["src/*"]
+    }
   },
-  "include": ["src"],
-  "references": [
-    { "path": "./tsconfig.node.json" }
-  ]
+  "exclude": ["build", "node_modules", "cypress"]
 }
