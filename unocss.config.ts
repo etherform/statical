@@ -8,6 +8,8 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
+import { iconsArray } from './src/styles/icons'
+
 export default defineConfig({
   shortcuts: [],
   presets: [
@@ -26,17 +28,5 @@ export default defineConfig({
     transformerDirectives(),
     transformerVariantGroup(),
   ],
-  safelist: [
-    'i-quill:hamburger-sidebar',
-    'i-octicon:sidebar-collapse-24',
-    'i-octicon:sidebar-expand-24',
-    'i-uil-user',
-    'i-uil-lock',
-    'i-uil:lock-alt',
-    'i-uil:lock-open-alt',
-    'i-majesticons:arrows-expand-line',
-    'i-uil:user-circle',
-    'i-majesticons:chevron-down',
-    'i-fluent-mdl2:locale-language',
-  ],
+  safelist: [...iconsArray],
 })

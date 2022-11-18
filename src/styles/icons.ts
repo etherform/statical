@@ -11,3 +11,5 @@ export const icons = {
   down: 'i-majesticons:chevron-down',
   locale: 'i-fluent-mdl2:locale-language',
 }
+
+export const iconsArray = Object.values(icons)

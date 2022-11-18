@@ -17,6 +17,7 @@ const form = reactive({
 
 const selectedLocale = ref(0)
 
+// maybe this could be done with i18n by referencing strings from different locales
 const locales = {
   ru: 'Русский',
   en: 'English',
@@ -31,8 +32,8 @@ const handleSignIn = async () => {
 
 watchEffect(() => userStore.setLocaleById(selectedLocale.value))
 
-tryOnMounted(
-  () => userStore.locale.elementArray.findIndex((i) => i.name === userStore.locale.string),
+tryOnMounted(() =>
+  selectedLocale.value = userStore.locale.elementArray.findIndex((i) => i.name === userStore.locale.string),
 )
 </script>
 
