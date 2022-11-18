@@ -69,8 +69,6 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
         'vue-router',
         'vue-i18n',
         'vue/macros',
-        '@vueuse/head',
-        '@vueuse/core',
       ],
       dirs: ['src/database', 'src/store', 'src/composables'],
       /* resolvers: [], */
@@ -88,14 +86,14 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
       compositionOnly: true,
       include: [path.resolve(root, './locales/**')],
     }),
-    Electron({
+    /* Electron({
       include: ['electron'],
       transformOptions: {
-        sourcemap: !!process.env.VSCODE_DEBUG,
+        sourcemap: mode !== 'production',
       },
       plugins: [loadViteEnv()],
       outDir: 'build/dist-electron',
-    }),
+    }), */
   ]
 
   const resolve = {

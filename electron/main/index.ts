@@ -13,6 +13,7 @@
 import { release } from 'os'
 import { join } from 'path'
 import { BrowserWindow, app, ipcMain, shell } from 'electron'
+import installExtension, { APOLLO_DEVELOPER_TOOLS } from 'electron-devtools-installer'
 
 process.env.DIST_ELECTRON = join(__dirname, '..')
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
@@ -44,7 +45,9 @@ const indexHtml = join(process.env.DIST, 'index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
-    title: 'Main window',
+    title: 'Statical',
+    width: 1280,
+    height: 720,
     icon: join(process.env.PUBLIC, 'favicon.ico'),
     webPreferences: {
       preload,
@@ -78,7 +81,9 @@ async function createWindow() {
   })
 }
 
-app.whenReady().then(createWindow)
+app.whenReady()
+  .then(createWindow)
+  .then(() => installExtension(APOLLO_DEVELOPER_TOOLS))
 
 app.on('window-all-closed', () => {
   win = null

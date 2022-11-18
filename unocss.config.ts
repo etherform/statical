@@ -9,10 +9,7 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  shortcuts: [
-    /* ['btn', 'px-4 py-1 rounded inline-block bg-teal-700 text-white cursor-pointer hover:bg-teal-800 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
-    ['icon-btn', 'inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600'], */
-  ],
+  shortcuts: [],
   presets: [
     presetUno(),
     presetAttributify(),
@@ -21,10 +18,6 @@ export default defineConfig({
         'display': 'flex',
         'justify-content': 'space-around',
         'vertical-align': 'middle',
-        /* 'height': '100%',
-        'width': '100%', */
-        /* 'margin-left': 'auto',
-        'margin-right': 'auto', */
       },
     }),
     presetTypography(),
@@ -32,5 +25,18 @@ export default defineConfig({
   transformers: [
     transformerDirectives(),
     transformerVariantGroup(),
+  ],
+  safelist: [
+    'i-quill:hamburger-sidebar',
+    'i-octicon:sidebar-collapse-24',
+    'i-octicon:sidebar-expand-24',
+    'i-uil-user',
+    'i-uil-lock',
+    'i-uil:lock-alt',
+    'i-uil:lock-open-alt',
+    'i-majesticons:arrows-expand-line',
+    'i-uil:user-circle',
+    'i-majesticons:chevron-down',
+    'i-fluent-mdl2:locale-language',
   ],
 })

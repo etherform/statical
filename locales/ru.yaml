@@ -1,6 +1,11 @@
-strings:
+name: Русский
+strings_lower:
   email: почта
   password: пароль
+strings_capital:
+  email: Почта
+  password: Пароль
+  error: Ошибка
 labels:
   login: Вход
 titles:
@@ -10,3 +15,5 @@ tooltips:
   caps: Caps lock включен
 buttons:
   login: Войти
+messages:
+  login_fail: Авторизация не удалась.

@@ -1,6 +1,11 @@
-strings:
+name: English
+strings_lower:
   email: e-mail
   password: password
+strings_capital:
+  email: E-mail
+  password: Password
+  error: Error
 labels:
   login: Log in
 titles:
@@ -10,3 +15,5 @@ tooltips:
   caps: Caps lock is On
 buttons:
   login: Login
+messages:
+  login_fail: Login attempt failed.

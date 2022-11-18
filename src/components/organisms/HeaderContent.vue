@@ -1,14 +1,19 @@
 <script lang="ts" setup>
+import { useSignOut } from '@nhost/vue'
 import { ElMessage as message } from 'element-plus/es'
 import { icons } from '~/styles/icons'
 
+const { t } = useI18n()
+
 const user = useUserStore()
 const app = useAppStore()
+const { signOut } = useSignOut()
 
-const signOut = async () => {
-  const error = await user.signOut()
-  if (error)
-    message.error(error.message)
+const handleSignOut = async () => {
+  const { isError, error } = await signOut()
+
+  if (isError)
+    message.error(`${t('strings_capital.error')}: ${error?.message}`)
 }
 </script>
 
@@ -47,7 +52,7 @@ const signOut = async () => {
         <router-link to="/profile">
           <el-dropdown-item>Профиль</el-dropdown-item>
         </router-link>
-        <el-dropdown-item divided @click="signOut">
+        <el-dropdown-item divided @click="handleSignOut">
           Выйти
         </el-dropdown-item>
       </el-dropdown-menu>

@@ -1,10 +1,12 @@
 import nprogress from 'nprogress'
 import type { Router } from 'vue-router'
+import { toast } from '~/utils/toast'
+import { isAuthenticated } from '~/utils/auth'
 
 nprogress.configure({ showSpinner: false })
 
 export const setupGuards = (router: Router) => {
-  router.beforeEach((to, _from, next) => {
+  router.beforeEach(async (to, _from, next) => {
     // start nprogress animation
     nprogress.start()
 
@@ -18,27 +20,44 @@ export const setupGuards = (router: Router) => {
     const user = useUserStore()
 
     // if authenticated redirect from login to home page
-    /* if (to.path === '/login') {
-      if (user.isAuthenticated) { next({ path: '/home' }) }
-      else {
+    if (to.path === '/login' && await isAuthenticated()) {
+      if (import.meta.env.DEV)
+        toast.info('ROUTER: Redirecting authorized user to /home.')
+
+      next({ path: '/home' })
+    }
+    else if (to.matched.some((record) => record.meta.requiresAuth) && !(await isAuthenticated())) {
+      if (user.token.refresh) {
         user.refreshSession()
-        if (user.isAuthenticated)
-          next({ path: '/home' })
+
+        if (await isAuthenticated()) {
+          if (import.meta.env.DEV)
+            toast.info('ROUTER: Successfully refreshed user session.')
+
+          next()
+        }
+        else {
+          if (import.meta.env.DEV)
+            toast.info('ROUTER: Session refresh failed. Redirecting user to /login.')
+
+          next({ path: '/login' })
+        }
       }
-    } */
+      else {
+        if (import.meta.env.DEV)
+          toast.info('ROUTER: Redirecting unauthorized user to /login.')
 
-    // if not authenticated and required to be
-    /* else */ if (to.meta.requiresAuth && !user.isAuthenticated)
-      next({ path: '/login' })
-
-    else next()
+        next({ path: '/login' })
+      }
+    }
+    else { next() }
   })
 
   router.afterEach(async (to, _from, failure) => {
     const app = useAppStore()
     if (!failure) {
-      app.setPath(to.path)
-      app.setTitle(to.meta.title as string)
+      app.setPagePath(to.path)
+      app.setPageTitle(to.meta.title as string)
     }
 
     // finish nprogress animation

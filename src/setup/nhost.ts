@@ -1,11 +1,15 @@
 import type { App } from 'vue'
 import { NhostClient } from '@nhost/vue'
+import { createApolloClient } from '@nhost/apollo'
+import { DefaultApolloClient } from '@vue/apollo-composable'
 
-const nhost = new NhostClient({
-  subdomain: import.meta.env.VITE_NHOST_SUBDOMAIN as string,
-  region: import.meta.env.VITE_NHOST_REGION as string,
+export const nhost = new NhostClient({
+  subdomain: import.meta.env.VITE_NHOST_SUBDOMAIN,
+  region: import.meta.env.VITE_NHOST_REGION,
 })
 
+const apolloClient = createApolloClient({ nhost })
+
 export const setupDatabase = (app: App) => {
-  app.use(nhost)
+  app.use(nhost).provide(DefaultApolloClient, apolloClient)
 }

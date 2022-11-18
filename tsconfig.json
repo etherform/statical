@@ -4,7 +4,6 @@
     "module": "ESNext",
     "target": "ESNext",
     "lib": ["DOM", "ESNext"],
-    "strict": true,
     "esModuleInterop": true,
     "jsx": "preserve",
     "skipLibCheck": true,
@@ -12,7 +11,11 @@
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,
+
     "allowJs": true,
+    "checkJs": false,
+    "strict": true,
+
     "forceConsistentCasingInFileNames": true,
     "types": [
       "vite/client",

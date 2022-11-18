@@ -9,4 +9,5 @@ export const icons = {
   fullscreen: 'i-majesticons:arrows-expand-line',
   user: 'i-uil:user-circle',
   down: 'i-majesticons:chevron-down',
+  locale: 'i-fluent-mdl2:locale-language',
 }

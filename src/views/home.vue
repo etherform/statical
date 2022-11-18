@@ -2,6 +2,7 @@
 
 <template>
   <div>
+    <div class="i-mdi-alarm text-orange-400" />
     <h3>Forever Empty Dashboard.</h3>
   </div>
   <div>

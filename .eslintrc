@@ -1,6 +1,7 @@
 {
   "extends": ["@antfu"],
   "rules": {
-    "arrow-parens": [2, "always"]
+    "arrow-parens": [2, "always"],
+    "max-len": ["error", { "code": 120, "tabWidth": 2 }]
   }
 }

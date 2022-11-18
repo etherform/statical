@@ -1,6 +1,7 @@
 import type { App } from 'vue'
-import { createHead } from '@vueuse/head'
+import { createHead } from '@unhead/vue'
 
+import '@unocss/reset/tailwind.css'
 import '~/styles/default.scss'
 import '~/styles/hover.scss'
 import '~/styles/element.scss'
