@@ -1,7 +1,7 @@
 import { release } from 'os'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import { BrowserWindow, app, ipcMain, shell } from 'electron'
-import installExtension, { APOLLO_DEVELOPER_TOOLS, VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
+import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 
 process.env.DIST_ELECTRON = join(__dirname, '.')
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
@@ -22,9 +22,9 @@ if (!app.requestSingleInstanceLock()) {
 
 let win: BrowserWindow | null = null
 // Here, you can also use other preload
-const preload = join(__dirname, './preload.js')
+const preload = resolve(__dirname, './preload.js')
 const url = process.env.VITE_DEV_SERVER_URL
-const indexHtml = join(process.env.DIST, 'index.html')
+const indexHtml = resolve(__dirname, '../renderer/index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
@@ -69,7 +69,6 @@ app.whenReady()
   .then(createWindow)
   .then(() => {
     installExtension(VUEJS3_DEVTOOLS)
-    installExtension(APOLLO_DEVELOPER_TOOLS)
   })
 
 app.on('window-all-closed', () => {

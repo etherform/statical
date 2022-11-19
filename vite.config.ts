@@ -12,7 +12,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import UnoCSS from 'unocss/vite'
 import Electron from 'vite-plugin-electron'
-import Inspect from 'vite-plugin-inspect'
+/* import Inspect from 'vite-plugin-inspect' */
 import { generateThemeVars } from './src/renderer/styles/theme'
 
 rmSync('build/dist', { recursive: true, force: true })
@@ -104,16 +104,22 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
           build: {
             assetsDir: '',
             outDir: path.resolve('./build/dist/main'),
-            rollupOptions: { external: ['electron', ...builtinModules] },
+            rollupOptions: {
+              external: [
+                'electron',
+                'leveldown',
+                ...builtinModules,
+              ],
+            },
           },
           resolve,
         },
       },
     ),
-    Inspect({
+    /* Inspect({
       build: true,
       outputDir: 'build/.vite-inspect',
-    }),
+    }), */
   ]
 
   const server = {
