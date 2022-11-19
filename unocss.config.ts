@@ -8,7 +8,7 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-import { iconsArray } from './src/styles/icons'
+import { iconsArray } from './src/renderer/styles/icons'
 
 export default defineConfig({
   shortcuts: [],

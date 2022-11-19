@@ -17,3 +17,8 @@ buttons:
   login: Login
 messages:
   login_fail: Login attempt failed.
+notifications:
+  online-title: Online
+  online-text: Internet access is available!
+  offline-title: Offline
+  offline-text: Internet access is not available!

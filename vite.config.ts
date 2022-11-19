@@ -1,5 +1,6 @@
-import { rmSync } from 'fs'
 import path from 'path'
+import { builtinModules } from 'module'
+import { rmSync } from 'fs'
 import type { ConfigEnv, UserConfigExport } from 'vite'
 import { defineConfig, loadEnv } from 'vite'
 import Vue from '@vitejs/plugin-vue'
@@ -10,11 +11,11 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import UnoCSS from 'unocss/vite'
-import Electron from 'vite-electron-plugin'
-import { /* customStart, */ loadViteEnv } from 'vite-electron-plugin/plugin'
-import { generateThemeVars } from './src/styles/theme'
+import Electron from 'vite-plugin-electron'
+import Inspect from 'vite-plugin-inspect'
+import { generateThemeVars } from './src/renderer/styles/theme'
 
-rmSync('build/dist-electron', { recursive: true, force: true })
+rmSync('build/dist', { recursive: true, force: true })
 
 export default ({ mode }: ConfigEnv): UserConfigExport => {
   const productionMode = mode === 'production'
@@ -23,21 +24,27 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
   const env = loadEnv(mode, root)
   process.env = { ...process.env, ...env }
 
-  /* console.log(`HERE ${JSON.stringify(process.env)}`)
-  console.log(`HERE ${JSON.stringify(mode)}`) */
   const url = process.env.VITE_DEV_SERVER_URL
     ? new URL(process.env.VITE_DEV_SERVER_URL)
     : undefined
 
+  const resolve = {
+    alias: {
+      '~/': `${path.resolve(root, './src/renderer')}/`,
+      '@/': `${path.resolve(root, './src/main')}/`,
+      '#/': `${path.resolve(root, './src/common')}/`,
+    },
+  }
+
   const build = {
     assetsDir: '', // #287
-    sourcemap: mode !== 'production',
+    sourcemap: !productionMode,
     rollupOptions: {
       output: {
         inlineDynamicImports: true,
       },
     },
-    outDir: 'build/dist',
+    outDir: 'build/dist/renderer',
   }
 
   const css = {
@@ -54,28 +61,29 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
       reactivityTransform: true,
     }),
     Pages({
-      pagesDir: 'src/views',
+      pagesDir: 'src/renderer/views',
       extendRoute(route) {
         return route?.meta?.requiresAuth === false
           ? route
           : { ...route, meta: { requiresAuth: true } }
       },
     }),
-    Layouts(),
+    Layouts({ layoutsDirs: 'src/renderer/layouts' }),
     AutoImport({
-      dts: 'types/auto-imports.d.ts',
+      dts: 'src/common/types/auto-imports.d.ts',
       imports: [
         'vue',
         'vue-router',
         'vue-i18n',
         'vue/macros',
       ],
-      dirs: ['src/database', 'src/store', 'src/composables'],
+      dirs: ['src/renderer/store'],
       /* resolvers: [], */
       vueTemplate: true,
     }),
     Components({
-      dts: 'types/components.d.ts',
+      dirs: ['src/renderer/components'],
+      dts: 'src/common/types/components.d.ts',
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       resolvers: [ElementPlusResolver({ importStyle: 'sass' })],
@@ -84,30 +92,36 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
     VueI18n({
       runtimeOnly: true,
       compositionOnly: true,
-      include: [path.resolve(root, './locales/**')],
+      include: [path.resolve(root, './src/common/locales/**')],
     }),
-    /* Electron({
-      include: ['electron'],
-      transformOptions: {
-        sourcemap: mode !== 'production',
+    Electron(
+      {
+        entry: [path.resolve(root, './src/main/main.ts'), path.resolve(root, './src/main/preload.ts')],
+        onstart: (options) => {
+          options.startup(['.', '--inspect=5858', '--remote-debugging-port=9227'])
+        },
+        vite: {
+          build: {
+            assetsDir: '',
+            outDir: path.resolve('./build/dist/main'),
+            rollupOptions: { external: ['electron', ...builtinModules] },
+          },
+          resolve,
+        },
       },
-      plugins: [loadViteEnv()],
-      outDir: 'build/dist-electron',
-    }), */
+    ),
+    Inspect({
+      build: true,
+      outputDir: 'build/.vite-inspect',
+    }),
   ]
-
-  const resolve = {
-    alias: {
-      '~/': `${path.resolve(root, './src')}/`,
-    },
-  }
 
   const server = {
     fs: {
       strict: true,
     },
-    host: productionMode ? process.env.VITE_HOST ?? 'localhost' : url?.hostname ?? 'localhost',
-    port: productionMode ? Number(process.env.VITE_PORT) ?? 3030 : Number(url?.port) ?? 3344,
+    host: url?.hostname ?? 'localhost',
+    port: Number(url?.port) ?? 3344,
     cors: false,
     strictPort: true,
   }

@@ -17,3 +17,8 @@ buttons:
   login: Войти
 messages:
   login_fail: Авторизация не удалась.
+notifications:
+  online-title: В сети
+  online-text: Интернет доступен!
+  offline-title: Не в сети
+  offline-text: Интернет не доступен!

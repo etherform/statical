@@ -1,6 +1,3 @@
-/**
- * @see https://www.electron.build/configuration/configuration
- */
 {
   "productName": "Statical",
   "appId": "dev.etherform.statical",
@@ -8,23 +5,16 @@
   "directories": {
     "output": "build/release/${version}"
   },
-  "files": [
-    "build/dist-electron",
-    "build/dist"
-  ],
+  "files": ["build/dist/main", "build/dist/renderer"],
   "mac": {
     "artifactName": "${productName}_${version}.${ext}",
-    "target": [
-      "dmg"
-    ]
+    "target": ["dmg"]
   },
   "win": {
     "target": [
       {
         "target": "nsis",
-        "arch": [
-          "x64"
-        ]
+        "arch": ["x64"]
       }
     ],
     "icon": "./public/favicon.ico",

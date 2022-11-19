@@ -1,12 +1,17 @@
 <script lang="ts" setup>
 import { useNhostClient } from '@nhost/vue'
 import { useHead } from '@unhead/vue'
-import { toast } from '~/utils/toast'
+import isOnline from 'is-online'
+import { computedAsync, tryOnMounted, whenever } from '@vueuse/core'
+import { notify, toast } from '~/utils/toasts'
 
 const app = useAppStore()
 const user = useUserStore()
 const { nhost } = useNhostClient()
 const router = useRouter()
+const { t } = useI18n()
+
+const onlineStatus = computedAsync(async () => await isOnline(), false)
 
 useHead({
   title: 'Statical',
@@ -39,6 +44,14 @@ nhost.auth.onTokenChanged((session) => {
 
   if (session)
     user.handleTokenChange(session)
+})
+tryOnMounted(() => {
+  whenever(() =>
+    onlineStatus.value === true, () => notify.success(t('notifications.online-title'), t('notifications.online-text')),
+  )
+  whenever(() =>
+    onlineStatus.value === false, () => notify.error(t('notifications.offline-title'), t('notifications.offline-text')),
+  )
 })
 </script>
 

@@ -3,9 +3,7 @@ import type { Language } from 'element-plus/es/locale'
 import { en, ru } from 'element-plus/es/locales'
 import type { NhostSession } from '@nhost/core'
 import { nhost } from '~/setup/nhost'
-import { i18n } from '~/setup/i18n'
-
-const { t, locale: appLocale } = i18n.global
+import { t, locale as appLocale } from '~/setup/i18n'
 
 export interface UserState {
   id: string | undefined

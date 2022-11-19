@@ -2,7 +2,7 @@
 import { useSignInEmailPassword } from '@nhost/vue'
 import { tryOnMounted } from '@vueuse/core'
 import { icons } from '~/styles/icons'
-import { toast } from '~/utils/toast'
+import { toast } from '~/utils/toasts'
 
 const { t } = useI18n()
 const { isLoading, signInEmailPassword } = useSignInEmailPassword()

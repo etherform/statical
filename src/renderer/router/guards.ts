@@ -1,6 +1,6 @@
 import nprogress from 'nprogress'
 import type { Router } from 'vue-router'
-import { toast } from '~/utils/toast'
+import { toast } from '~/utils/toasts'
 import { isAuthenticated } from '~/utils/auth'
 
 nprogress.configure({ showSpinner: false })

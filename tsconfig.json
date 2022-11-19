@@ -3,16 +3,16 @@
     "baseUrl": ".",
     "module": "ESNext",
     "target": "ESNext",
-    "lib": ["DOM", "ESNext"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "esModuleInterop": true,
     "jsx": "preserve",
     "skipLibCheck": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "strictNullChecks": true,
 
-    "allowJs": true,
+    "allowJs": false,
     "checkJs": false,
     "strict": true,
 
@@ -22,12 +22,15 @@
       "vue/ref-macros",
       "vite-plugin-pages/client",
       "vite-plugin-vue-layouts/client",
-      "vite-electron-plugin/electron-env"
+      "@intlify/vite-plugin-vue-i18n/client"
     ],
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["node_modules/@types", "src/common/types"],
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/renderer/*"],
+      "@/*": ["src/main/*"],
+      "#/*": ["src/common/*"]
     }
   },
-  "exclude": ["build", "node_modules", "cypress"]
+  "include": ["src"],
+  "exclude": ["build", "node_modules"]
 }

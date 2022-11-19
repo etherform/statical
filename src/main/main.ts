@@ -1,21 +1,9 @@
-/*
- The built directory structure
-
- ├─┬ dist-electron
- │ ├─┬ main
- │ │ └── index.js    > Electron-Main
- │ └─┬ preload
- │   └── index.js    > Preload-Scripts
- ├─┬ dist
- │ └── index.html    > Electron-Renderer
- */
-
 import { release } from 'os'
 import { join } from 'path'
 import { BrowserWindow, app, ipcMain, shell } from 'electron'
-import installExtension, { APOLLO_DEVELOPER_TOOLS } from 'electron-devtools-installer'
+import installExtension, { APOLLO_DEVELOPER_TOOLS, VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 
-process.env.DIST_ELECTRON = join(__dirname, '..')
+process.env.DIST_ELECTRON = join(__dirname, '.')
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
 process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST_ELECTRON, '../public')
 
@@ -32,14 +20,9 @@ if (!app.requestSingleInstanceLock()) {
   process.exit(0)
 }
 
-// Remove electron security warnings
-// This warning only shows in development mode
-// Read more on https://www.electronjs.org/docs/latest/tutorial/security
-// process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
-
 let win: BrowserWindow | null = null
 // Here, you can also use other preload
-const preload = join(__dirname, '../preload/index.js')
+const preload = join(__dirname, './preload.js')
 const url = process.env.VITE_DEV_SERVER_URL
 const indexHtml = join(process.env.DIST, 'index.html')
 
@@ -56,6 +39,7 @@ async function createWindow() {
       // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
       nodeIntegration: false,
       contextIsolation: true,
+      sandbox: false,
     },
   })
 
@@ -83,7 +67,10 @@ async function createWindow() {
 
 app.whenReady()
   .then(createWindow)
-  .then(() => installExtension(APOLLO_DEVELOPER_TOOLS))
+  .then(() => {
+    installExtension(VUEJS3_DEVTOOLS)
+    installExtension(APOLLO_DEVELOPER_TOOLS)
+  })
 
 app.on('window-all-closed', () => {
   win = null

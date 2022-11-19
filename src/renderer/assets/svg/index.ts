@@ -1,6 +1,6 @@
-import type { IconifyJSON } from '@iconify/vue'
+/* import type { IconifyJSON } from '@iconify/vue' */
 
-export const localCollection: IconifyJSON = {
+export const localCollection/* : IconifyJSON */ = {
   prefix: 'local',
   icons: {
     '404': {

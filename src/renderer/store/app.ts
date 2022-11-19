@@ -1,7 +1,5 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import { i18n } from '~/setup/i18n'
-
-const { t, te } = i18n.global
+import { t, te } from '~/setup/i18n'
 
 export interface AppState {
   page: {
