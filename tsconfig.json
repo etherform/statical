@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "module": "ESNext",
     "target": "ESNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
@@ -11,7 +11,7 @@
     "resolveJsonModule": true,
     "noUnusedLocals": false,
     "strictNullChecks": true,
-
+    "sourceMap": false,
     "allowJs": false,
     "checkJs": false,
     "strict": true,
@@ -20,17 +20,34 @@
     "types": [
       "vite/client",
       "vue/ref-macros",
-      "vite-plugin-pages/client",
-      "vite-plugin-vue-layouts/client",
-      "@intlify/vite-plugin-vue-i18n/client"
+      "@intlify/unplugin-vue-i18n/messages"
     ],
-    "typeRoots": ["node_modules/@types", "src/common/types"],
+    "typeRoots": ["node_modules/@types", "src/renderer/types"],
     "paths": {
       "~/*": ["src/renderer/*"],
       "@/*": ["src/main/*"],
-      "#/*": ["src/common/*"]
+      "&/*": ["src/preload/*"],
+      "#/*": ["src/shared/*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["build", "node_modules"]
+  "vueCompilerOptions": {
+    "target": 3,
+    "plugins": [
+      "volar-plugin-vue-router",
+    ]
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "ES2022",
+      "esModuleInterop": true,
+      "sourceMap": false,
+      "resolveJsonModule": true,
+    },
+  },
+
+  "include": ["src/**/*.ts", "src/**/*.vue"],
+  "exclude": ["build/**/*", "node_modules/**/*"]
 }

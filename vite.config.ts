@@ -1,53 +1,66 @@
 import path from 'path'
-import { builtinModules } from 'module'
 import { rmSync } from 'fs'
-import type { ConfigEnv, UserConfigExport } from 'vite'
+import type { ConfigEnv, UserConfig, UserConfigExport } from 'vite'
 import { defineConfig, loadEnv } from 'vite'
 import Vue from '@vitejs/plugin-vue'
-import Pages from 'vite-plugin-pages'
-import Layouts from 'vite-plugin-vue-layouts'
+/* import Pages from 'vite-plugin-pages' */
+import VueRouter from 'unplugin-vue-router/vite'
+/* import Layouts from 'vite-plugin-vue-layouts' */
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
+import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import UnoCSS from 'unocss/vite'
-import Electron from 'vite-plugin-electron'
-/* import Inspect from 'vite-plugin-inspect' */
+import Electron from 'vite-electron-plugin'
+import { alias, loadViteEnv } from 'vite-electron-plugin/plugin'
+import { VueRouterAutoImports } from 'unplugin-vue-router'
 import { generateThemeVars } from './src/renderer/styles/theme'
+import { chrome, node } from './.electron-vendors.cache.json'
 
-rmSync('build/dist', { recursive: true, force: true })
+rmSync('build/main', { recursive: true, force: true })
+rmSync('build/preload', { recursive: true, force: true })
+rmSync('build/shared', { recursive: true, force: true })
 
-export default ({ mode }: ConfigEnv): UserConfigExport => {
-  const productionMode = mode === 'production'
+export default ({ command, mode }: ConfigEnv): UserConfigExport => {
+  /* const productionMode = mode === 'production' */
 
-  const root = process.cwd()
-  const env = loadEnv(mode, root)
+  const projectRoot = process.cwd()
+  /* const electronRoot = path.resolve(projectRoot, 'src/main')
+  const sharedRoot = path.resolve(projectRoot, 'src/shared') */
+  const buildRoot = path.resolve(projectRoot, 'build')
+  const root = path.resolve(projectRoot, 'src/renderer')
+  const publicDir = path.resolve(projectRoot, 'public')
+  const env = loadEnv(mode, projectRoot)
   process.env = { ...process.env, ...env }
 
   const url = process.env.VITE_DEV_SERVER_URL
     ? new URL(process.env.VITE_DEV_SERVER_URL)
     : undefined
 
-  const resolve = {
+  const resolve: UserConfig['resolve'] = {
     alias: {
-      '~/': `${path.resolve(root, './src/renderer')}/`,
-      '@/': `${path.resolve(root, './src/main')}/`,
-      '#/': `${path.resolve(root, './src/common')}/`,
+      '~/': `${path.resolve(projectRoot, './src/renderer')}/`,
+      '@/': `${path.resolve(projectRoot, './src/main')}/`,
+      '&/': `${path.resolve(projectRoot, './src/preload')}/`,
+      '#/': `${path.resolve(projectRoot, './src/shared')}/`,
     },
   }
 
-  const build = {
+  const build: UserConfig['build'] = {
     assetsDir: '', // #287
-    sourcemap: !productionMode,
+    sourcemap: command === 'serve' ? 'inline' : false,
+    target: [`chrome${chrome}`, `node${node}`],
+    emptyOutDir: true,
     rollupOptions: {
       output: {
         inlineDynamicImports: true,
+        sourcemap: command === 'serve' ? 'inline' : false,
       },
     },
-    outDir: 'build/dist/renderer',
+    outDir: path.resolve(buildRoot, './renderer'),
   }
 
-  const css = {
+  const css: UserConfig['css'] = {
     preprocessorOptions: {
       scss: {
         additionalData: generateThemeVars(),
@@ -55,35 +68,33 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
     },
   }
 
-  const plugins = [
+  const plugins: UserConfig['plugins'] = [
+    VueRouter({
+      routesFolder: ['src/renderer/views'],
+      routeBlockLang: 'yaml',
+      dts: 'src/renderer/types/router.d.ts',
+      importMode: 'async',
+    }),
     Vue({
       include: [/\.vue$/, /\.md$/],
       reactivityTransform: true,
     }),
-    Pages({
-      pagesDir: 'src/renderer/views',
-      extendRoute(route) {
-        return route?.meta?.requiresAuth === false
-          ? route
-          : { ...route, meta: { requiresAuth: true } }
-      },
-    }),
-    Layouts({ layoutsDirs: 'src/renderer/layouts' }),
     AutoImport({
-      dts: 'src/common/types/auto-imports.d.ts',
+      dts: 'types/auto-imports.d.ts',
       imports: [
         'vue',
-        'vue-router',
         'vue-i18n',
         'vue/macros',
+        VueRouterAutoImports,
+        { 'vue-router/auto': ['useLink'] },
       ],
-      dirs: ['src/renderer/store'],
+      dirs: ['composables', 'store'],
       /* resolvers: [], */
       vueTemplate: true,
     }),
     Components({
-      dirs: ['src/renderer/components'],
-      dts: 'src/common/types/components.d.ts',
+      dirs: ['components'],
+      dts: 'types/components.d.ts',
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       resolvers: [ElementPlusResolver({ importStyle: 'sass' })],
@@ -92,37 +103,29 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
     VueI18n({
       runtimeOnly: true,
       compositionOnly: true,
-      include: [path.resolve(root, './src/common/locales/**')],
+      include: [path.resolve(projectRoot, 'src/shared/locales/**')],
     }),
-    Electron(
-      {
-        entry: [path.resolve(root, './src/main/main.ts'), path.resolve(root, './src/main/preload.ts')],
-        onstart: (options) => {
-          options.startup(['.', '--inspect=5858', '--remote-debugging-port=9227'])
-        },
-        vite: {
-          build: {
-            assetsDir: '',
-            outDir: path.resolve('./build/dist/main'),
-            rollupOptions: {
-              external: [
-                'electron',
-                'leveldown',
-                ...builtinModules,
-              ],
-            },
-          },
-          resolve,
-        },
+    Electron({
+      root: path.resolve(projectRoot, 'src'),
+      include: ['shared', 'main', 'preload'],
+      outDir: buildRoot,
+      plugins: [
+        alias([
+          { find: '~', replacement: path.resolve(__dirname, 'src/renderer') },
+          { find: '@', replacement: path.resolve(__dirname, 'src/main') },
+          { find: '&', replacement: path.resolve(__dirname, 'src/preload') },
+          { find: '#', replacement: path.resolve(__dirname, 'src/shared') },
+        ]),
+        loadViteEnv(),
+      ],
+      transformOptions: {
+        sourcemap: command === 'serve' ? 'inline' : false,
+        target: [`chrome${chrome}`, `node${node}`],
       },
-    ),
-    /* Inspect({
-      build: true,
-      outputDir: 'build/.vite-inspect',
-    }), */
+    }),
   ]
 
-  const server = {
+  const server: UserConfig['server'] = {
     fs: {
       strict: true,
     },
@@ -132,5 +135,14 @@ export default ({ mode }: ConfigEnv): UserConfigExport => {
     strictPort: true,
   }
 
-  return defineConfig({ resolve, plugins, css, build, server, clearScreen: false })
+  return defineConfig({
+    root,
+    publicDir,
+    resolve,
+    plugins,
+    css,
+    build,
+    server,
+    clearScreen: false,
+  })
 }

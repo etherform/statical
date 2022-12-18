@@ -2,16 +2,20 @@ import { ElMessage, ElNotification } from 'element-plus/es'
 
 export const toast = {
   success: (message: string, duration?: number) =>
-    ElMessage.success({ message, duration: duration ?? 3000 }),
+    ElMessage.success({ message, duration: duration ?? 3000, offset: 50 }),
 
   info: (message: string, duration?: number) =>
-    ElMessage.info({ message, duration: duration ?? 3000 }),
+    ElMessage.info({ message, duration: duration ?? 3000, offset: 50 }),
 
   warn: (message: string, duration?: number) =>
-    ElMessage.warning({ message, duration: duration ?? 5000 }),
+    ElMessage.warning({ message, duration: duration ?? 5000, offset: 50 }),
 
   error: (message: string, duration?: number) =>
-    ElMessage.error({ message, duration: duration ?? 5000 }),
+    ElMessage.error({ message, duration: duration ?? 5000, offset: 50 }),
+  debug: (message: string, duration?: number) => {
+    if (import.meta.env.DEV)
+      ElMessage.info({ message, duration: duration ?? 3000, offset: 50 })
+  },
 }
 
 export const notify = {

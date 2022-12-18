@@ -1,11 +1,11 @@
 {
   "productName": "Statical",
   "appId": "dev.etherform.statical",
-  "asar": true,
+  "asar": false,
   "directories": {
     "output": "build/release/${version}"
   },
-  "files": ["build/dist/main", "build/dist/renderer"],
+  "files": ["build/main", "build/renderer"],
   "mac": {
     "artifactName": "${productName}_${version}.${ext}",
     "target": ["dmg"]
@@ -17,7 +17,6 @@
         "arch": ["x64"]
       }
     ],
-    "icon": "./public/favicon.ico",
     "artifactName": "${productName}_${version}.${ext}"
   },
   "nsis": {

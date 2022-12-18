@@ -1,27 +1,17 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { Language } from 'element-plus/es/locale'
-import { en, ru } from 'element-plus/es/locales'
-import type { NhostSession } from '@nhost/core'
-import { nhost } from '~/setup/nhost'
-import { t, locale as appLocale } from '~/setup/i18n'
+import type { Session } from '@supabase/supabase-js'
+import type { RemovableRef } from '@vueuse/core'
+import { useStorage } from '@vueuse/core'
+import { logger } from '~/utils/logger'
 
 export interface UserState {
   id: string | undefined
   name: string | undefined
   email: string | undefined
   roles: string[] | undefined
-  avatar: string | undefined
-  locale: {
-    name: string
-    string: string
-    element: Language
-    elementArray: Language[]
-  }
-  token: {
-    access: string | undefined
-    refresh: string | undefined
-  }
-
+  locale: string
+  refreshToken: RemovableRef<string>
+  session: Session | undefined
 }
 
 export const useUserStore = defineStore({
@@ -31,34 +21,33 @@ export const useUserStore = defineStore({
     name: undefined,
     email: undefined,
     roles: undefined,
-    avatar: undefined,
-    locale: {
-      name: t('name'),
-      string: en.name,
-      element: en,
-      elementArray: [en, ru],
-    },
-    token: {
-      access: undefined,
-      refresh: undefined,
-    },
+    locale: 'ru',
+    refreshToken: useStorage('refreshToken', ''),
+    session: undefined,
   }),
+  getters: {
+    isAuthenticated(state) {
+      return !!state.session
+    },
+  },
   actions: {
-    handleSignIn(session: NhostSession) {
-      this.id = session.user.id
-      this.name = session.user?.displayName
-      this.email = session.user?.email
-      this.roles = session.user?.roles
-      this.avatar = session.user?.avatarUrl
+    async handleSignIn(session: Session) {
+      this.session = session
 
-      if (session.user?.locale) {
-        const locale = this.locale.elementArray.find((i) => i.name === session.user.locale)
-        if (locale && this.locale.name !== locale.name) {
-          appLocale.value = locale.name
-          this.locale.string = locale.name
-          this.locale.name = t('name')
-          this.locale.element = locale
-        }
+      const supa = useSupabase()
+      const { data: users, error } = await supa.from('users').select(`
+        id,
+        name,
+        email,
+        locale
+      `).eq('id', session.user.id)
+
+      if (users?.length === 1) {
+        this.id = users[0].id
+        this.name = users[0].name
+        this.email = users[0].email
+        this.locale = users[0].locale
+        this.refreshToken = session.refresh_token
       }
     },
 
@@ -67,25 +56,27 @@ export const useUserStore = defineStore({
       this.name = undefined
       this.email = undefined
       this.roles = undefined
-      this.avatar = undefined
-      this.token.access = undefined
-      this.token.refresh = undefined
+      this.refreshToken = ''
+      this.session = undefined
     },
 
-    handleTokenChange(session: NhostSession) {
-      this.token.access = session.accessToken
-      this.token.refresh = session.refreshToken
+    handleTokenChange(session: Session) {
+      this.refreshToken = session.refresh_token
+      this.session = session
     },
 
-    refreshSession() {
-      nhost.auth.refreshSession(this.token.refresh)
-    },
+    async refreshSession() {
+      const supa = useSupabase()
+      const { data, error } = await supa.auth.refreshSession({ refresh_token: this.refreshToken })
+      if (error) {
+        logger.debug(`AUTH => Failed to refresh session: ${error.message}`)
+      }
+      else if (data.session) {
+        logger.debug('AUTH => Successfully refreshed session.')
+        await this.handleSignIn(data.session)
+      }
 
-    setLocaleById(id: number) {
-      appLocale.value = this.locale.elementArray[id].name
-      this.locale.string = this.locale.elementArray[id].name
-      this.locale.element = this.locale.elementArray[id]
-      this.locale.name = t('name')
+      return !!data.session
     },
   },
 })

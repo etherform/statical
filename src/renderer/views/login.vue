@@ -1,21 +1,27 @@
 <script lang="ts" setup>
-import { useSignInEmailPassword } from '@nhost/vue'
 import { tryOnMounted } from '@vueuse/core'
+import { logger } from '~/utils/logger'
 import { icons } from '~/styles/icons'
 import { toast } from '~/utils/toasts'
 
 const { t } = useI18n()
-const { isLoading, signInEmailPassword } = useSignInEmailPassword()
-const userStore = useUserStore()
+const user = useUserStore()
+const supa = useSupabase()
+const locale = useLocaleStore()
 
 const form = reactive({
   email: '',
   password: '',
   passwordTooltip: false,
-  isLoading,
+  isLoading: false,
+  selectedLocale: locale.elementLocaleArray.findIndex((e) => e.name === user.locale),
 })
 
-const selectedLocale = ref(0)
+watch(
+  () => form.selectedLocale,
+  () => user.locale = locale.elementLocaleArray[form.selectedLocale].name,
+  { immediate: true },
+)
 
 // maybe this could be done with i18n by referencing strings from different locales
 const locales = {
@@ -24,23 +30,37 @@ const locales = {
 }
 
 const handleSignIn = async () => {
-  const { isError, error } = await signInEmailPassword(form.email, form.password)
-
-  if (isError)
-    toast.error(`${t('messages.login_fail')} ${t('strings_capital.error')}: ${error?.message}`)
+  try {
+    form.isLoading = true
+    const { error } = await supa.auth.signInWithPassword({
+      email: form.email,
+      password: form.password,
+    })
+    if (error)
+      throw error
+  }
+  catch (error) {
+    if (error instanceof Error) {
+      toast.error(error.message)
+      logger.error(`Sign-in failed: ${error.message}`)
+    }
+  }
+  finally {
+    form.isLoading = false
+  }
 }
 
-watchEffect(() => userStore.setLocaleById(selectedLocale.value))
+/* watchEffect(() => userStore.setLocaleById(selectedLocale.value))
 
 tryOnMounted(() =>
   selectedLocale.value = userStore.locale.elementArray.findIndex((i) => i.name === userStore.locale.string),
-)
+) */
 </script>
 
 <template>
-  <el-container h-screen bg-bluegray-700>
-    <el-header w-screen />
-    <el-main w-screen flex-grow flex justify-center items-start>
+  <el-container h-full bg-bluegray-700>
+    <el-header w-full />
+    <el-main w-full flex-grow flex justify-center items-start>
       <el-form :model="form" autocomplete="on" w-sm size="large" pt-16>
         <img src="/logo-transp-bg.png" w-sm>
         <div flex pb-4 pl-1 pr-1 w-full text-gray-200 justify-between>
@@ -58,7 +78,7 @@ tryOnMounted(() =>
                 <el-dropdown-item>
                   Выйти
                 </el-dropdown-item> -->
-                <el-radio-group v-model="selectedLocale">
+                <el-radio-group v-model="form.selectedLocale">
                   <el-dropdown-item>
                     <el-radio :label="0" border size="small">
                       {{ locales.en }}

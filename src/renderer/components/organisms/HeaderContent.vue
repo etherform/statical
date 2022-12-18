@@ -1,20 +1,13 @@
 <script lang="ts" setup>
-import { useSignOut } from '@nhost/vue'
-import { ElMessage as message } from 'element-plus/es'
 import { icons } from '~/styles/icons'
 
 const { t } = useI18n()
 
 const user = useUserStore()
 const app = useAppStore()
-const { signOut } = useSignOut()
+const supa = useSupabase()
 
-const handleSignOut = async () => {
-  const { isError, error } = await signOut()
-
-  if (isError)
-    message.error(`${t('strings_capital.error')}: ${error?.message}`)
-}
+const handleSignOut = () => supa.auth.signOut()
 </script>
 
 <template>

@@ -1,4 +1,24 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const supa = useSupabase()
+const user = useUserStore()
+
+const handle = async () => {
+  const { data: users, error } = await supa
+    .from('users')
+    .select(`
+      id,
+      email,
+      user_roles (
+        roles (
+          role
+        )
+      )
+    `)
+  /* users[0].roles[0] */
+  /* .eq('user_id', user.id) */
+  console.log(JSON.stringify(users, null, 2))
+}
+</script>
 
 <template>
   <div>
@@ -6,7 +26,7 @@
     <h3>Forever Empty Dashboard.</h3>
   </div>
   <div>
-    <el-button type="primary">
+    <el-button type="primary" @click="handle">
       Change Icon
     </el-button>
   </div>

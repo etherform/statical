@@ -1,31 +1,31 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import { t, te } from '~/setup/i18n'
 
 export interface AppState {
-  page: {
-    path: string | undefined
-    title: string | undefined
-  }
   sidebar: {
     collapsed: boolean
   }
-  allowEdit: boolean
 }
 
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
-    page: {
-      path: undefined,
-      title: undefined,
-    },
     sidebar: {
       collapsed: false,
     },
-    allowEdit: false,
   }),
+  getters: {
+    /*     pageTitle(_state): string | undefined {
+      const route = useRoute()
+      if (route.meta.title && te(route.meta.title as string))
+        return t(route.meta.title as string)
+      else if (route.meta.title)
+        return route.meta.title as string
+      else
+        return undefined
+    }, */
+  },
   actions: {
-    async setPagePath(path: string) {
+    /* async setPagePath(path: string) {
       this.page.path = path
     },
     async setPageTitle(title: string | undefined) {
@@ -35,12 +35,9 @@ export const useAppStore = defineStore({
         this.page.title = title
       else
         this.page.title = undefined
-    },
+    }, */
     toggleSidebar() {
       this.sidebar.collapsed = !this.sidebar.collapsed
-    },
-    toggleEditMode() {
-      this.allowEdit = !this.allowEdit
     },
   },
 },

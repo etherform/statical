@@ -1,9 +1,8 @@
-<template>
-  <router-view />
-</template>
-
-<route lang="yaml">
-redirect: /home
-meta:
-  requiresAuth: false
-</route>
+<script setup lang="ts">
+definePage({
+  redirect: '/home',
+  meta: {
+    requiresAuth: false,
+  },
+})
+</script>

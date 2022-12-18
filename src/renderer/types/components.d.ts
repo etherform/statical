@@ -7,9 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AsideContent: typeof import('./../../renderer/components/organisms/AsideContent.vue')['default']
-    AsideMenuItem: typeof import('./../../renderer/components/molecules/AsideMenuItem.vue')['default']
-    Breadcrumb: typeof import('./../../renderer/components/molecules/Breadcrumb.vue')['default']
+    AppLayout: typeof import('./../components/AppLayout/AppLayout.vue')['default']
+    AsideContent: typeof import('./../components/organisms/AsideContent.vue')['default']
+    AsideMenuItem: typeof import('./../components/molecules/AsideMenuItem.vue')['default']
+    Breadcrumb: typeof import('./../components/molecules/Breadcrumb.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
@@ -27,10 +28,8 @@ declare module '@vue/runtime-core' {
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
-    ElTable: typeof import('element-plus/es')['ElTable']
-    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
-    HeaderContent: typeof import('./../../renderer/components/organisms/HeaderContent.vue')['default']
+    HeaderContent: typeof import('./../components/organisms/HeaderContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

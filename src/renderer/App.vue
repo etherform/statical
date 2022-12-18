@@ -1,63 +1,83 @@
 <script lang="ts" setup>
-import { useNhostClient } from '@nhost/vue'
-import { useHead } from '@unhead/vue'
-import isOnline from 'is-online'
-import { computedAsync, tryOnMounted, whenever } from '@vueuse/core'
-import { notify, toast } from '~/utils/toasts'
+import { tryOnMounted, useTitle } from '@vueuse/core'
+import type { ComputedRef } from 'vue'
+import { logger } from '~/utils'
 
-const app = useAppStore()
 const user = useUserStore()
-const { nhost } = useNhostClient()
+const locale = useLocaleStore()
+const route = useRoute()
 const router = useRouter()
-const { t } = useI18n()
+const supa = useSupabase()
+const { t, te } = useI18n()
 
-const onlineStatus = computedAsync(async () => await isOnline(), false)
-
-useHead({
-  title: 'Statical',
-  titleTemplate: (title) => { return app.page.title ? `${title} - ${app.page.title}` : `${title}` },
+const pageTitle: ComputedRef<string | undefined> = computed(() => {
+  if (route.meta.title && te(route.meta.title as string))
+    return t(route.meta.title as string)
+  else if (route.meta.title)
+    return route.meta.title as string
+  else
+    return undefined
 })
 
-nhost.auth.onAuthStateChanged(async (event, session) => {
-  if (import.meta.env.DEV)
-    toast.info(`EVENT: Auth - ${event}`)
+const appTitle = useTitle(() => pageTitle.value ? `Statical - ${pageTitle.value}` : 'Statical')
 
-  if (event === 'SIGNED_IN' && session) {
-    user.handleSignIn(session)
-    if (router.currentRoute.value.path === '/login' || router.currentRoute.value.path === '/') {
-      const error = await router.push({ path: '/home' })
-      if (error && import.meta.env.DEV)
-        toast.error(error.message)
-    }
-  }
-  else if (event === 'SIGNED_OUT') {
-    user.handleSignOut()
-    const error = await router.push({ path: '/login' })
-    if (error && import.meta.env.DEV)
-      toast.error(error.message)
-  }
-})
+watch(
+  () => appTitle.value,
+  () => window.titlebar.setTitle(appTitle.value ?? 'Statical'),
+  { immediate: true },
+)
 
-nhost.auth.onTokenChanged((session) => {
-  if (import.meta.env.DEV)
-    toast.info('EVENT: Auth - Token changed.')
+watch(
+  () => user.locale,
+  (loc) => locale.setLocale(loc),
+  { immediate: true },
+)
 
-  if (session)
-    user.handleTokenChange(session)
-})
 tryOnMounted(() => {
-  whenever(() =>
-    onlineStatus.value === true, () => notify.success(t('notifications.online-title'), t('notifications.online-text')),
-  )
-  whenever(() =>
-    onlineStatus.value === false, () => notify.error(t('notifications.offline-title'), t('notifications.offline-text')),
-  )
+  window.api.finishLoadingAnimation()
+
+  /*
+  | 'PASSWORD_RECOVERY'
+  | 'SIGNED_IN'
+  | 'SIGNED_OUT'
+  | 'TOKEN_REFRESHED'
+  | 'USER_UPDATED'
+  | 'USER_DELETED'
+  */
+  supa.auth.onAuthStateChange(async (event, session) => {
+    logger.debug(`AUTH_EVENT => ${event}`)
+
+    switch (event) {
+      case 'SIGNED_IN':
+        if (session) {
+          await user.handleSignIn(session)
+          if (route.path === '/' || route.path === '/login')
+            router.push('/home')
+        }
+        break
+      case 'SIGNED_OUT':
+        user.handleSignOut()
+        router.push('/login')
+        break
+      case 'TOKEN_REFRESHED':
+        if (session)
+          user.handleTokenChange(session)
+        break
+      case 'USER_UPDATED':
+        if (session)
+          await user.handleSignIn(session)
+        break
+      case 'USER_DELETED':
+        user.handleSignOut()
+        router.push('/login')
+        break
+    }
+  })
 })
 </script>
 
 <template>
-  <el-config-provider :locale="user.locale.element" size="default" :z-index="3000">
-    <router-view />
+  <el-config-provider :locale="locale.current.ui" size="default" :z-index="3000">
+    <app-layout />
   </el-config-provider>
 </template>
-

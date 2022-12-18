@@ -1,5 +1,6 @@
-import { appendChildSafe, removeChildSafe } from './dom'
+import { appendChildSafe, removeChildSafe } from '&/utils'
 
+let animationRunning = false
 /**
  * https://tobiasahlin.com/spinkit
  * https://connoratherton.com/loaders
@@ -95,13 +96,18 @@ export function useLoadingAnimation() {
 
   return {
     startLoadingAnimation() {
-      appendChildSafe(document.head, oStyle)
-      appendChildSafe(document.body, oDiv)
+      if (!animationRunning) {
+        appendChildSafe(document.head, oStyle)
+        appendChildSafe(document.body, oDiv)
+        animationRunning = true
+      }
     },
     finishLoadingAnimation() {
-      removeChildSafe(document.head, oStyle)
-      removeChildSafe(document.body, oDiv)
+      if (animationRunning) {
+        removeChildSafe(document.head, oStyle)
+        removeChildSafe(document.body, oDiv)
+        animationRunning = false
+      }
     },
   }
 }
-
