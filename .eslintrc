@@ -1,7 +1,17 @@
 {
+  "root": true,
+  "reportUnusedDisableDirectives": true,
   "extends": ["@antfu"],
-  "rules": {
-    "arrow-parens": [2, "always"],
-    "max-len": ["error", { "code": 120, "tabWidth": 2 }]
-  }
+  "overrides": [
+    {
+      "files": ["*.graphql"],
+      "extends": [
+        "plugin:@graphql-eslint/schema-recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "@graphql-eslint/naming-convention": "off"
+      }
+    }
+  ]
 }

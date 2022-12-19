@@ -32,5 +32,8 @@ declare module '@vue/runtime-core' {
     HeaderContent: typeof import('./../components/organisms/HeaderContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sidebar: typeof import('./../components/Sidebar/Sidebar.vue')['default']
+    SidebarMenu: typeof import('./../components/SidebarMenu/SidebarMenu.vue')['default']
+    SidebarMenuItem: typeof import('./../components/SidebarMenuItem/SidebarMenuItem.vue')['default']
   }
 }

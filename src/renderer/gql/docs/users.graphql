@@ -1,0 +1,21 @@
+fragment userWithRolesFields on users {
+  id
+  email
+  displayName
+  locale
+  defaultRole
+  roles {
+    role
+  }
+  avatarUrl
+  lastSeen
+  metadata
+  isAnonymous
+  disabled
+}
+
+query userWithRoles($id: uuid!) {
+  user(id: $id) {
+    ...userWithRolesFields
+  }
+}

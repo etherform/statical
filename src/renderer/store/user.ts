@@ -1,8 +1,9 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { Session } from '@supabase/supabase-js'
 import type { RemovableRef } from '@vueuse/core'
 import { useStorage } from '@vueuse/core'
+import type { NhostSession } from '@nhost/core'
 import { logger } from '~/utils/logger'
+import { nhost } from '~/setup/nhost'
 
 export interface UserState {
   id: string | undefined
@@ -10,8 +11,9 @@ export interface UserState {
   email: string | undefined
   roles: string[] | undefined
   locale: string
+  tokenExpires: Date | undefined
   refreshToken: RemovableRef<string>
-  session: Session | undefined
+  session: NhostSession | undefined
 }
 
 export const useUserStore = defineStore({
@@ -22,6 +24,7 @@ export const useUserStore = defineStore({
     email: undefined,
     roles: undefined,
     locale: 'ru',
+    tokenExpires: undefined,
     refreshToken: useStorage('refreshToken', ''),
     session: undefined,
   }),
@@ -31,24 +34,16 @@ export const useUserStore = defineStore({
     },
   },
   actions: {
-    async handleSignIn(session: Session) {
+    handleSignIn(session: NhostSession) {
       this.session = session
+      this.id = session.user.id
+      this.name = session.user.displayName
+      this.email = session.user.email
+      this.locale = session.user.locale
+      this.refreshToken = session.refreshToken
+      this.roles = session.user.roles
 
-      const supa = useSupabase()
-      const { data: users, error } = await supa.from('users').select(`
-        id,
-        name,
-        email,
-        locale
-      `).eq('id', session.user.id)
-
-      if (users?.length === 1) {
-        this.id = users[0].id
-        this.name = users[0].name
-        this.email = users[0].email
-        this.locale = users[0].locale
-        this.refreshToken = session.refresh_token
-      }
+      logger.debug('AUTH => Session refreshed.')
     },
 
     handleSignOut() {
@@ -58,25 +53,26 @@ export const useUserStore = defineStore({
       this.roles = undefined
       this.refreshToken = ''
       this.session = undefined
-    },
-
-    handleTokenChange(session: Session) {
-      this.refreshToken = session.refresh_token
-      this.session = session
+      logger.debug('AUTH => Session dropped.')
     },
 
     async refreshSession() {
-      const supa = useSupabase()
-      const { data, error } = await supa.auth.refreshSession({ refresh_token: this.refreshToken })
-      if (error) {
-        logger.debug(`AUTH => Failed to refresh session: ${error.message}`)
-      }
-      else if (data.session) {
-        logger.debug('AUTH => Successfully refreshed session.')
-        await this.handleSignIn(data.session)
+      logger.debug('AUTH => Attempting to refresh session...')
+
+      if (!this.refreshToken || this.refreshToken.length === 0) {
+        logger.debug('AUTH => Failed to refresh session: refresh token missing')
+        return false
       }
 
-      return !!data.session
+      const { session, error } = await nhost.auth.refreshSession(this.refreshToken)
+
+      if (error)
+        logger.debug(`AUTH => Failed to refresh session: ${error.message}`)
+
+      if (session)
+        return true
+
+      return false
     },
   },
 })

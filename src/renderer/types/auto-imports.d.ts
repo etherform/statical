@@ -64,8 +64,8 @@ declare global {
   const useRoute: typeof import('vue-router/auto')['useRoute']
   const useRouter: typeof import('vue-router/auto')['useRouter']
   const useSlots: typeof import('vue')['useSlots']
-  const useSupabase: typeof import('../composables/useSupabase')['useSupabase']
   const useUserStore: typeof import('../store/user')['useUserStore']
+  const useWSClient: typeof import('../composables/useWSClient')['useWSClient']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -138,8 +138,8 @@ declare module 'vue' {
     readonly useRoute: UnwrapRef<typeof import('vue-router/auto')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router/auto')['useRouter']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
-    readonly useSupabase: UnwrapRef<typeof import('../composables/useSupabase')['useSupabase']>
     readonly useUserStore: UnwrapRef<typeof import('../store/user')['useUserStore']>
+    readonly useWSClient: UnwrapRef<typeof import('../composables/useWSClient')['useWSClient']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>

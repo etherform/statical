@@ -8,7 +8,9 @@ export const createWindow
     new BrowserWindow({
       title,
       width,
+      minWidth: 640,
       height,
+      minHeight: 640,
       icon,
       frame: false,
       backgroundColor: '#fff',

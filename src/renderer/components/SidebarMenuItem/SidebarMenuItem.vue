@@ -1,7 +1,5 @@
-<script lang="ts" setup>
-/* import type { MenuMapItem } from '~/config/menuMap' */
+<script setup lang="ts">
 
-const props = withDefaults(defineProps<{ item: MenuMapItem }>(), {})
 </script>
 
 <template>
@@ -23,3 +21,7 @@ const props = withDefaults(defineProps<{ item: MenuMapItem }>(), {})
     </template>
   </el-menu-item> -->
 </template>
+
+<style lang="scss" scoped>
+
+</style>

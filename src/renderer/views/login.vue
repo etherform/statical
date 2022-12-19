@@ -1,20 +1,19 @@
 <script lang="ts" setup>
-import { tryOnMounted } from '@vueuse/core'
+import { useSignInEmailPassword } from '@nhost/vue'
 import { logger } from '~/utils/logger'
 import { icons } from '~/styles/icons'
-import { toast } from '~/utils/toasts'
 
 const { t } = useI18n()
 const user = useUserStore()
-const supa = useSupabase()
 const locale = useLocaleStore()
+const { isLoading, signInEmailPassword } = useSignInEmailPassword()
 
 const form = reactive({
   email: '',
   password: '',
   passwordTooltip: false,
   isLoading: false,
-  selectedLocale: locale.elementLocaleArray.findIndex((e) => e.name === user.locale),
+  selectedLocale: locale.elementLocaleArray.findIndex(e => e.name === user.locale),
 })
 
 watch(
@@ -30,31 +29,10 @@ const locales = {
 }
 
 const handleSignIn = async () => {
-  try {
-    form.isLoading = true
-    const { error } = await supa.auth.signInWithPassword({
-      email: form.email,
-      password: form.password,
-    })
-    if (error)
-      throw error
-  }
-  catch (error) {
-    if (error instanceof Error) {
-      toast.error(error.message)
-      logger.error(`Sign-in failed: ${error.message}`)
-    }
-  }
-  finally {
-    form.isLoading = false
-  }
+  const { error } = await signInEmailPassword(form.email, form.password)
+  if (error)
+    logger.error(`Sign-in failed: ${error.message}`)
 }
-
-/* watchEffect(() => userStore.setLocaleById(selectedLocale.value))
-
-tryOnMounted(() =>
-  selectedLocale.value = userStore.locale.elementArray.findIndex((i) => i.name === userStore.locale.string),
-) */
 </script>
 
 <template>
@@ -72,12 +50,6 @@ tryOnMounted(() =>
             <div :class="icons.locale" text-2xl class="hvr-grow" />
             <template #dropdown>
               <el-dropdown-menu class="no-select">
-                <!-- <el-dropdown-item :icon="icons.locale">
-                  Профиль
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  Выйти
-                </el-dropdown-item> -->
                 <el-radio-group v-model="form.selectedLocale">
                   <el-dropdown-item>
                     <el-radio :label="0" border size="small">
@@ -126,7 +98,7 @@ tryOnMounted(() =>
           </el-tooltip>
         </el-form-item>
         <el-form-item>
-          <el-button w-screen :loading="form.isLoading" type="primary" tabindex="3" @click="handleSignIn">
+          <el-button w-screen :loading="isLoading" type="primary" tabindex="3" @click="handleSignIn">
             {{ t('buttons.login') }}
           </el-button>
         </el-form-item>
@@ -157,30 +129,6 @@ tryOnMounted(() =>
     }
   }
 }
-
-/* :deep(.el-form-item) {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  background: rgba(0, 0, 0, 0.1);
-  color: #454545;
-  .el-form-item__content {
-    display: inline-flex;
-  }
-  .el-input {
-    width: 85%;
-    height: 100%;
-    input {
-      padding: 12px 5px 12px 15px;
-      color: #eee;
-      -webkit-appearance: none;
-      caret-color: #fff;
-      &:-webkit-autofill {
-        box-shadow: 0 0 0 1000px #283443 inset !important;
-        -webkit-text-fill-color: #fff !important;
-      }
-    }
-  }
-} */
 </style>
 
 <route lang="yaml">

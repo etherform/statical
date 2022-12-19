@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import { NhostClient } from '@nhost/vue'
 
 export const nhost = new NhostClient({
-  backendUrl: 'https://statical.etherform.dev',
+  backendUrl: import.meta.env.VITE_BACKEND_URL as string,
   autoRefreshToken: true,
   autoSignIn: true,
 })

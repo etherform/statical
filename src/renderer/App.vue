@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useNhostClient } from '@nhost/vue'
 import { tryOnMounted, useTitle } from '@vueuse/core'
 import type { ComputedRef } from 'vue'
 import { logger } from '~/utils'
@@ -7,7 +8,8 @@ const user = useUserStore()
 const locale = useLocaleStore()
 const route = useRoute()
 const router = useRouter()
-const supa = useSupabase()
+const { nhost } = useNhostClient()
+const ws = useWSClient()
 const { t, te } = useI18n()
 
 const pageTitle: ComputedRef<string | undefined> = computed(() => {
@@ -29,28 +31,21 @@ watch(
 
 watch(
   () => user.locale,
-  (loc) => locale.setLocale(loc),
+  loc => locale.setLocale(loc),
   { immediate: true },
 )
 
 tryOnMounted(() => {
   window.api.finishLoadingAnimation()
 
-  /*
-  | 'PASSWORD_RECOVERY'
-  | 'SIGNED_IN'
-  | 'SIGNED_OUT'
-  | 'TOKEN_REFRESHED'
-  | 'USER_UPDATED'
-  | 'USER_DELETED'
-  */
-  supa.auth.onAuthStateChange(async (event, session) => {
+  nhost.auth.onAuthStateChanged(async (event, session) => {
     logger.debug(`AUTH_EVENT => ${event}`)
 
     switch (event) {
       case 'SIGNED_IN':
         if (session) {
-          await user.handleSignIn(session)
+          user.handleSignIn(session)
+          ws?.restart()
           if (route.path === '/' || route.path === '/login')
             router.push('/home')
         }
@@ -59,19 +54,17 @@ tryOnMounted(() => {
         user.handleSignOut()
         router.push('/login')
         break
-      case 'TOKEN_REFRESHED':
-        if (session)
-          user.handleTokenChange(session)
-        break
-      case 'USER_UPDATED':
-        if (session)
-          await user.handleSignIn(session)
-        break
-      case 'USER_DELETED':
-        user.handleSignOut()
-        router.push('/login')
-        break
     }
+  })
+
+  nhost.auth.onTokenChanged(async (session) => {
+    logger.debug('AUTH_EVENT => TOKEN_CHANGED')
+
+    if (session) {
+      user.handleSignIn(session)
+      ws?.restart()
+    }
+    else { logger.error('AUTH => Session is null on TOKEN_CHANGED') }
   })
 })
 </script>

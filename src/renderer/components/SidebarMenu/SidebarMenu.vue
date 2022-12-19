@@ -1,5 +1,5 @@
-<script lang="ts" setup>
-/* const app = useAppStore() */
+<script setup lang="ts">
+
 </script>
 
 <template>
@@ -20,3 +20,6 @@
   </el-scrollbar>
 </template>
 
+<style lang="scss" scoped>
+
+</style>

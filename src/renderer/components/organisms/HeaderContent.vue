@@ -5,9 +5,8 @@ const { t } = useI18n()
 
 const user = useUserStore()
 const app = useAppStore()
-const supa = useSupabase()
 
-const handleSignOut = () => supa.auth.signOut()
+const handleSignOut = () => { }
 </script>
 
 <template>
@@ -16,18 +15,11 @@ const handleSignOut = () => supa.auth.signOut()
   </div>
   <el-divider direction="vertical" h-6 />
   <div flex-grow />
-  <div
-    class="header-item flex"
-    style="justify-content: center; width: 40px"
-  >
+  <div class="header-item flex" style="justify-content: center; width: 40px">
     <div :class="icons.fullscreen" />
   </div>
-  <div
-    class="header-item flex"
-    style="justify-content: center; width: 40px"
-    @click="app.toggleEditMode"
-  >
-    <div :class="app.allowEdit ? icons.unlock : icons.lock" />
+  <div class="header-item flex" style="justify-content: center; width: 40px">
+    <div :class="icons.lock" />
   </div>
   <el-dropdown trigger="click" mr-4>
     <div class="flex" style="justify-content: space-evenly; height: 100%">
