@@ -24,3 +24,8 @@
     </el-table>
   </el-main>
 </template>
+
+<route lang="yaml">
+meta:
+  menuIndex: 1
+</route>

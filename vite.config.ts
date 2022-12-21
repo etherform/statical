@@ -14,7 +14,6 @@ import UnoCSS from 'unocss/vite'
 import Electron from 'vite-electron-plugin'
 import { alias, loadViteEnv } from 'vite-electron-plugin/plugin'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
-import { generateThemeVars } from './src/renderer/styles/theme'
 import { chrome, node } from './.electron-vendors.cache.json'
 
 rmSync('build/main', { recursive: true, force: true })
@@ -61,11 +60,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   }
 
   const css: UserConfig['css'] = {
-    preprocessorOptions: {
+    /* preprocessorOptions: {
       scss: {
-        additionalData: generateThemeVars(),
+        additionalData: '@use "~/styles/element.scss" as *;',
       },
-    },
+    }, */
   }
 
   const plugins: UserConfig['plugins'] = [
@@ -97,7 +96,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       dts: 'types/components.d.ts',
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      resolvers: [ElementPlusResolver({ importStyle: 'sass' })],
+      resolvers: [ElementPlusResolver({ importStyle: false /* 'sass' */ })],
     }),
     UnoCSS(),
     VueI18n({

@@ -1,31 +1,20 @@
 <script lang="ts" setup>
 import { useNhostClient } from '@nhost/vue'
 import { tryOnMounted, useTitle } from '@vueuse/core'
-import type { ComputedRef } from 'vue'
 import { logger } from '~/utils'
 
+const app = useAppStore()
 const user = useUserStore()
 const locale = useLocaleStore()
-const route = useRoute()
 const router = useRouter()
 const { nhost } = useNhostClient()
 const ws = useWSClient()
-const { t, te } = useI18n()
 
-const pageTitle: ComputedRef<string | undefined> = computed(() => {
-  if (route.meta.title && te(route.meta.title as string))
-    return t(route.meta.title as string)
-  else if (route.meta.title)
-    return route.meta.title as string
-  else
-    return undefined
-})
-
-const appTitle = useTitle(() => pageTitle.value ? `Statical - ${pageTitle.value}` : 'Statical')
+useTitle(() => app.title)
 
 watch(
-  () => appTitle.value,
-  () => window.titlebar.setTitle(appTitle.value ?? 'Statical'),
+  () => app.title,
+  title => window.titlebar.setTitle(title),
   { immediate: true },
 )
 
@@ -46,8 +35,8 @@ tryOnMounted(() => {
         if (session) {
           user.handleSignIn(session)
           ws?.restart()
-          if (route.path === '/' || route.path === '/login')
-            router.push('/home')
+          if (app.route.current.path === '/' || app.route.current.path === '/login')
+            router.push(app.route.previous.path ?? '/home')
         }
         break
       case 'SIGNED_OUT':
@@ -70,7 +59,7 @@ tryOnMounted(() => {
 </script>
 
 <template>
-  <el-config-provider :locale="locale.current.ui" size="default" :z-index="3000">
+  <el-config-provider :locale="locale.current.ui" size="default" :z-index="3000" :message="{ max: 3 }">
     <app-layout />
   </el-config-provider>
 </template>

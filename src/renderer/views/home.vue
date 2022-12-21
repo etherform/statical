@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+import { routes } from 'vue-router/auto/routes'
+
 const user = useUserStore()
+const router = useRouter()
 
 const handle = async () => {
 
@@ -13,7 +16,7 @@ const handle = async () => {
   </div>
   <div>
     <el-button type="primary" @click="handle">
-      Change Icon
+      Test button
     </el-button>
   </div>
 </template>
@@ -21,4 +24,6 @@ const handle = async () => {
 <route lang="yaml">
 meta:
   title: titles.home
+  menuIndex: 1
+  menuIcon: i-majesticons:home-line
 </route>

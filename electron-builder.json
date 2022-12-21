@@ -5,7 +5,7 @@
   "directories": {
     "output": "build/release/${version}"
   },
-  "files": ["build/main", "build/renderer"],
+  "files": ["build/main", "build/preload", "build/shared", "build/renderer"],
   "mac": {
     "artifactName": "${productName}_${version}.${ext}",
     "target": ["dmg"]

@@ -6,27 +6,20 @@ import { logger } from '~/utils/logger'
 import { nhost } from '~/setup/nhost'
 
 export interface UserState {
-  id: string | undefined
-  name: string | undefined
-  email: string | undefined
-  roles: string[] | undefined
+  id?: string
+  name?: string
+  email?: string
+  roles?: string[]
   locale: string
-  tokenExpires: Date | undefined
   refreshToken: RemovableRef<string>
-  session: NhostSession | undefined
+  session?: NhostSession
 }
 
 export const useUserStore = defineStore({
   id: 'user',
   state: (): UserState => ({
-    id: undefined,
-    name: undefined,
-    email: undefined,
-    roles: undefined,
     locale: 'ru',
-    tokenExpires: undefined,
     refreshToken: useStorage('refreshToken', ''),
-    session: undefined,
   }),
   getters: {
     isAuthenticated(state) {

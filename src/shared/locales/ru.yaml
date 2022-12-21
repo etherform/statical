@@ -10,7 +10,9 @@ labels:
   login: Вход
 titles:
   login: Вход
-  home: Главная
+  profile: Профиль пользователя
+  home: Панель
+  dict: Справочники
 tooltips:
   caps: Caps lock включен
 buttons:

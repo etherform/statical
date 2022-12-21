@@ -1,8 +1,8 @@
 import nprogress from 'nprogress'
-import type { Router } from 'vue-router'
+import type { Router } from 'vue-router/auto'
 import { logger } from '~/utils'
 
-nprogress.configure({ showSpinner: false })
+nprogress.configure({ showSpinner: false, parent: '#app' })
 
 export const setupGuards = (router: Router) => {
   router.beforeEach(async (to, from, next) => {
@@ -25,7 +25,12 @@ export const setupGuards = (router: Router) => {
     }
   })
 
-  router.afterEach(async (_to, _from, _failure) => {
+  router.afterEach(async (to, from, failure) => {
+    const app = useAppStore()
+
+    if (!failure)
+      app.handleRouteChange(from, to)
+
     nprogress.done()
   })
 }

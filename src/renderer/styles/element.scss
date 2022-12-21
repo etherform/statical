@@ -6,7 +6,7 @@
     'white': #fcfcfc,
     'black': #000000,
     'primary': (
-      /* 'base': #409eff, */ 'base': #3a71a8,
+      /* 'base': #409eff, */ 'base': #3a71a8, //#3a71a8
     ),
     'success': (
       /* 'base': #67c23a, */ 'base': #30b08f,
@@ -23,7 +23,14 @@
     'info': (
       'base': #909399,
     ),
-  )
+  ),
+  $text-color: (
+    'primary': #404040,
+    'regular': #737373,
+    'secondary': #909399,
+    'placeholder': #a8abb2,
+    'disabled': #c0c4cc,
+  ),
 );
 
 @use 'element-plus/theme-chalk/src/index.scss' as *;

@@ -1,8 +1,7 @@
-/* import { release } from 'os' */
+import { homedir, release } from 'os'
 import { resolve } from 'path'
-import { type BrowserWindow, app, shell } from 'electron'
+import { type BrowserWindow, app, session, shell } from 'electron'
 import { attachTitlebarToWindow } from 'custom-electron-titlebar/main'
-import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import { ipcMainSetup } from '@/ipc'
 import { createWindow } from '@/window'
 import { logger } from '@/logger'
@@ -34,7 +33,6 @@ const width = 1280
 const height = 720
 const icon = resolve(__dirname, '../renderer/favicon.ico')
 
-// eslint-disable-next-line max-len
 logger.debug(`Creating electron window(title: ${title}, width: ${width}, height: ${height}, icon: ${icon}, preload: ${preload}, url: ${app.isPackaged ? indexHtml : devUrl})`)
 
 app.whenReady()
@@ -48,13 +46,10 @@ app.whenReady()
         return { action: 'deny' }
       })
 
-      if (!app.isPackaged && devUrl) {
+      if (!app.isPackaged && devUrl)
         win.loadURL(devUrl)
-        win.webContents.openDevTools()
-      }
-      else {
+      else
         win.loadFile(indexHtml)
-      }
 
       ctx.mainWindow = win
     },
@@ -63,7 +58,21 @@ app.whenReady()
     },
   )
   .then(() => ipcMainSetup(ctx))
-  .then(() => installExtension(VUEJS_DEVTOOLS))
+  .then(async () => {
+    if (!app.isPackaged && process.platform === 'win32') {
+      try {
+        const path = resolve(homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/6.4.5_0')
+        session.defaultSession.loadExtension(path)
+      }
+      catch (e: any) {
+        logger.error(`Failed to install extension: ${e.message}`)
+      }
+    }
+  })
+  .then(() => {
+    if (!app.isPackaged)
+      ctx.mainWindow?.webContents.openDevTools()
+  })
 
 app.on('window-all-closed', () => {
   ctx.mainWindow = undefined

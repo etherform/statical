@@ -10,7 +10,9 @@ labels:
   login: Log in
 titles:
   login: Login
+  profile: User profile
   home: Home
+  dict: Dictionaries
 tooltips:
   caps: Caps lock is On
 buttons:
