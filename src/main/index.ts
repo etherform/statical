@@ -1,6 +1,6 @@
-import { homedir, release } from 'os'
-import { resolve } from 'path'
-import { type BrowserWindow, app, session, shell } from 'electron'
+import { homedir/* , release */ } from 'node:os'
+import { resolve } from 'node:path'
+import { type BrowserWindow, app, shell } from 'electron'
 import { attachTitlebarToWindow } from 'custom-electron-titlebar/main'
 import { ipcMainSetup } from '@/ipc'
 import { createWindow } from '@/window'
@@ -61,14 +61,15 @@ app.whenReady()
   .then(async () => {
     if (!app.isPackaged && process.platform === 'win32') {
       try {
-        const path = resolve(homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/6.4.5_0')
-        session.defaultSession.loadExtension(path)
-      }
-      catch (e: any) {
-        logger.error(`Failed to install extension: ${e.message}`)
+        const vueDevTools = resolve(homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/6.4.5_0')
+        // session.defaultSession.loadExtension(vueDevTools)
+        const urqlDevTools = resolve(homedir(), 'AppData/Local/Google/Chrome/User Data/Default/Extensions/mcfphkbpmkbeofnkjehahlmidmceblmm/2.6.2_0')
+        // session.defaultSession.loadExtension(urqlDevTools)
+      } catch (e: any) {
+        logger.error(`Failed to install extensions: ${e.message}`)
       }
     }
-  })
+  }) //
   .then(() => {
     if (!app.isPackaged)
       ctx.mainWindow?.webContents.openDevTools()

@@ -6,6 +6,7 @@ import Urql, {
   fetchExchange,
   subscriptionExchange,
 } from '@urql/vue'
+import { devtoolsExchange } from '@urql/devtools'
 import { DefaultWSClient, GQL_URL, WS_URL, createRestartableClient, getAuthHeaders } from '~/utils'
 /* import { contextExchange } from '@urql/exchange-context'; */
 
@@ -19,6 +20,7 @@ export const wsClient = createRestartableClient({
 })
 
 const exchanges = [
+  devtoolsExchange,
   dedupExchange,
   cacheExchange,
   fetchExchange,

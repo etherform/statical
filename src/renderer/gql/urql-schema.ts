@@ -110,6 +110,96 @@ export default {
         name: 'Float',
       },
       {
+        kind: 'INPUT_OBJECT',
+        name: 'Float_comparison_exp',
+        inputFields: [
+          {
+            name: '_eq',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+          },
+          {
+            name: '_gt',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+          },
+          {
+            name: '_gte',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+          },
+          {
+            name: '_in',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'SCALAR',
+                  name: 'Float',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: '_is_null',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: '_lt',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+          },
+          {
+            name: '_lte',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+          },
+          {
+            name: '_neq',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+          },
+          {
+            name: '_nin',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'SCALAR',
+                  name: 'Float',
+                  ofType: null,
+                },
+              },
+            },
+          },
+        ],
+      },
+      {
         kind: 'SCALAR',
         name: 'Int',
       },
@@ -9766,20 +9856,8 @@ export default {
         ],
       },
       {
-        kind: 'ENUM',
-        name: 'cursor_ordering',
-        enumValues: [
-          {
-            name: 'ASC',
-          },
-          {
-            name: 'DESC',
-          },
-        ],
-      },
-      {
         kind: 'OBJECT',
-        name: 'dictCompanies',
+        name: 'companies',
         fields: [
           {
             name: 'createdAt',
@@ -9794,7 +9872,19 @@ export default {
             args: [],
           },
           {
-            name: 'deleted',
+            name: 'createdBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'disabled',
             type: {
               kind: 'NON_NULL',
               ofType: {
@@ -9808,12 +9898,9 @@ export default {
           {
             name: 'fullName',
             type: {
-              kind: 'NON_NULL',
-              ofType: {
-                kind: 'SCALAR',
-                name: 'String',
-                ofType: null,
-              },
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
             },
             args: [],
           },
@@ -9853,18 +9940,30 @@ export default {
             },
             args: [],
           },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
         ],
         interfaces: [],
       },
       {
         kind: 'OBJECT',
-        name: 'dictCompanies_aggregate',
+        name: 'companies_aggregate',
         fields: [
           {
             name: 'aggregate',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies_aggregate_fields',
+              name: 'companies_aggregate_fields',
               ofType: null,
             },
             args: [],
@@ -9879,7 +9978,7 @@ export default {
                   kind: 'NON_NULL',
                   ofType: {
                     kind: 'OBJECT',
-                    name: 'dictCompanies',
+                    name: 'companies',
                     ofType: null,
                   },
                 },
@@ -9892,7 +9991,7 @@ export default {
       },
       {
         kind: 'OBJECT',
-        name: 'dictCompanies_aggregate_fields',
+        name: 'companies_aggregate_fields',
         fields: [
           {
             name: 'count',
@@ -9913,7 +10012,7 @@ export default {
                     kind: 'NON_NULL',
                     ofType: {
                       kind: 'ENUM',
-                      name: 'dictCompanies_select_column',
+                      name: 'companies_select_column',
                       ofType: null,
                     },
                   },
@@ -9933,7 +10032,7 @@ export default {
             name: 'max',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies_max_fields',
+              name: 'companies_max_fields',
               ofType: null,
             },
             args: [],
@@ -9942,7 +10041,7 @@ export default {
             name: 'min',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies_min_fields',
+              name: 'companies_min_fields',
               ofType: null,
             },
             args: [],
@@ -9952,7 +10051,7 @@ export default {
       },
       {
         kind: 'INPUT_OBJECT',
-        name: 'dictCompanies_bool_exp',
+        name: 'companies_bool_exp',
         inputFields: [
           {
             name: '_and',
@@ -9962,7 +10061,7 @@ export default {
                 kind: 'NON_NULL',
                 ofType: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_bool_exp',
+                  name: 'companies_bool_exp',
                   ofType: null,
                 },
               },
@@ -9972,7 +10071,7 @@ export default {
             name: '_not',
             type: {
               kind: 'INPUT_OBJECT',
-              name: 'dictCompanies_bool_exp',
+              name: 'companies_bool_exp',
               ofType: null,
             },
           },
@@ -9984,7 +10083,7 @@ export default {
                 kind: 'NON_NULL',
                 ofType: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_bool_exp',
+                  name: 'companies_bool_exp',
                   ofType: null,
                 },
               },
@@ -9999,7 +10098,15 @@ export default {
             },
           },
           {
-            name: 'deleted',
+            name: 'createdBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
             type: {
               kind: 'INPUT_OBJECT',
               name: 'Boolean_comparison_exp',
@@ -10038,26 +10145,31 @@ export default {
               ofType: null,
             },
           },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
         ],
       },
       {
         kind: 'ENUM',
-        name: 'dictCompanies_constraint',
+        name: 'companies_constraint',
         enumValues: [
           {
-            name: 'dict_companies_full_name_key',
+            name: 'companies_pkey',
           },
           {
-            name: 'dict_companies_pkey',
-          },
-          {
-            name: 'dict_companies_short_name_key',
+            name: 'companies_short_name_key',
           },
         ],
       },
       {
         kind: 'INPUT_OBJECT',
-        name: 'dictCompanies_insert_input',
+        name: 'companies_insert_input',
         inputFields: [
           {
             name: 'createdAt',
@@ -10068,7 +10180,15 @@ export default {
             },
           },
           {
-            name: 'deleted',
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
             type: {
               kind: 'SCALAR',
               name: 'Boolean',
@@ -10107,17 +10227,34 @@ export default {
               ofType: null,
             },
           },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
         ],
       },
       {
         kind: 'OBJECT',
-        name: 'dictCompanies_max_fields',
+        name: 'companies_max_fields',
         fields: [
           {
             name: 'createdAt',
             type: {
               kind: 'SCALAR',
               name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
               ofType: null,
             },
             args: [],
@@ -10158,18 +10295,36 @@ export default {
             },
             args: [],
           },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
         ],
         interfaces: [],
       },
       {
         kind: 'OBJECT',
-        name: 'dictCompanies_min_fields',
+        name: 'companies_min_fields',
         fields: [
           {
             name: 'createdAt',
             type: {
               kind: 'SCALAR',
               name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
               ofType: null,
             },
             args: [],
@@ -10210,12 +10365,21 @@ export default {
             },
             args: [],
           },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
         ],
         interfaces: [],
       },
       {
         kind: 'OBJECT',
-        name: 'dictCompanies_mutation_response',
+        name: 'companies_mutation_response',
         fields: [
           {
             name: 'affected_rows',
@@ -10239,7 +10403,7 @@ export default {
                   kind: 'NON_NULL',
                   ofType: {
                     kind: 'OBJECT',
-                    name: 'dictCompanies',
+                    name: 'companies',
                     ofType: null,
                   },
                 },
@@ -10252,7 +10416,7 @@ export default {
       },
       {
         kind: 'INPUT_OBJECT',
-        name: 'dictCompanies_on_conflict',
+        name: 'companies_on_conflict',
         inputFields: [
           {
             name: 'constraint',
@@ -10260,7 +10424,7 @@ export default {
               kind: 'NON_NULL',
               ofType: {
                 kind: 'ENUM',
-                name: 'dictCompanies_constraint',
+                name: 'companies_constraint',
                 ofType: null,
               },
             },
@@ -10275,7 +10439,7 @@ export default {
                   kind: 'NON_NULL',
                   ofType: {
                     kind: 'ENUM',
-                    name: 'dictCompanies_update_column',
+                    name: 'companies_update_column',
                     ofType: null,
                   },
                 },
@@ -10287,7 +10451,7 @@ export default {
             name: 'where',
             type: {
               kind: 'INPUT_OBJECT',
-              name: 'dictCompanies_bool_exp',
+              name: 'companies_bool_exp',
               ofType: null,
             },
           },
@@ -10295,7 +10459,7 @@ export default {
       },
       {
         kind: 'INPUT_OBJECT',
-        name: 'dictCompanies_order_by',
+        name: 'companies_order_by',
         inputFields: [
           {
             name: 'createdAt',
@@ -10306,7 +10470,15 @@ export default {
             },
           },
           {
-            name: 'deleted',
+            name: 'createdBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
             type: {
               kind: 'ENUM',
               name: 'order_by',
@@ -10345,11 +10517,19 @@ export default {
               ofType: null,
             },
           },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
         ],
       },
       {
         kind: 'INPUT_OBJECT',
-        name: 'dictCompanies_pk_columns_input',
+        name: 'companies_pk_columns_input',
         inputFields: [
           {
             name: 'id',
@@ -10366,13 +10546,16 @@ export default {
       },
       {
         kind: 'ENUM',
-        name: 'dictCompanies_select_column',
+        name: 'companies_select_column',
         enumValues: [
           {
             name: 'createdAt',
           },
           {
-            name: 'deleted',
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
           },
           {
             name: 'fullName',
@@ -10386,11 +10569,14 @@ export default {
           {
             name: 'updatedAt',
           },
+          {
+            name: 'updatedBy',
+          },
         ],
       },
       {
         kind: 'INPUT_OBJECT',
-        name: 'dictCompanies_set_input',
+        name: 'companies_set_input',
         inputFields: [
           {
             name: 'createdAt',
@@ -10401,7 +10587,15 @@ export default {
             },
           },
           {
-            name: 'deleted',
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
             type: {
               kind: 'SCALAR',
               name: 'Boolean',
@@ -10440,11 +10634,19 @@ export default {
               ofType: null,
             },
           },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
         ],
       },
       {
         kind: 'INPUT_OBJECT',
-        name: 'dictCompanies_stream_cursor_input',
+        name: 'companies_stream_cursor_input',
         inputFields: [
           {
             name: 'initial_value',
@@ -10452,7 +10654,7 @@ export default {
               kind: 'NON_NULL',
               ofType: {
                 kind: 'INPUT_OBJECT',
-                name: 'dictCompanies_stream_cursor_value_input',
+                name: 'companies_stream_cursor_value_input',
                 ofType: null,
               },
             },
@@ -10469,7 +10671,7 @@ export default {
       },
       {
         kind: 'INPUT_OBJECT',
-        name: 'dictCompanies_stream_cursor_value_input',
+        name: 'companies_stream_cursor_value_input',
         inputFields: [
           {
             name: 'createdAt',
@@ -10480,7 +10682,15 @@ export default {
             },
           },
           {
-            name: 'deleted',
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
             type: {
               kind: 'SCALAR',
               name: 'Boolean',
@@ -10519,17 +10729,28 @@ export default {
               ofType: null,
             },
           },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
         ],
       },
       {
         kind: 'ENUM',
-        name: 'dictCompanies_update_column',
+        name: 'companies_update_column',
         enumValues: [
           {
             name: 'createdAt',
           },
           {
-            name: 'deleted',
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
           },
           {
             name: 'fullName',
@@ -10543,17 +10764,20 @@ export default {
           {
             name: 'updatedAt',
           },
+          {
+            name: 'updatedBy',
+          },
         ],
       },
       {
         kind: 'INPUT_OBJECT',
-        name: 'dictCompanies_updates',
+        name: 'companies_updates',
         inputFields: [
           {
             name: '_set',
             type: {
               kind: 'INPUT_OBJECT',
-              name: 'dictCompanies_set_input',
+              name: 'companies_set_input',
               ofType: null,
             },
           },
@@ -10563,10 +10787,22 @@ export default {
               kind: 'NON_NULL',
               ofType: {
                 kind: 'INPUT_OBJECT',
-                name: 'dictCompanies_bool_exp',
+                name: 'companies_bool_exp',
                 ofType: null,
               },
             },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'cursor_ordering',
+        enumValues: [
+          {
+            name: 'ASC',
+          },
+          {
+            name: 'DESC',
           },
         ],
       },
@@ -12478,6 +12714,504 @@ export default {
         ],
       },
       {
+        kind: 'OBJECT',
+        name: 'goodsArrivalTypes',
+        fields: [
+          {
+            name: 'label',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'type',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'String',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'goodsArrivalTypes_aggregate',
+        fields: [
+          {
+            name: 'aggregate',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes_aggregate_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'nodes',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'goodsArrivalTypes',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'goodsArrivalTypes_aggregate_fields',
+        fields: [
+          {
+            name: 'count',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'columns',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'goodsArrivalTypes_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'distinct',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Boolean',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'max',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes_max_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'min',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes_min_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'goodsArrivalTypes_bool_exp',
+        inputFields: [
+          {
+            name: '_and',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: '_not',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'goodsArrivalTypes_bool_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: '_or',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: 'label',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'type',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'goodsArrivalTypes_constraint',
+        enumValues: [
+          {
+            name: 'goods_arrival_types_pkey',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'goodsArrivalTypes_insert_input',
+        inputFields: [
+          {
+            name: 'label',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'type',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'goodsArrivalTypes_max_fields',
+        fields: [
+          {
+            name: 'label',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'type',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'goodsArrivalTypes_min_fields',
+        fields: [
+          {
+            name: 'label',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'type',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'goodsArrivalTypes_mutation_response',
+        fields: [
+          {
+            name: 'affected_rows',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'returning',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'goodsArrivalTypes',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'goodsArrivalTypes_on_conflict',
+        inputFields: [
+          {
+            name: 'constraint',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'ENUM',
+                name: 'goodsArrivalTypes_constraint',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'update_columns',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'ENUM',
+                    name: 'goodsArrivalTypes_update_column',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            defaultValue: '[]',
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'goodsArrivalTypes_bool_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'goodsArrivalTypes_order_by',
+        inputFields: [
+          {
+            name: 'label',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'type',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'goodsArrivalTypes_pk_columns_input',
+        inputFields: [
+          {
+            name: 'type',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'String',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'goodsArrivalTypes_select_column',
+        enumValues: [
+          {
+            name: 'label',
+          },
+          {
+            name: 'type',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'goodsArrivalTypes_set_input',
+        inputFields: [
+          {
+            name: 'label',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'type',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'goodsArrivalTypes_stream_cursor_input',
+        inputFields: [
+          {
+            name: 'initial_value',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'goodsArrivalTypes_stream_cursor_value_input',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'ordering',
+            type: {
+              kind: 'ENUM',
+              name: 'cursor_ordering',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'goodsArrivalTypes_stream_cursor_value_input',
+        inputFields: [
+          {
+            name: 'label',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'type',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'goodsArrivalTypes_update_column',
+        enumValues: [
+          {
+            name: 'label',
+          },
+          {
+            name: 'type',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'goodsArrivalTypes_updates',
+        inputFields: [
+          {
+            name: '_set',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'goodsArrivalTypes_set_input',
+              ofType: null,
+            },
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'goodsArrivalTypes_bool_exp',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
         kind: 'SCALAR',
         name: 'jsonb',
       },
@@ -12986,10 +13720,10 @@ export default {
             ],
           },
           {
-            name: 'deleteDictCompanies',
+            name: 'deleteCompanies',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies_mutation_response',
+              name: 'companies_mutation_response',
               ofType: null,
             },
             args: [
@@ -12999,7 +13733,7 @@ export default {
                   kind: 'NON_NULL',
                   ofType: {
                     kind: 'INPUT_OBJECT',
-                    name: 'dictCompanies_bool_exp',
+                    name: 'companies_bool_exp',
                     ofType: null,
                   },
                 },
@@ -13007,10 +13741,10 @@ export default {
             ],
           },
           {
-            name: 'deleteDictCompany',
+            name: 'deleteCompany',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies',
+              name: 'companies',
               ofType: null,
             },
             args: [
@@ -13070,6 +13804,174 @@ export default {
             ],
           },
           {
+            name: 'deleteGoodsArrivalType',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'type',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'String',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteGoodsArrivalTypes',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'goodsArrivalTypes_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteProduct',
+            type: {
+              kind: 'OBJECT',
+              name: 'products',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteProductGroup',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteProductGroups',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'productGroups_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteProductPassport',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteProductPassports',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'productPassports_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteProducts',
+            type: {
+              kind: 'OBJECT',
+              name: 'products_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'products_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
             name: 'deleteUser',
             type: {
               kind: 'OBJECT',
@@ -13112,6 +14014,132 @@ export default {
             ],
           },
           {
+            name: 'deleteWarehouse',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteWarehouseGroup',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteWarehouseGroups',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouseGroups_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteWarehouseStorage',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteWarehouseStorages',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouseStorages_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'deleteWarehouses',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouses_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
             name: 'delete_auth_migrations',
             type: {
               kind: 'OBJECT',
@@ -13147,6 +14175,48 @@ export default {
                   ofType: {
                     kind: 'SCALAR',
                     name: 'Int',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'delete_storage_schema_migrations',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'storage_schema_migrations_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'delete_storage_schema_migrations_by_pk',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'version',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'bigint',
                     ofType: null,
                   },
                 },
@@ -13666,10 +14736,10 @@ export default {
             ],
           },
           {
-            name: 'insertDictCompanies',
+            name: 'insertCompanies',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies_mutation_response',
+              name: 'companies_mutation_response',
               ofType: null,
             },
             args: [
@@ -13683,7 +14753,7 @@ export default {
                       kind: 'NON_NULL',
                       ofType: {
                         kind: 'INPUT_OBJECT',
-                        name: 'dictCompanies_insert_input',
+                        name: 'companies_insert_input',
                         ofType: null,
                       },
                     },
@@ -13694,17 +14764,17 @@ export default {
                 name: 'on_conflict',
                 type: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_on_conflict',
+                  name: 'companies_on_conflict',
                   ofType: null,
                 },
               },
             ],
           },
           {
-            name: 'insertDictCompany',
+            name: 'insertCompany',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies',
+              name: 'companies',
               ofType: null,
             },
             args: [
@@ -13714,7 +14784,7 @@ export default {
                   kind: 'NON_NULL',
                   ofType: {
                     kind: 'INPUT_OBJECT',
-                    name: 'dictCompanies_insert_input',
+                    name: 'companies_insert_input',
                     ofType: null,
                   },
                 },
@@ -13723,7 +14793,7 @@ export default {
                 name: 'on_conflict',
                 type: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_on_conflict',
+                  name: 'companies_on_conflict',
                   ofType: null,
                 },
               },
@@ -13794,6 +14864,262 @@ export default {
             ],
           },
           {
+            name: 'insertGoodsArrivalType',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'object',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'goodsArrivalTypes_insert_input',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertGoodsArrivalTypes',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'objects',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'goodsArrivalTypes_insert_input',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertProduct',
+            type: {
+              kind: 'OBJECT',
+              name: 'products',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'object',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'products_insert_input',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertProductGroup',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'object',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'productGroups_insert_input',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertProductGroups',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'objects',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'productGroups_insert_input',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertProductPassport',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'object',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'productPassports_insert_input',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertProductPassports',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'objects',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'productPassports_insert_input',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertProducts',
+            type: {
+              kind: 'OBJECT',
+              name: 'products_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'objects',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'products_insert_input',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
             name: 'insertUser',
             type: {
               kind: 'OBJECT',
@@ -13858,6 +15184,198 @@ export default {
             ],
           },
           {
+            name: 'insertWarehouse',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'object',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouses_insert_input',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertWarehouseGroup',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'object',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouseGroups_insert_input',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertWarehouseGroups',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'objects',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'warehouseGroups_insert_input',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertWarehouseStorage',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'object',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouseStorages_insert_input',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertWarehouseStorages',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'objects',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'warehouseStorages_insert_input',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insertWarehouses',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'objects',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'warehouses_insert_input',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
             name: 'insert_auth_migrations',
             type: {
               kind: 'OBJECT',
@@ -13916,6 +15434,70 @@ export default {
                 type: {
                   kind: 'INPUT_OBJECT',
                   name: 'auth_migrations_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insert_storage_schema_migrations',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'objects',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'storage_schema_migrations_insert_input',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_on_conflict',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'insert_storage_schema_migrations_one',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'object',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'storage_schema_migrations_insert_input',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'on_conflict',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_on_conflict',
                   ofType: null,
                 },
               },
@@ -14498,10 +16080,10 @@ export default {
             ],
           },
           {
-            name: 'updateDictCompanies',
+            name: 'updateCompanies',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies_mutation_response',
+              name: 'companies_mutation_response',
               ofType: null,
             },
             args: [
@@ -14509,7 +16091,7 @@ export default {
                 name: '_set',
                 type: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_set_input',
+                  name: 'companies_set_input',
                   ofType: null,
                 },
               },
@@ -14519,7 +16101,7 @@ export default {
                   kind: 'NON_NULL',
                   ofType: {
                     kind: 'INPUT_OBJECT',
-                    name: 'dictCompanies_bool_exp',
+                    name: 'companies_bool_exp',
                     ofType: null,
                   },
                 },
@@ -14527,10 +16109,10 @@ export default {
             ],
           },
           {
-            name: 'updateDictCompany',
+            name: 'updateCompany',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies',
+              name: 'companies',
               ofType: null,
             },
             args: [
@@ -14538,7 +16120,7 @@ export default {
                 name: '_set',
                 type: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_set_input',
+                  name: 'companies_set_input',
                   ofType: null,
                 },
               },
@@ -14548,7 +16130,7 @@ export default {
                   kind: 'NON_NULL',
                   ofType: {
                     kind: 'INPUT_OBJECT',
-                    name: 'dictCompanies_pk_columns_input',
+                    name: 'companies_pk_columns_input',
                     ofType: null,
                   },
                 },
@@ -14623,6 +16205,254 @@ export default {
                   ofType: {
                     kind: 'INPUT_OBJECT',
                     name: 'files_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateGoodsArrivalType',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'pk_columns',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'goodsArrivalTypes_pk_columns_input',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateGoodsArrivalTypes',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'goodsArrivalTypes_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateProduct',
+            type: {
+              kind: 'OBJECT',
+              name: 'products',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'pk_columns',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'products_pk_columns_input',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateProductGroup',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'pk_columns',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'productGroups_pk_columns_input',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateProductGroups',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'productGroups_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateProductPassport',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_inc',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_inc_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'pk_columns',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'productPassports_pk_columns_input',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateProductPassports',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_inc',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_inc_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'productPassports_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateProducts',
+            type: {
+              kind: 'OBJECT',
+              name: 'products_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'products_bool_exp',
                     ofType: null,
                   },
                 },
@@ -14761,6 +16591,180 @@ export default {
                   ofType: {
                     kind: 'INPUT_OBJECT',
                     name: 'users_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateWarehouse',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'pk_columns',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouses_pk_columns_input',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateWarehouseGroup',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'pk_columns',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouseGroups_pk_columns_input',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateWarehouseGroups',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouseGroups_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateWarehouseStorage',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'pk_columns',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouseStorages_pk_columns_input',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateWarehouseStorages',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouseStorages_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'updateWarehouses',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'warehouses_bool_exp',
                     ofType: null,
                   },
                 },
@@ -15112,12 +17116,12 @@ export default {
             ],
           },
           {
-            name: 'update_dictCompanies_many',
+            name: 'update_companies_many',
             type: {
               kind: 'LIST',
               ofType: {
                 kind: 'OBJECT',
-                name: 'dictCompanies_mutation_response',
+                name: 'companies_mutation_response',
                 ofType: null,
               },
             },
@@ -15132,7 +17136,7 @@ export default {
                       kind: 'NON_NULL',
                       ofType: {
                         kind: 'INPUT_OBJECT',
-                        name: 'dictCompanies_updates',
+                        name: 'companies_updates',
                         ofType: null,
                       },
                     },
@@ -15172,6 +17176,230 @@ export default {
             ],
           },
           {
+            name: 'update_goodsArrivalTypes_many',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'goodsArrivalTypes_mutation_response',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'updates',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'goodsArrivalTypes_updates',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'update_productGroups_many',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'productGroups_mutation_response',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'updates',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'productGroups_updates',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'update_productPassports_many',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'productPassports_mutation_response',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'updates',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'productPassports_updates',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'update_products_many',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'products_mutation_response',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'updates',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'products_updates',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'update_storage_schema_migrations',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_mutation_response',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_inc',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_inc_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'storage_schema_migrations_bool_exp',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'update_storage_schema_migrations_by_pk',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations',
+              ofType: null,
+            },
+            args: [
+              {
+                name: '_inc',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_inc_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: '_set',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_set_input',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'pk_columns',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'INPUT_OBJECT',
+                    name: 'storage_schema_migrations_pk_columns_input',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'update_storage_schema_migrations_many',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'storage_schema_migrations_mutation_response',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'updates',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'storage_schema_migrations_updates',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          {
             name: 'update_users_many',
             type: {
               kind: 'LIST',
@@ -15193,6 +17421,96 @@ export default {
                       ofType: {
                         kind: 'INPUT_OBJECT',
                         name: 'users_updates',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'update_warehouseGroups_many',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'warehouseGroups_mutation_response',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'updates',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'warehouseGroups_updates',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'update_warehouseStorages_many',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'warehouseStorages_mutation_response',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'updates',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'warehouseStorages_updates',
+                        ofType: null,
+                      },
+                    },
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'update_warehouses_many',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'warehouses_mutation_response',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'updates',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'NON_NULL',
+                      ofType: {
+                        kind: 'INPUT_OBJECT',
+                        name: 'warehouses_updates',
                         ofType: null,
                       },
                     },
@@ -15225,6 +17543,3352 @@ export default {
           },
           {
             name: 'desc_nulls_last',
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productGroups',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Boolean',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'String',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productGroups_aggregate',
+        fields: [
+          {
+            name: 'aggregate',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups_aggregate_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'nodes',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'productGroups',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productGroups_aggregate_fields',
+        fields: [
+          {
+            name: 'count',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'columns',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'productGroups_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'distinct',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Boolean',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'max',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups_max_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'min',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups_min_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productGroups_bool_exp',
+        inputFields: [
+          {
+            name: '_and',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: '_not',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'productGroups_bool_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: '_or',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'Boolean_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'productGroups_constraint',
+        enumValues: [
+          {
+            name: 'product_groups_pkey',
+          },
+          {
+            name: 'product_groups_short_name_key',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productGroups_insert_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productGroups_max_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productGroups_min_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productGroups_mutation_response',
+        fields: [
+          {
+            name: 'affected_rows',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'returning',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'productGroups',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productGroups_on_conflict',
+        inputFields: [
+          {
+            name: 'constraint',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'ENUM',
+                name: 'productGroups_constraint',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'update_columns',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'ENUM',
+                    name: 'productGroups_update_column',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            defaultValue: '[]',
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'productGroups_bool_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productGroups_order_by',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productGroups_pk_columns_input',
+        inputFields: [
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'productGroups_select_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'fullName',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'shortName',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productGroups_set_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productGroups_stream_cursor_input',
+        inputFields: [
+          {
+            name: 'initial_value',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'productGroups_stream_cursor_value_input',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'ordering',
+            type: {
+              kind: 'ENUM',
+              name: 'cursor_ordering',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productGroups_stream_cursor_value_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'productGroups_update_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'fullName',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'shortName',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productGroups_updates',
+        inputFields: [
+          {
+            name: '_set',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'productGroups_set_input',
+              ofType: null,
+            },
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'productGroups_bool_exp',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'date',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'density',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Float',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Boolean',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'number',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'String',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'producerId',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'product_id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_aggregate',
+        fields: [
+          {
+            name: 'aggregate',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_aggregate_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'nodes',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'productPassports',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_aggregate_fields',
+        fields: [
+          {
+            name: 'avg',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_avg_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'count',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'columns',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'productPassports_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'distinct',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Boolean',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'max',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_max_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'min',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_min_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'stddev',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_stddev_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'stddev_pop',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_stddev_pop_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'stddev_samp',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_stddev_samp_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'sum',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_sum_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'var_pop',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_var_pop_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'var_samp',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_var_samp_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'variance',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports_variance_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_avg_fields',
+        fields: [
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productPassports_bool_exp',
+        inputFields: [
+          {
+            name: '_and',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: '_not',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'productPassports_bool_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: '_or',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'date',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'density',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'Float_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'Boolean_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'number',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'producerId',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'product_id',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'productPassports_constraint',
+        enumValues: [
+          {
+            name: 'product_passports_number_key',
+          },
+          {
+            name: 'product_passports_pkey',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productPassports_inc_input',
+        inputFields: [
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productPassports_insert_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'date',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'number',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'producerId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'product_id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_max_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'date',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'number',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'producerId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'product_id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_min_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'date',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'number',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'producerId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'product_id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_mutation_response',
+        fields: [
+          {
+            name: 'affected_rows',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'returning',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'productPassports',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productPassports_on_conflict',
+        inputFields: [
+          {
+            name: 'constraint',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'ENUM',
+                name: 'productPassports_constraint',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'update_columns',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'ENUM',
+                    name: 'productPassports_update_column',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            defaultValue: '[]',
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'productPassports_bool_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productPassports_order_by',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'date',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'density',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'number',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'producerId',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'product_id',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productPassports_pk_columns_input',
+        inputFields: [
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'productPassports_select_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'date',
+          },
+          {
+            name: 'density',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'number',
+          },
+          {
+            name: 'producerId',
+          },
+          {
+            name: 'product_id',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productPassports_set_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'date',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'number',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'producerId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'product_id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_stddev_fields',
+        fields: [
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_stddev_pop_fields',
+        fields: [
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_stddev_samp_fields',
+        fields: [
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productPassports_stream_cursor_input',
+        inputFields: [
+          {
+            name: 'initial_value',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'productPassports_stream_cursor_value_input',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'ordering',
+            type: {
+              kind: 'ENUM',
+              name: 'cursor_ordering',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productPassports_stream_cursor_value_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'date',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'number',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'producerId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'product_id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_sum_fields',
+        fields: [
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'ENUM',
+        name: 'productPassports_update_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'date',
+          },
+          {
+            name: 'density',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'number',
+          },
+          {
+            name: 'producerId',
+          },
+          {
+            name: 'product_id',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'productPassports_updates',
+        inputFields: [
+          {
+            name: '_inc',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'productPassports_inc_input',
+              ofType: null,
+            },
+          },
+          {
+            name: '_set',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'productPassports_set_input',
+              ofType: null,
+            },
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'productPassports_bool_exp',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_var_pop_fields',
+        fields: [
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_var_samp_fields',
+        fields: [
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'productPassports_variance_fields',
+        fields: [
+          {
+            name: 'density',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'products',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Boolean',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'productGroupId',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'String',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'products_aggregate',
+        fields: [
+          {
+            name: 'aggregate',
+            type: {
+              kind: 'OBJECT',
+              name: 'products_aggregate_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'nodes',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'products',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'products_aggregate_fields',
+        fields: [
+          {
+            name: 'count',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'columns',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'products_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'distinct',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Boolean',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'max',
+            type: {
+              kind: 'OBJECT',
+              name: 'products_max_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'min',
+            type: {
+              kind: 'OBJECT',
+              name: 'products_min_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'products_bool_exp',
+        inputFields: [
+          {
+            name: '_and',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: '_not',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'products_bool_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: '_or',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'Boolean_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'productGroupId',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'products_constraint',
+        enumValues: [
+          {
+            name: 'products_pkey',
+          },
+          {
+            name: 'products_short_name_key',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'products_insert_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'productGroupId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'products_max_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'productGroupId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'products_min_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'productGroupId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'products_mutation_response',
+        fields: [
+          {
+            name: 'affected_rows',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'returning',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'products',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'products_on_conflict',
+        inputFields: [
+          {
+            name: 'constraint',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'ENUM',
+                name: 'products_constraint',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'update_columns',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'ENUM',
+                    name: 'products_update_column',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            defaultValue: '[]',
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'products_bool_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'products_order_by',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'productGroupId',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'products_pk_columns_input',
+        inputFields: [
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'products_select_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'fullName',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'productGroupId',
+          },
+          {
+            name: 'shortName',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'products_set_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'productGroupId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'products_stream_cursor_input',
+        inputFields: [
+          {
+            name: 'initial_value',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'products_stream_cursor_value_input',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'ordering',
+            type: {
+              kind: 'ENUM',
+              name: 'cursor_ordering',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'products_stream_cursor_value_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'productGroupId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'products_update_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'fullName',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'productGroupId',
+          },
+          {
+            name: 'shortName',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'products_updates',
+        inputFields: [
+          {
+            name: '_set',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'products_set_input',
+              ofType: null,
+            },
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'products_bool_exp',
+                ofType: null,
+              },
+            },
           },
         ],
       },
@@ -16646,7 +22310,7 @@ export default {
             ],
           },
           {
-            name: 'dictCompanies',
+            name: 'companies',
             type: {
               kind: 'NON_NULL',
               ofType: {
@@ -16655,7 +22319,7 @@ export default {
                   kind: 'NON_NULL',
                   ofType: {
                     kind: 'OBJECT',
-                    name: 'dictCompanies',
+                    name: 'companies',
                     ofType: null,
                   },
                 },
@@ -16670,7 +22334,7 @@ export default {
                     kind: 'NON_NULL',
                     ofType: {
                       kind: 'ENUM',
-                      name: 'dictCompanies_select_column',
+                      name: 'companies_select_column',
                       ofType: null,
                     },
                   },
@@ -16700,7 +22364,7 @@ export default {
                     kind: 'NON_NULL',
                     ofType: {
                       kind: 'INPUT_OBJECT',
-                      name: 'dictCompanies_order_by',
+                      name: 'companies_order_by',
                       ofType: null,
                     },
                   },
@@ -16710,19 +22374,19 @@ export default {
                 name: 'where',
                 type: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_bool_exp',
+                  name: 'companies_bool_exp',
                   ofType: null,
                 },
               },
             ],
           },
           {
-            name: 'dictCompanies_aggregate',
+            name: 'companies_aggregate',
             type: {
               kind: 'NON_NULL',
               ofType: {
                 kind: 'OBJECT',
-                name: 'dictCompanies_aggregate',
+                name: 'companies_aggregate',
                 ofType: null,
               },
             },
@@ -16735,7 +22399,7 @@ export default {
                     kind: 'NON_NULL',
                     ofType: {
                       kind: 'ENUM',
-                      name: 'dictCompanies_select_column',
+                      name: 'companies_select_column',
                       ofType: null,
                     },
                   },
@@ -16765,7 +22429,7 @@ export default {
                     kind: 'NON_NULL',
                     ofType: {
                       kind: 'INPUT_OBJECT',
-                      name: 'dictCompanies_order_by',
+                      name: 'companies_order_by',
                       ofType: null,
                     },
                   },
@@ -16775,17 +22439,17 @@ export default {
                 name: 'where',
                 type: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_bool_exp',
+                  name: 'companies_bool_exp',
                   ofType: null,
                 },
               },
             ],
           },
           {
-            name: 'dictCompany',
+            name: 'company',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies',
+              name: 'companies',
               ofType: null,
             },
             args: [
@@ -16960,6 +22624,791 @@ export default {
             ],
           },
           {
+            name: 'goodsArrivalType',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'type',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'String',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'goodsArrivalTypes',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'goodsArrivalTypes',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'goodsArrivalTypes_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'goodsArrivalTypes_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'goodsArrivalTypes_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'goodsArrivalTypes_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'goodsArrivalTypes_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'goodsArrivalTypes_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'product',
+            type: {
+              kind: 'OBJECT',
+              name: 'products',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'productGroup',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'productGroups',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'productGroups',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'productGroups_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'productGroups_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'productGroups_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'productGroups_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'productGroups_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'productGroups_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'productPassport',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'productPassports',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'productPassports',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'productPassports_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'productPassports_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'productPassports_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'productPassports_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'productPassports_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'productPassports_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'products',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'products',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'products_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'products_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'products_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'products_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'products_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'products_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'storage_schema_migrations',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'storage_schema_migrations',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'storage_schema_migrations_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'storage_schema_migrations_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'storage_schema_migrations_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'storage_schema_migrations_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'storage_schema_migrations_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'storage_schema_migrations_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'storage_schema_migrations_by_pk',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'version',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'bigint',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
             name: 'user',
             type: {
               kind: 'OBJECT',
@@ -17115,6 +23564,1182 @@ export default {
                 },
               },
             ],
+          },
+          {
+            name: 'warehouse',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseGroup',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseGroups',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouseGroups',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouseGroups_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouseGroups_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseGroups_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'warehouseGroups_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouseGroups_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouseGroups_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseStorage',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseStorages',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouseStorages',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouseStorages_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouseStorages_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseStorages_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'warehouseStorages_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouseStorages_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouseStorages_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouses',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouses',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouses_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouses_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouses_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'warehouses_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouses_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouses_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations',
+        fields: [
+          {
+            name: 'dirty',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Boolean',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'version',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'bigint',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_aggregate',
+        fields: [
+          {
+            name: 'aggregate',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_aggregate_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'nodes',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'storage_schema_migrations',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_aggregate_fields',
+        fields: [
+          {
+            name: 'avg',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_avg_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'count',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'columns',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'storage_schema_migrations_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'distinct',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Boolean',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'max',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_max_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'min',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_min_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'stddev',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_stddev_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'stddev_pop',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_stddev_pop_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'stddev_samp',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_stddev_samp_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'sum',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_sum_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'var_pop',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_var_pop_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'var_samp',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_var_samp_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'variance',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations_variance_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_avg_fields',
+        fields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'storage_schema_migrations_bool_exp',
+        inputFields: [
+          {
+            name: '_and',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: '_not',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'storage_schema_migrations_bool_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: '_or',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: 'dirty',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'Boolean_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'version',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'bigint_comparison_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'storage_schema_migrations_constraint',
+        enumValues: [
+          {
+            name: 'schema_migrations_pkey',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'storage_schema_migrations_inc_input',
+        inputFields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'bigint',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'storage_schema_migrations_insert_input',
+        inputFields: [
+          {
+            name: 'dirty',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'bigint',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_max_fields',
+        fields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'bigint',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_min_fields',
+        fields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'bigint',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_mutation_response',
+        fields: [
+          {
+            name: 'affected_rows',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'returning',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'storage_schema_migrations',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'storage_schema_migrations_on_conflict',
+        inputFields: [
+          {
+            name: 'constraint',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'ENUM',
+                name: 'storage_schema_migrations_constraint',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'update_columns',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'ENUM',
+                    name: 'storage_schema_migrations_update_column',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            defaultValue: '[]',
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'storage_schema_migrations_bool_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'storage_schema_migrations_order_by',
+        inputFields: [
+          {
+            name: 'dirty',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'version',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'storage_schema_migrations_pk_columns_input',
+        inputFields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'bigint',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'storage_schema_migrations_select_column',
+        enumValues: [
+          {
+            name: 'dirty',
+          },
+          {
+            name: 'version',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'storage_schema_migrations_set_input',
+        inputFields: [
+          {
+            name: 'dirty',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'bigint',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_stddev_fields',
+        fields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_stddev_pop_fields',
+        fields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_stddev_samp_fields',
+        fields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'storage_schema_migrations_stream_cursor_input',
+        inputFields: [
+          {
+            name: 'initial_value',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'storage_schema_migrations_stream_cursor_value_input',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'ordering',
+            type: {
+              kind: 'ENUM',
+              name: 'cursor_ordering',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'storage_schema_migrations_stream_cursor_value_input',
+        inputFields: [
+          {
+            name: 'dirty',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'bigint',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_sum_fields',
+        fields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'bigint',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'ENUM',
+        name: 'storage_schema_migrations_update_column',
+        enumValues: [
+          {
+            name: 'dirty',
+          },
+          {
+            name: 'version',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'storage_schema_migrations_updates',
+        inputFields: [
+          {
+            name: '_inc',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'storage_schema_migrations_inc_input',
+              ofType: null,
+            },
+          },
+          {
+            name: '_set',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'storage_schema_migrations_set_input',
+              ofType: null,
+            },
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'storage_schema_migrations_bool_exp',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_var_pop_fields',
+        fields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_var_samp_fields',
+        fields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'storage_schema_migrations_variance_fields',
+        fields: [
+          {
+            name: 'version',
+            type: {
+              kind: 'SCALAR',
+              name: 'Float',
+              ofType: null,
+            },
+            args: [],
           },
         ],
         interfaces: [],
@@ -19005,7 +26630,7 @@ export default {
             ],
           },
           {
-            name: 'dictCompanies',
+            name: 'companies',
             type: {
               kind: 'NON_NULL',
               ofType: {
@@ -19014,7 +26639,7 @@ export default {
                   kind: 'NON_NULL',
                   ofType: {
                     kind: 'OBJECT',
-                    name: 'dictCompanies',
+                    name: 'companies',
                     ofType: null,
                   },
                 },
@@ -19029,7 +26654,7 @@ export default {
                     kind: 'NON_NULL',
                     ofType: {
                       kind: 'ENUM',
-                      name: 'dictCompanies_select_column',
+                      name: 'companies_select_column',
                       ofType: null,
                     },
                   },
@@ -19059,7 +26684,7 @@ export default {
                     kind: 'NON_NULL',
                     ofType: {
                       kind: 'INPUT_OBJECT',
-                      name: 'dictCompanies_order_by',
+                      name: 'companies_order_by',
                       ofType: null,
                     },
                   },
@@ -19069,19 +26694,19 @@ export default {
                 name: 'where',
                 type: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_bool_exp',
+                  name: 'companies_bool_exp',
                   ofType: null,
                 },
               },
             ],
           },
           {
-            name: 'dictCompanies_aggregate',
+            name: 'companies_aggregate',
             type: {
               kind: 'NON_NULL',
               ofType: {
                 kind: 'OBJECT',
-                name: 'dictCompanies_aggregate',
+                name: 'companies_aggregate',
                 ofType: null,
               },
             },
@@ -19094,7 +26719,7 @@ export default {
                     kind: 'NON_NULL',
                     ofType: {
                       kind: 'ENUM',
-                      name: 'dictCompanies_select_column',
+                      name: 'companies_select_column',
                       ofType: null,
                     },
                   },
@@ -19124,7 +26749,7 @@ export default {
                     kind: 'NON_NULL',
                     ofType: {
                       kind: 'INPUT_OBJECT',
-                      name: 'dictCompanies_order_by',
+                      name: 'companies_order_by',
                       ofType: null,
                     },
                   },
@@ -19134,14 +26759,14 @@ export default {
                 name: 'where',
                 type: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_bool_exp',
+                  name: 'companies_bool_exp',
                   ofType: null,
                 },
               },
             ],
           },
           {
-            name: 'dictCompanies_stream',
+            name: 'companies_stream',
             type: {
               kind: 'NON_NULL',
               ofType: {
@@ -19150,7 +26775,7 @@ export default {
                   kind: 'NON_NULL',
                   ofType: {
                     kind: 'OBJECT',
-                    name: 'dictCompanies',
+                    name: 'companies',
                     ofType: null,
                   },
                 },
@@ -19176,7 +26801,7 @@ export default {
                     kind: 'LIST',
                     ofType: {
                       kind: 'INPUT_OBJECT',
-                      name: 'dictCompanies_stream_cursor_input',
+                      name: 'companies_stream_cursor_input',
                       ofType: null,
                     },
                   },
@@ -19186,17 +26811,17 @@ export default {
                 name: 'where',
                 type: {
                   kind: 'INPUT_OBJECT',
-                  name: 'dictCompanies_bool_exp',
+                  name: 'companies_bool_exp',
                   ofType: null,
                 },
               },
             ],
           },
           {
-            name: 'dictCompany',
+            name: 'company',
             type: {
               kind: 'OBJECT',
-              name: 'dictCompanies',
+              name: 'companies',
               ofType: null,
             },
             args: [
@@ -19423,6 +27048,1051 @@ export default {
             ],
           },
           {
+            name: 'goodsArrivalType',
+            type: {
+              kind: 'OBJECT',
+              name: 'goodsArrivalTypes',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'type',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'String',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'goodsArrivalTypes',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'goodsArrivalTypes',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'goodsArrivalTypes_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'goodsArrivalTypes_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'goodsArrivalTypes_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'goodsArrivalTypes_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'goodsArrivalTypes_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'goodsArrivalTypes_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'goodsArrivalTypes_stream',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'goodsArrivalTypes',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'batch_size',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Int',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'cursor',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'goodsArrivalTypes_stream_cursor_input',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'goodsArrivalTypes_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'product',
+            type: {
+              kind: 'OBJECT',
+              name: 'products',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'productGroup',
+            type: {
+              kind: 'OBJECT',
+              name: 'productGroups',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'productGroups',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'productGroups',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'productGroups_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'productGroups_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'productGroups_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'productGroups_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'productGroups_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'productGroups_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'productGroups_stream',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'productGroups',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'batch_size',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Int',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'cursor',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'productGroups_stream_cursor_input',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'productPassport',
+            type: {
+              kind: 'OBJECT',
+              name: 'productPassports',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'productPassports',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'productPassports',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'productPassports_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'productPassports_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'productPassports_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'productPassports_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'productPassports_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'productPassports_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'productPassports_stream',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'productPassports',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'batch_size',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Int',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'cursor',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'productPassports_stream_cursor_input',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'productPassports_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'products',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'products',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'products_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'products_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'products_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'products_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'products_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'products_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'products_stream',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'products',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'batch_size',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Int',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'cursor',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'products_stream_cursor_input',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'products_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'storage_schema_migrations',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'storage_schema_migrations',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'storage_schema_migrations_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'storage_schema_migrations_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'storage_schema_migrations_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'storage_schema_migrations_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'storage_schema_migrations_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'storage_schema_migrations_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'storage_schema_migrations_by_pk',
+            type: {
+              kind: 'OBJECT',
+              name: 'storage_schema_migrations',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'version',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'bigint',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'storage_schema_migrations_stream',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'storage_schema_migrations',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'batch_size',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Int',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'cursor',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'storage_schema_migrations_stream_cursor_input',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'storage_schema_migrations_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
             name: 'user',
             type: {
               kind: 'OBJECT',
@@ -19626,6 +28296,633 @@ export default {
                 type: {
                   kind: 'INPUT_OBJECT',
                   name: 'users_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouse',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseGroup',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseGroups',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouseGroups',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouseGroups_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouseGroups_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseGroups_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'warehouseGroups_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouseGroups_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouseGroups_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseGroups_stream',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouseGroups',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'batch_size',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Int',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'cursor',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouseGroups_stream_cursor_input',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseStorage',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages',
+              ofType: null,
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'uuid',
+                    ofType: null,
+                  },
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseStorages',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouseStorages',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouseStorages_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouseStorages_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseStorages_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'warehouseStorages_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouseStorages_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouseStorages_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouseStorages_stream',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouseStorages',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'batch_size',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Int',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'cursor',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouseStorages_stream_cursor_input',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouses',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouses',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouses_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouses_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouses_aggregate',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'warehouses_aggregate',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'distinct_on',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouses_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'limit',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'offset',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Int',
+                  ofType: null,
+                },
+              },
+              {
+                name: 'order_by',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouses_order_by',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_bool_exp',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'warehouses_stream',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouses',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [
+              {
+                name: 'batch_size',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Int',
+                    ofType: null,
+                  },
+                },
+              },
+              {
+                name: 'cursor',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'LIST',
+                    ofType: {
+                      kind: 'INPUT_OBJECT',
+                      name: 'warehouses_stream_cursor_input',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'where',
+                type: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_bool_exp',
                   ofType: null,
                 },
               },
@@ -23498,6 +32795,2975 @@ export default {
         ],
       },
       {
+        kind: 'OBJECT',
+        name: 'warehouseGroups',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Boolean',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'String',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseGroups_aggregate',
+        fields: [
+          {
+            name: 'aggregate',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups_aggregate_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'nodes',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouseGroups',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseGroups_aggregate_fields',
+        fields: [
+          {
+            name: 'count',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'columns',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouseGroups_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'distinct',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Boolean',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'max',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups_max_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'min',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseGroups_min_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseGroups_bool_exp',
+        inputFields: [
+          {
+            name: '_and',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: '_not',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'warehouseGroups_bool_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: '_or',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseGroups_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'Boolean_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'warehouseGroups_constraint',
+        enumValues: [
+          {
+            name: 'warehouse_groups_pkey',
+          },
+          {
+            name: 'warehouse_groups_short_name_key',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseGroups_insert_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseGroups_max_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseGroups_min_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseGroups_mutation_response',
+        fields: [
+          {
+            name: 'affected_rows',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'returning',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouseGroups',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseGroups_on_conflict',
+        inputFields: [
+          {
+            name: 'constraint',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'ENUM',
+                name: 'warehouseGroups_constraint',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'update_columns',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'ENUM',
+                    name: 'warehouseGroups_update_column',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            defaultValue: '[]',
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'warehouseGroups_bool_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseGroups_order_by',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseGroups_pk_columns_input',
+        inputFields: [
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'warehouseGroups_select_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'fullName',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'shortName',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseGroups_set_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseGroups_stream_cursor_input',
+        inputFields: [
+          {
+            name: 'initial_value',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'warehouseGroups_stream_cursor_value_input',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'ordering',
+            type: {
+              kind: 'ENUM',
+              name: 'cursor_ordering',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseGroups_stream_cursor_value_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'warehouseGroups_update_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'fullName',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'shortName',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseGroups_updates',
+        inputFields: [
+          {
+            name: '_set',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'warehouseGroups_set_input',
+              ofType: null,
+            },
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'warehouseGroups_bool_exp',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseStorages',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Boolean',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'String',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'warehouseId',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseStorages_aggregate',
+        fields: [
+          {
+            name: 'aggregate',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages_aggregate_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'nodes',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouseStorages',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseStorages_aggregate_fields',
+        fields: [
+          {
+            name: 'count',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'columns',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouseStorages_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'distinct',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Boolean',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'max',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages_max_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'min',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouseStorages_min_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseStorages_bool_exp',
+        inputFields: [
+          {
+            name: '_and',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: '_not',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'warehouseStorages_bool_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: '_or',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouseStorages_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'Boolean_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'warehouseId',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'warehouseStorages_constraint',
+        enumValues: [
+          {
+            name: 'warehouse_storages_pkey',
+          },
+          {
+            name: 'warehouse_storages_short_name_key',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseStorages_insert_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'warehouseId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseStorages_max_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'warehouseId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseStorages_min_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'warehouseId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouseStorages_mutation_response',
+        fields: [
+          {
+            name: 'affected_rows',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'returning',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouseStorages',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseStorages_on_conflict',
+        inputFields: [
+          {
+            name: 'constraint',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'ENUM',
+                name: 'warehouseStorages_constraint',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'update_columns',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'ENUM',
+                    name: 'warehouseStorages_update_column',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            defaultValue: '[]',
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'warehouseStorages_bool_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseStorages_order_by',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'warehouseId',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseStorages_pk_columns_input',
+        inputFields: [
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'warehouseStorages_select_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'fullName',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'shortName',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+          {
+            name: 'warehouseId',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseStorages_set_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'warehouseId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseStorages_stream_cursor_input',
+        inputFields: [
+          {
+            name: 'initial_value',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'warehouseStorages_stream_cursor_value_input',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'ordering',
+            type: {
+              kind: 'ENUM',
+              name: 'cursor_ordering',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseStorages_stream_cursor_value_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'warehouseId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'warehouseStorages_update_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'fullName',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'shortName',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+          {
+            name: 'warehouseId',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouseStorages_updates',
+        inputFields: [
+          {
+            name: '_set',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'warehouseStorages_set_input',
+              ofType: null,
+            },
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'warehouseStorages_bool_exp',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouses',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Boolean',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'String',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'timestamptz',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'warehouseGroupId',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouses_aggregate',
+        fields: [
+          {
+            name: 'aggregate',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses_aggregate_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'nodes',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouses',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouses_aggregate_fields',
+        fields: [
+          {
+            name: 'count',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'columns',
+                type: {
+                  kind: 'LIST',
+                  ofType: {
+                    kind: 'NON_NULL',
+                    ofType: {
+                      kind: 'ENUM',
+                      name: 'warehouses_select_column',
+                      ofType: null,
+                    },
+                  },
+                },
+              },
+              {
+                name: 'distinct',
+                type: {
+                  kind: 'SCALAR',
+                  name: 'Boolean',
+                  ofType: null,
+                },
+              },
+            ],
+          },
+          {
+            name: 'max',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses_max_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'min',
+            type: {
+              kind: 'OBJECT',
+              name: 'warehouses_min_fields',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouses_bool_exp',
+        inputFields: [
+          {
+            name: '_and',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: '_not',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'warehouses_bool_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: '_or',
+            type: {
+              kind: 'LIST',
+              ofType: {
+                kind: 'NON_NULL',
+                ofType: {
+                  kind: 'INPUT_OBJECT',
+                  name: 'warehouses_bool_exp',
+                  ofType: null,
+                },
+              },
+            },
+          },
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'Boolean_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'String_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'timestamptz_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+          {
+            name: 'warehouseGroupId',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'uuid_comparison_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'warehouses_constraint',
+        enumValues: [
+          {
+            name: 'warehouses_pkey',
+          },
+          {
+            name: 'warehouses_short_name_key',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouses_insert_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'warehouseGroupId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouses_max_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'warehouseGroupId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouses_min_fields',
+        fields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+          {
+            name: 'warehouseGroupId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'warehouses_mutation_response',
+        fields: [
+          {
+            name: 'affected_rows',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Int',
+                ofType: null,
+              },
+            },
+            args: [],
+          },
+          {
+            name: 'returning',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'OBJECT',
+                    name: 'warehouses',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouses_on_conflict',
+        inputFields: [
+          {
+            name: 'constraint',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'ENUM',
+                name: 'warehouses_constraint',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'update_columns',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'LIST',
+                ofType: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'ENUM',
+                    name: 'warehouses_update_column',
+                    ofType: null,
+                  },
+                },
+              },
+            },
+            defaultValue: '[]',
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'warehouses_bool_exp',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouses_order_by',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+          {
+            name: 'warehouseGroupId',
+            type: {
+              kind: 'ENUM',
+              name: 'order_by',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouses_pk_columns_input',
+        inputFields: [
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'uuid',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'warehouses_select_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'fullName',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'shortName',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+          {
+            name: 'warehouseGroupId',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouses_set_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'warehouseGroupId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouses_stream_cursor_input',
+        inputFields: [
+          {
+            name: 'initial_value',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'warehouses_stream_cursor_value_input',
+                ofType: null,
+              },
+            },
+          },
+          {
+            name: 'ordering',
+            type: {
+              kind: 'ENUM',
+              name: 'cursor_ordering',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouses_stream_cursor_value_input',
+        inputFields: [
+          {
+            name: 'createdAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'createdBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'disabled',
+            type: {
+              kind: 'SCALAR',
+              name: 'Boolean',
+              ofType: null,
+            },
+          },
+          {
+            name: 'fullName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'id',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'shortName',
+            type: {
+              kind: 'SCALAR',
+              name: 'String',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedAt',
+            type: {
+              kind: 'SCALAR',
+              name: 'timestamptz',
+              ofType: null,
+            },
+          },
+          {
+            name: 'updatedBy',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+          {
+            name: 'warehouseGroupId',
+            type: {
+              kind: 'SCALAR',
+              name: 'uuid',
+              ofType: null,
+            },
+          },
+        ],
+      },
+      {
+        kind: 'ENUM',
+        name: 'warehouses_update_column',
+        enumValues: [
+          {
+            name: 'createdAt',
+          },
+          {
+            name: 'createdBy',
+          },
+          {
+            name: 'disabled',
+          },
+          {
+            name: 'fullName',
+          },
+          {
+            name: 'id',
+          },
+          {
+            name: 'shortName',
+          },
+          {
+            name: 'updatedAt',
+          },
+          {
+            name: 'updatedBy',
+          },
+          {
+            name: 'warehouseGroupId',
+          },
+        ],
+      },
+      {
+        kind: 'INPUT_OBJECT',
+        name: 'warehouses_updates',
+        inputFields: [
+          {
+            name: '_set',
+            type: {
+              kind: 'INPUT_OBJECT',
+              name: 'warehouses_set_input',
+              ofType: null,
+            },
+          },
+          {
+            name: 'where',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'INPUT_OBJECT',
+                name: 'warehouses_bool_exp',
+                ofType: null,
+              },
+            },
+          },
+        ],
+      },
+      {
         kind: 'SCALAR',
         name: 'Any',
       },
@@ -23505,9 +35771,7 @@ export default {
     directives: [
       {
         name: 'cached',
-        locations: [
-          'QUERY',
-        ],
+        locations: ['QUERY'],
         args: [
           {
             name: 'refresh',
@@ -23537,11 +35801,7 @@ export default {
       },
       {
         name: 'include',
-        locations: [
-          'FIELD',
-          'FRAGMENT_SPREAD',
-          'INLINE_FRAGMENT',
-        ],
+        locations: ['FIELD', 'FRAGMENT_SPREAD', 'INLINE_FRAGMENT'],
         args: [
           {
             name: 'if',
@@ -23558,11 +35818,7 @@ export default {
       },
       {
         name: 'skip',
-        locations: [
-          'FIELD',
-          'FRAGMENT_SPREAD',
-          'INLINE_FRAGMENT',
-        ],
+        locations: ['FIELD', 'FRAGMENT_SPREAD', 'INLINE_FRAGMENT'],
         args: [
           {
             name: 'if',

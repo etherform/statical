@@ -1,27 +1,29 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { Color, Titlebar } from 'custom-electron-titlebar'
-import type TitlebarClass from 'custom-electron-titlebar/dist/titlebar'
+import { Titlebar, TitlebarColor } from 'custom-electron-titlebar'
 import { domReady } from '&/utils'
 import { useLoadingAnimation } from '&/animation'
 import { ipcEvents } from '#/ipc'
 
-let titlebar: TitlebarClass
+let titlebar: Titlebar
 
 /* some fancy loading animation */
 const { startLoadingAnimation, finishLoadingAnimation } = useLoadingAnimation()
 
-domReady().then(async () => {
-  await ipcRenderer.invoke(ipcEvents.INSERT_CSS_RESET)
+domReady().then(
+  async () => {
+    await ipcRenderer.invoke(ipcEvents.INSERT_CSS_RESET)
 
-  titlebar = new Titlebar({
-    backgroundColor: Color.fromHex('#24292E'),
-    itemBackgroundColor: Color.fromHex('#24292E'),
+    titlebar = new Titlebar({
+      backgroundColor: TitlebarColor.fromHex('#24292E'),
+      itemBackgroundColor: TitlebarColor.fromHex('#24292E'),
     // menu: null // = do not automatically use Menu.applicationMenu
-  })
-  titlebar.updateTitle('Statical')
+    })
+    titlebar.updateTitle('Statical')
 
-  startLoadingAnimation()
-}).then(() => setTimeout(finishLoadingAnimation, 15000))
+    startLoadingAnimation()
+  },
+  () => {},
+).then(() => setTimeout(finishLoadingAnimation, 15000))
 
 /* titlebar api */
 const titlebarAPI = {

@@ -2,6 +2,9 @@
   "root": true,
   "reportUnusedDisableDirectives": true,
   "extends": ["@antfu"],
+  "rules": {
+    "@typescript-eslint/brace-style": ["warn", "1tbs"]
+  },
   "overrides": [
     {
       "files": ["*.graphql"],

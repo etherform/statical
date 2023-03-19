@@ -35,7 +35,7 @@ const transport = {
     level: LOG_LEVEL,
     format: winston.format.combine(
       winston.format.timestamp({ format: 'HH:mm:ss' }),
-      winston.format.printf((info) => `${info.level} ${info.timestamp} : ${info.message}`),
+      winston.format.printf(info => `${info.level} ${info.timestamp} : ${info.message}`),
     ),
   }),
   file_renderer: new DailyRotateFile({
@@ -47,7 +47,7 @@ const transport = {
     level: LOG_LEVEL,
     format: winston.format.combine(
       winston.format.timestamp({ format: 'HH:mm:ss' }),
-      winston.format.printf((info) => `${info.level} ${info.timestamp} : ${info.message}`),
+      winston.format.printf(info => `${info.level} ${info.timestamp} : ${info.message}`),
     ),
   }),
 }

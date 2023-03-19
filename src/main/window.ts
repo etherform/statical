@@ -4,7 +4,7 @@ import { BrowserWindow } from 'electron'
 setupTitlebar()
 
 export const createWindow
-  = async (title: string, width: number, height: number, icon: string, preload: string) =>
+  = (title: string, width: number, height: number, icon: string, preload: string) =>
     new BrowserWindow({
       title,
       width,

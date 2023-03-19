@@ -9,20 +9,24 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-import { iconsArray } from './src/renderer/styles/icons'
+import { safelist, shortcuts } from './src/renderer/styles/unocss'
 
 export default defineConfig({
-  shortcuts: [
-    ['icon-btn', 'inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600'],
-  ],
+  shortcuts,
   presets: [
     presetUno(),
     presetAttributify(),
     presetIcons({
+      collections: {
+        majesticons: () => import('@iconify-json/majesticons/icons.json').then(i => i.default),
+        uil: () => import('@iconify-json/uil/icons.json').then(i => i.default),
+        quill: () => import('@iconify-json/quill/icons.json').then(i => i.default),
+        ep: () => import('@iconify-json/ep/icons.json').then(i => i.default),
+      },
       extraProperties: {
-        'display': 'flex',
+        /* 'display': 'flex',
         'justify-content': 'space-around',
-        'vertical-align': 'middle',
+        'vertical-align': 'middle', */
       },
     }),
     presetTypography(),
@@ -38,5 +42,5 @@ export default defineConfig({
     transformerDirectives(),
     transformerVariantGroup(),
   ],
-  safelist: [...iconsArray],
+  safelist,
 })

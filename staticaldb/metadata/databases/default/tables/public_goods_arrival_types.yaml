@@ -1,0 +1,15 @@
+table:
+  name: goods_arrival_types
+  schema: public
+configuration:
+  column_config: {}
+  custom_column_names: {}
+  custom_name: goodsArrivalTypes
+  custom_root_fields:
+    delete: deleteGoodsArrivalTypes
+    delete_by_pk: deleteGoodsArrivalType
+    insert: insertGoodsArrivalTypes
+    insert_one: insertGoodsArrivalType
+    select_by_pk: goodsArrivalType
+    update: updateGoodsArrivalTypes
+    update_by_pk: updateGoodsArrivalType

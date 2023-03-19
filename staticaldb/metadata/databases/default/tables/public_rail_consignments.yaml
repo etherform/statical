@@ -1,0 +1,33 @@
+table:
+  name: rail_consignments
+  schema: public
+configuration:
+  column_config:
+    contractor_id:
+      custom_name: contractorId
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    product_passport_id:
+      custom_name: productPassportId
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+  custom_column_names:
+    contractor_id: contractorId
+    created_at: createdAt
+    created_by: createdBy
+    product_passport_id: productPassportId
+    updated_at: updatedAt
+    updated_by: updatedBy
+  custom_name: railConsignments
+  custom_root_fields:
+    delete: deleteRailConsignments
+    delete_by_pk: deleteRailConsignment
+    insert: insertRailConsignments
+    insert_one: insertRailConsignment
+    select_by_pk: railConsignment
+    update: updateRailConsignments
+    update_by_pk: updateRailConsignment

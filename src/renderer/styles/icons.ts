@@ -1,5 +1,5 @@
 export const icons = {
-  sidebar: 'i-quill:hamburger-sidebar', // 'i-quill:hamburger-sidebar',
+  sidebar: 'i-quill:hamburger-sidebar',
   login: 'i-majesticons:user-line',
   password: 'i-majesticons:lock-open-line',
   lock: 'i-majesticons:lock-line',
@@ -10,7 +10,5 @@ export const icons = {
   down: 'i-majesticons:chevron-down',
   home: 'i-majesticons:home-line',
   dict: 'i-majesticons:book-open-line',
-  locale: 'i-fluent-mdl2:locale-language',
+  locale: 'i-majesticons:translate-line',
 }
-
-export const iconsArray = Object.values(icons)

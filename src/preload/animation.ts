@@ -7,7 +7,7 @@ let animationRunning = false
  * https://projects.lukehaas.me/css-loaders
  * https://matejkustec.github.io/SpinThatShit
  */
-export function useLoadingAnimation() {
+export const useLoadingAnimation = () => {
   const htmlContent = `
   <div class="app-loading-wrap">
     <div class="spinner">

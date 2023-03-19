@@ -1,5 +1,5 @@
-import path from 'path'
-import { rmSync } from 'fs'
+import path from 'node:path'
+import { rmSync } from 'node:fs'
 import type { ConfigEnv, UserConfig, UserConfigExport } from 'vite'
 import { defineConfig, loadEnv } from 'vite'
 import Vue from '@vitejs/plugin-vue'

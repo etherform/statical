@@ -49,8 +49,9 @@ export const useAppStore = defineStore({
           if (r.children)
             filter(r.children)
           return true
+        } else {
+          return false
         }
-        else { return false }
       })
       const sort = (rs: RouteRecordRaw[]) => rs.sort((a, b) => Number(a.meta?.menuIndex) - Number(b.meta?.menuIndex)).map((r) => {
         if (r.children)

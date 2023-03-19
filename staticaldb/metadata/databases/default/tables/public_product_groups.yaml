@@ -1,0 +1,33 @@
+table:
+  name: product_groups
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    full_name:
+      custom_name: fullName
+    short_name:
+      custom_name: shortName
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    full_name: fullName
+    short_name: shortName
+    updated_at: updatedAt
+    updated_by: updatedBy
+  custom_name: productGroups
+  custom_root_fields:
+    delete: deleteProductGroups
+    delete_by_pk: deleteProductGroup
+    insert: insertProductGroups
+    insert_one: insertProductGroup
+    select_by_pk: productGroup
+    update: updateProductGroups
+    update_by_pk: updateProductGroup

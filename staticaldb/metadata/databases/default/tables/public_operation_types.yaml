@@ -1,0 +1,16 @@
+table:
+  name: operation_types
+  schema: public
+is_enum: true
+configuration:
+  column_config: {}
+  custom_column_names: {}
+  custom_name: operationTypes
+  custom_root_fields:
+    delete: deleteOperationTypes
+    delete_by_pk: deleteOperationType
+    insert: insertOperationTypes
+    insert_one: insertOperationType
+    select_by_pk: operationType
+    update: updateOperationTypes
+    update_by_pk: updateOperationType

@@ -24,6 +24,7 @@
       'base': #909399,
     ),
   ),
+
   $text-color: (
     'primary': #404040,
     'regular': #737373,
@@ -31,6 +32,14 @@
     'placeholder': #a8abb2,
     'disabled': #c0c4cc,
   ),
+
+  /* $menu: (
+    'bg-color': #283443,
+    'base-level-padding': 0.25rem,
+    'level-padding': 0.5rem,
+    'icon-width': 2rem,
+  ) */
 );
+
 
 @use 'element-plus/theme-chalk/src/index.scss' as *;

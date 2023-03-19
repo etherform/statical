@@ -54,7 +54,7 @@ onMounted(() => {
           </h1>
           <div />
           <el-dropdown text-bluegray-600 trigger="click" placement="top" size="small">
-            <el-icon h-6 w-6 :class="icons.locale" class="icon-btn" />
+            <el-icon :class="icons.locale" icon-btn-6 />
             <template #dropdown>
               <el-dropdown-menu class="no-select">
                 <el-radio-group v-model="form.selectedLocale">
@@ -118,26 +118,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-/* .el-input{
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  background: rgba(0, 0, 0, 0.1);
-  color: #454545;
 
-  .el-input__wrapper {
-    background: transparent;
-    box-shadow: none;
-
-    input {
-      color: #eee;
-      caret-color: var(--el-color-white);
-      &:-webkit-autofill {
-        box-shadow: 0 0 0 1000px #283443 inset !important;
-        -webkit-text-fill-color: var(--el-color-white) !important;
-      }
-    }
-  }
-} */
 </style>
 
 <route lang="yaml">

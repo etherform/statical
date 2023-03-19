@@ -15,7 +15,6 @@
     "allowJs": false,
     "checkJs": false,
     "strict": true,
-
     "forceConsistentCasingInFileNames": true,
     "types": [
       "vite/client",
@@ -33,9 +32,6 @@
   },
   "vueCompilerOptions": {
     "target": 3,
-    "plugins": [
-      "volar-plugin-vue-router",
-    ]
   },
   "ts-node": {
     "transpileOnly": true,
@@ -49,6 +45,5 @@
     },
   },
 
-  "include": ["src/**/*.ts", "src/**/*.vue"],
   "exclude": ["build/**/*", "node_modules/**/*"]
 }

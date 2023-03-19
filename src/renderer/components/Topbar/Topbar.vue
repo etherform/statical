@@ -13,29 +13,27 @@ const handleSignOut = async () => await nhost.auth.signOut()
 
 <template>
   <el-header shadow h-12 flex items-center p-0 bg-white color-gray-700>
-    <el-icon :class="icons.sidebar" class="icon-btn" w-7 h-7 ml-2 @click="app.toggleSidebar" />
+    <el-icon :class="icons.sidebar" icon-btn-7 ml-2 @click="app.toggleSidebar" />
     <el-divider direction="vertical" h-6 />
     <div flex-grow />
     <el-divider direction="vertical" h-6 />
-    <el-icon :class="icons.expand" class="icon-btn" w-6 h-6 />
+    <el-icon :class="icons.expand" icon-btn-6 />
     <el-divider direction="vertical" h-6 />
-    <el-icon :class="icons.lock" class="icon-btn" w-6 h-6 />
+    <el-icon :class="icons.lock" icon-btn-6 />
     <el-divider direction="vertical" h-6 />
     <el-dropdown trigger="click" mr-3>
-      <span flex items-center select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 color-gray-700 hover:color-teal-600>
-        <el-icon :class="icons.user" w-6 h-6 pr-2 />
-        <strong text-4>{{ user.name ?? 'User' }}</strong>
-        <el-icon :class="icons.down" w-5 h-5 />
-      </span>
-      <!-- <div class="flex" style="justify-content: space-evenly; height: 100%">
-        <div :class="icons.user" />
-        <div style="align-self: center; pointer-events: none">
-          <strong>{{ user.name ?? 'User' }}</strong>
+      <div flex items-center text-gray-700>
+        <div class="overflow-hidden relative w-7 h-7 bg-gray-100 rounded-full">
+          <svg class="absolute -top-0.5 -left-1 w-9 h-9 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
         </div>
-        <div style="align-self: end">
-          <div :class="icons.down" />
+        <div ml-2>
+          <div>{{ user.name ?? 'User' }}</div>
+          <div class="text-xs text-gray-500">
+            Администратор
+          </div>
         </div>
-      </div> -->
+        <el-icon :class="icons.down" w-5 h-5 ml-0.5 />
+      </div>
 
       <template #dropdown>
         <el-dropdown-menu class="no-select">

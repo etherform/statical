@@ -1,0 +1,27 @@
+table:
+  name: product_passports
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    updated_at: updatedAt
+    updated_by: updatedBy
+  custom_name: productPassports
+  custom_root_fields:
+    delete: deleteProductPassports
+    delete_by_pk: deleteProductPassport
+    insert: insertProductPassports
+    insert_one: insertProductPassport
+    select_by_pk: productPassport
+    update: updateProductPassports
+    update_by_pk: updateProductPassport

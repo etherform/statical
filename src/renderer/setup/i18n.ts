@@ -1,5 +1,6 @@
 import type { App } from 'vue'
 import { createI18n } from 'vue-i18n'
+import type { I18nOptions } from 'vue-i18n'
 /*
  * All i18n resources specified in the plugin `include` option can be loaded
  * at once using the import syntax
@@ -10,11 +11,10 @@ export const i18n = createI18n({
   legacy: false,
   locale: 'ru',
   fallbackLocale: 'en',
-  messages,
+  // this solves type error: https://github.com/intlify/vue-i18n-next/issues/1119
+  messages: messages as I18nOptions['messages'],
 })
 
-// this is exported to be used outside of vue components
-// type error: https://github.com/intlify/vue-i18n-next/issues/1119
 export const t = i18n.global.t
 export const te = i18n.global.te
 export const locale = i18n.global.locale

@@ -6,10 +6,6 @@ const app = useAppStore()
   <el-aside bg-bluegray-700 shadow h-full w-auto>
     <el-menu
       h-full
-      flex
-      flex-col
-      items-center
-      text-gray-700
       :default-active="app.route.current.path"
       :collapse="app.sidebar.collapsed"
       :unique-opened="true"

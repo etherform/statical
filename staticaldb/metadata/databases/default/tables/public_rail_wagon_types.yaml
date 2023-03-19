@@ -1,0 +1,15 @@
+table:
+  name: rail_wagon_types
+  schema: public
+configuration:
+  column_config: {}
+  custom_column_names: {}
+  custom_name: railWagonTypes
+  custom_root_fields:
+    delete: deleteRailWagonTypes
+    delete_by_pk: deleteRailWagonType
+    insert: insertRailWagonTypes
+    insert_one: insertRailWagonType
+    select_by_pk: railWagonType
+    update: updateRailWagonTypes
+    update_by_pk: updateRailWagonType

@@ -1,7 +1,9 @@
 <template>
   <sidebar />
-  <el-container flex flex-col bg-neutral-100>
+  <el-container flex flex-col>
     <topbar />
-    <content-container />
+    <el-main bg-neutral-200 p-2>
+      <router-view />
+    </el-main>
   </el-container>
 </template>

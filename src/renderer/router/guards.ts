@@ -15,12 +15,10 @@ export const setupGuards = (router: Router) => {
     if (to.path === '/login' && (user.isAuthenticated || await user.refreshSession())) {
       logger.debug('ROUTER => Redirecting AUTHORIZED user to /home.')
       next({ path: '/home' })
-    }
-    else if (to.matched.some(r => r.meta.requiresAuth) && (!user.isAuthenticated && !(await user.refreshSession()))) {
+    } else if (to.matched.some(r => r.meta.requiresAuth) && (!user.isAuthenticated && !(await user.refreshSession()))) {
       logger.debug('ROUTER => Redirecting UNAUTHORIZED user to /login.')
       next({ path: '/login' })
-    }
-    else {
+    } else {
       next()
     }
   })

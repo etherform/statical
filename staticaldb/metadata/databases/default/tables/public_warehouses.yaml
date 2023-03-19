@@ -1,0 +1,35 @@
+table:
+  name: warehouses
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    full_name:
+      custom_name: fullName
+    short_name:
+      custom_name: shortName
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+    warehouse_group_id:
+      custom_name: warehouseGroupId
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    full_name: fullName
+    short_name: shortName
+    updated_at: updatedAt
+    updated_by: updatedBy
+    warehouse_group_id: warehouseGroupId
+  custom_root_fields:
+    delete: deleteWarehouses
+    delete_by_pk: deleteWarehouse
+    insert: insertWarehouses
+    insert_one: insertWarehouse
+    select_by_pk: warehouse
+    update: updateWarehouses
+    update_by_pk: updateWarehouse

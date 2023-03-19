@@ -1,0 +1,44 @@
+table:
+  name: companies
+  schema: public
+configuration:
+  column_config:
+    created_at:
+      custom_name: createdAt
+    created_by:
+      custom_name: createdBy
+    full_name:
+      custom_name: fullName
+    is_contractor:
+      custom_name: isContractor
+    is_producer:
+      custom_name: isProducer
+    is_supplier:
+      custom_name: isSupplier
+    is_wagon_owner:
+      custom_name: isWagonOwner
+    short_name:
+      custom_name: shortName
+    updated_at:
+      custom_name: updatedAt
+    updated_by:
+      custom_name: updatedBy
+  custom_column_names:
+    created_at: createdAt
+    created_by: createdBy
+    full_name: fullName
+    is_contractor: isContractor
+    is_producer: isProducer
+    is_supplier: isSupplier
+    is_wagon_owner: isWagonOwner
+    short_name: shortName
+    updated_at: updatedAt
+    updated_by: updatedBy
+  custom_root_fields:
+    delete: deleteCompanies
+    delete_by_pk: deleteCompany
+    insert: insertCompanies
+    insert_one: insertCompany
+    select_by_pk: company
+    update: updateCompanies
+    update_by_pk: updateCompany

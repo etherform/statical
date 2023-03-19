@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useNhostClient } from '@nhost/vue'
-import { tryOnMounted, useTitle } from '@vueuse/core'
+import { useTitle } from '@vueuse/core'
 import { logger } from '~/utils'
 
 const app = useAppStore()
@@ -24,7 +24,7 @@ watch(
   { immediate: true },
 )
 
-tryOnMounted(() => {
+onMounted(() => {
   window.api.finishLoadingAnimation()
 
   nhost.auth.onAuthStateChanged(async (event, session) => {
@@ -32,12 +32,16 @@ tryOnMounted(() => {
 
     switch (event) {
       case 'SIGNED_IN':
-        if (session) {
-          user.handleSignIn(session)
-          ws?.restart()
-          if (app.route.current.path === '/' || app.route.current.path === '/login')
-            router.push(app.route.previous.path ?? '/home')
+        if (!session) {
+          logger.error('AUTH => Session is undefined at SIGN_IN.')
+          break
         }
+
+        user.handleSignIn(session)
+        ws?.restart()
+        if (app.route.current.path === '/' || app.route.current.path === '/login')
+          router.push(app.route.previous.path ?? '/home')
+
         break
       case 'SIGNED_OUT':
         user.handleSignOut()
@@ -52,8 +56,9 @@ tryOnMounted(() => {
     if (session) {
       user.handleSignIn(session)
       ws?.restart()
+    } else {
+      logger.debug('AUTH => Logged out.')
     }
-    else { logger.error('AUTH => Session is null on TOKEN_CHANGED') }
   })
 })
 </script>

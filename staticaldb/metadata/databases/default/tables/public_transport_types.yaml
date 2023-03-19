@@ -1,0 +1,16 @@
+table:
+  name: transport_types
+  schema: public
+is_enum: true
+configuration:
+  column_config: {}
+  custom_column_names: {}
+  custom_name: transportTypes
+  custom_root_fields:
+    delete: deleteTransportTypes
+    delete_by_pk: deleteTransportType
+    insert: insertTransportTypes
+    insert_one: insertTransportType
+    select_by_pk: transportType
+    update: updateTransportTypes
+    update_by_pk: updateTransportType

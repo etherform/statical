@@ -2,7 +2,7 @@ import 'dotenv/config'
 
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
-const url = process.env.VITE_HASURA_GRAPHQL_GRAPHQL_URL ?? 'http://localhost:8080/v1/graphql'
+const url = process.env.HASURA_GRAPHQL_GRAPHQL_URL ?? 'http://localhost:8080/v1/graphql'
 
 const config: CodegenConfig = {
   overwrite: true,
@@ -10,7 +10,7 @@ const config: CodegenConfig = {
     {
       [url]: {
         headers: {
-          'x-hasura-admin-secret': process.env.VITE_HASURA_GRAPHQL_ADMIN_SECRET ?? 'secret',
+          'x-hasura-admin-secret': process.env.HASURA_GRAPHQL_ADMIN_SECRET ?? 'secret',
         },
       },
     },
@@ -18,13 +18,13 @@ const config: CodegenConfig = {
   documents: 'src/renderer/gql/docs/**/*.graphql',
   ignoreNoDocuments: true, // for better experience with the watcher
   hooks: {
-    afterOneFileWrite: ['eslint --fix'],
+    afterOneFileWrite: ['eslint --fix', 'prettier --write'],
   },
   generates: {
-    'src/renderer/gql/schema.graphql': {
+    /* 'src/renderer/gql/schema.graphql': {
       plugins: ['schema-ast'],
       config: { includeDirectives: true },
-    },
+    }, */
     'src/renderer/gql/urql-schema.ts': {
       plugins: ['urql-introspection'],
       config: {

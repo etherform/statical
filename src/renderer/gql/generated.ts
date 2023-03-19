@@ -2,9 +2,15 @@ import gql from 'graphql-tag'
 import * as Urql from '@urql/vue'
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K]
+}
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>
+}
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>
+}
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 /** All built-in and custom scalars, mapped to their actual values */
 export interface Scalars {
@@ -33,6 +39,19 @@ export interface Boolean_Comparison_Exp {
   _lte: InputMaybe<Scalars['Boolean']>
   _neq: InputMaybe<Scalars['Boolean']>
   _nin: InputMaybe<Array<Scalars['Boolean']>>
+}
+
+/** Boolean expression to compare columns of type "Float". All fields are combined with logical 'AND'. */
+export interface Float_Comparison_Exp {
+  _eq: InputMaybe<Scalars['Float']>
+  _gt: InputMaybe<Scalars['Float']>
+  _gte: InputMaybe<Scalars['Float']>
+  _in: InputMaybe<Array<Scalars['Float']>>
+  _is_null: InputMaybe<Scalars['Boolean']>
+  _lt: InputMaybe<Scalars['Float']>
+  _lte: InputMaybe<Scalars['Float']>
+  _neq: InputMaybe<Scalars['Float']>
+  _nin: InputMaybe<Array<Scalars['Float']>>
 }
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -2132,188 +2151,210 @@ export interface Citext_Comparison_Exp {
   _similar: InputMaybe<Scalars['citext']>
 }
 
+/** columns and relationships of "companies" */
+export interface Companies {
+  createdAt: Scalars['timestamptz']
+  createdBy: Scalars['uuid']
+  disabled: Scalars['Boolean']
+  fullName: Maybe<Scalars['String']>
+  id: Scalars['uuid']
+  shortName: Scalars['String']
+  updatedAt: Scalars['timestamptz']
+  updatedBy: Scalars['uuid']
+}
+
+/** aggregated selection of "companies" */
+export interface Companies_Aggregate {
+  aggregate: Maybe<Companies_Aggregate_Fields>
+  nodes: Array<Companies>
+}
+
+/** aggregate fields of "companies" */
+export interface Companies_Aggregate_Fields {
+  count: Scalars['Int']
+  max: Maybe<Companies_Max_Fields>
+  min: Maybe<Companies_Min_Fields>
+}
+
+/** aggregate fields of "companies" */
+export interface Companies_Aggregate_FieldsCountArgs {
+  columns: InputMaybe<Array<Companies_Select_Column>>
+  distinct: InputMaybe<Scalars['Boolean']>
+}
+
+/** Boolean expression to filter rows from the table "companies". All fields are combined with a logical 'AND'. */
+export interface Companies_Bool_Exp {
+  _and: InputMaybe<Array<Companies_Bool_Exp>>
+  _not: InputMaybe<Companies_Bool_Exp>
+  _or: InputMaybe<Array<Companies_Bool_Exp>>
+  createdAt: InputMaybe<Timestamptz_Comparison_Exp>
+  createdBy: InputMaybe<Uuid_Comparison_Exp>
+  disabled: InputMaybe<Boolean_Comparison_Exp>
+  fullName: InputMaybe<String_Comparison_Exp>
+  id: InputMaybe<Uuid_Comparison_Exp>
+  shortName: InputMaybe<String_Comparison_Exp>
+  updatedAt: InputMaybe<Timestamptz_Comparison_Exp>
+  updatedBy: InputMaybe<Uuid_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "companies" */
+export enum Companies_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  CompaniesPkey = 'companies_pkey',
+  /** unique or primary key constraint on columns "short_name" */
+  CompaniesShortNameKey = 'companies_short_name_key',
+}
+
+/** input type for inserting data into table "companies" */
+export interface Companies_Insert_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate max on columns */
+export interface Companies_Max_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+}
+
+/** aggregate min on columns */
+export interface Companies_Min_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+}
+
+/** response of any mutation on the table "companies" */
+export interface Companies_Mutation_Response {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<Companies>
+}
+
+/** on_conflict condition type for table "companies" */
+export interface Companies_On_Conflict {
+  constraint: Companies_Constraint
+  update_columns: Array<Companies_Update_Column>
+  where: InputMaybe<Companies_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "companies". */
+export interface Companies_Order_By {
+  createdAt: InputMaybe<Order_By>
+  createdBy: InputMaybe<Order_By>
+  disabled: InputMaybe<Order_By>
+  fullName: InputMaybe<Order_By>
+  id: InputMaybe<Order_By>
+  shortName: InputMaybe<Order_By>
+  updatedAt: InputMaybe<Order_By>
+  updatedBy: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: companies */
+export interface Companies_Pk_Columns_Input {
+  id: Scalars['uuid']
+}
+
+/** select columns of table "companies" */
+export enum Companies_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+}
+
+/** input type for updating data in table "companies" */
+export interface Companies_Set_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** Streaming cursor of the table "companies" */
+export interface Companies_Stream_Cursor_Input {
+  /** Stream column input with initial value */
+  initial_value: Companies_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface Companies_Stream_Cursor_Value_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** update columns of table "companies" */
+export enum Companies_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+}
+
+export interface Companies_Updates {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<Companies_Set_Input>
+  where: Companies_Bool_Exp
+}
+
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
   Asc = 'ASC',
   /** descending ordering of the cursor */
   Desc = 'DESC',
-}
-
-/** columns and relationships of "dict_companies" */
-export interface DictCompanies {
-  createdAt: Scalars['timestamptz']
-  deleted: Scalars['Boolean']
-  fullName: Scalars['String']
-  id: Scalars['uuid']
-  shortName: Scalars['String']
-  updatedAt: Scalars['timestamptz']
-}
-
-/** aggregated selection of "dict_companies" */
-export interface DictCompanies_Aggregate {
-  aggregate: Maybe<DictCompanies_Aggregate_Fields>
-  nodes: Array<DictCompanies>
-}
-
-/** aggregate fields of "dict_companies" */
-export interface DictCompanies_Aggregate_Fields {
-  count: Scalars['Int']
-  max: Maybe<DictCompanies_Max_Fields>
-  min: Maybe<DictCompanies_Min_Fields>
-}
-
-/** aggregate fields of "dict_companies" */
-export interface DictCompanies_Aggregate_FieldsCountArgs {
-  columns: InputMaybe<Array<DictCompanies_Select_Column>>
-  distinct: InputMaybe<Scalars['Boolean']>
-}
-
-/** Boolean expression to filter rows from the table "dict_companies". All fields are combined with a logical 'AND'. */
-export interface DictCompanies_Bool_Exp {
-  _and: InputMaybe<Array<DictCompanies_Bool_Exp>>
-  _not: InputMaybe<DictCompanies_Bool_Exp>
-  _or: InputMaybe<Array<DictCompanies_Bool_Exp>>
-  createdAt: InputMaybe<Timestamptz_Comparison_Exp>
-  deleted: InputMaybe<Boolean_Comparison_Exp>
-  fullName: InputMaybe<String_Comparison_Exp>
-  id: InputMaybe<Uuid_Comparison_Exp>
-  shortName: InputMaybe<String_Comparison_Exp>
-  updatedAt: InputMaybe<Timestamptz_Comparison_Exp>
-}
-
-/** unique or primary key constraints on table "dict_companies" */
-export enum DictCompanies_Constraint {
-  /** unique or primary key constraint on columns "full_name" */
-  DictCompaniesFullNameKey = 'dict_companies_full_name_key',
-  /** unique or primary key constraint on columns "id" */
-  DictCompaniesPkey = 'dict_companies_pkey',
-  /** unique or primary key constraint on columns "short_name" */
-  DictCompaniesShortNameKey = 'dict_companies_short_name_key',
-}
-
-/** input type for inserting data into table "dict_companies" */
-export interface DictCompanies_Insert_Input {
-  createdAt: InputMaybe<Scalars['timestamptz']>
-  deleted: InputMaybe<Scalars['Boolean']>
-  fullName: InputMaybe<Scalars['String']>
-  id: InputMaybe<Scalars['uuid']>
-  shortName: InputMaybe<Scalars['String']>
-  updatedAt: InputMaybe<Scalars['timestamptz']>
-}
-
-/** aggregate max on columns */
-export interface DictCompanies_Max_Fields {
-  createdAt: Maybe<Scalars['timestamptz']>
-  fullName: Maybe<Scalars['String']>
-  id: Maybe<Scalars['uuid']>
-  shortName: Maybe<Scalars['String']>
-  updatedAt: Maybe<Scalars['timestamptz']>
-}
-
-/** aggregate min on columns */
-export interface DictCompanies_Min_Fields {
-  createdAt: Maybe<Scalars['timestamptz']>
-  fullName: Maybe<Scalars['String']>
-  id: Maybe<Scalars['uuid']>
-  shortName: Maybe<Scalars['String']>
-  updatedAt: Maybe<Scalars['timestamptz']>
-}
-
-/** response of any mutation on the table "dict_companies" */
-export interface DictCompanies_Mutation_Response {
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int']
-  /** data from the rows affected by the mutation */
-  returning: Array<DictCompanies>
-}
-
-/** on_conflict condition type for table "dict_companies" */
-export interface DictCompanies_On_Conflict {
-  constraint: DictCompanies_Constraint
-  update_columns: Array<DictCompanies_Update_Column>
-  where: InputMaybe<DictCompanies_Bool_Exp>
-}
-
-/** Ordering options when selecting data from "dict_companies". */
-export interface DictCompanies_Order_By {
-  createdAt: InputMaybe<Order_By>
-  deleted: InputMaybe<Order_By>
-  fullName: InputMaybe<Order_By>
-  id: InputMaybe<Order_By>
-  shortName: InputMaybe<Order_By>
-  updatedAt: InputMaybe<Order_By>
-}
-
-/** primary key columns input for table: dict_companies */
-export interface DictCompanies_Pk_Columns_Input {
-  id: Scalars['uuid']
-}
-
-/** select columns of table "dict_companies" */
-export enum DictCompanies_Select_Column {
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Deleted = 'deleted',
-  /** column name */
-  FullName = 'fullName',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ShortName = 'shortName',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-}
-
-/** input type for updating data in table "dict_companies" */
-export interface DictCompanies_Set_Input {
-  createdAt: InputMaybe<Scalars['timestamptz']>
-  deleted: InputMaybe<Scalars['Boolean']>
-  fullName: InputMaybe<Scalars['String']>
-  id: InputMaybe<Scalars['uuid']>
-  shortName: InputMaybe<Scalars['String']>
-  updatedAt: InputMaybe<Scalars['timestamptz']>
-}
-
-/** Streaming cursor of the table "dictCompanies" */
-export interface DictCompanies_Stream_Cursor_Input {
-  /** Stream column input with initial value */
-  initial_value: DictCompanies_Stream_Cursor_Value_Input
-  /** cursor ordering */
-  ordering: InputMaybe<Cursor_Ordering>
-}
-
-/** Initial value of the column from where the streaming should start */
-export interface DictCompanies_Stream_Cursor_Value_Input {
-  createdAt: InputMaybe<Scalars['timestamptz']>
-  deleted: InputMaybe<Scalars['Boolean']>
-  fullName: InputMaybe<Scalars['String']>
-  id: InputMaybe<Scalars['uuid']>
-  shortName: InputMaybe<Scalars['String']>
-  updatedAt: InputMaybe<Scalars['timestamptz']>
-}
-
-/** update columns of table "dict_companies" */
-export enum DictCompanies_Update_Column {
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Deleted = 'deleted',
-  /** column name */
-  FullName = 'fullName',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ShortName = 'shortName',
-  /** column name */
-  UpdatedAt = 'updatedAt',
-}
-
-export interface DictCompanies_Updates {
-  /** sets the columns of the filtered rows to the given values */
-  _set: InputMaybe<DictCompanies_Set_Input>
-  where: DictCompanies_Bool_Exp
 }
 
 /** columns and relationships of "storage.files" */
@@ -2723,6 +2764,132 @@ export interface Files_Variance_Order_By {
   size: InputMaybe<Order_By>
 }
 
+/** columns and relationships of "goods_arrival_types" */
+export interface GoodsArrivalTypes {
+  label: Maybe<Scalars['String']>
+  type: Scalars['String']
+}
+
+/** aggregated selection of "goods_arrival_types" */
+export interface GoodsArrivalTypes_Aggregate {
+  aggregate: Maybe<GoodsArrivalTypes_Aggregate_Fields>
+  nodes: Array<GoodsArrivalTypes>
+}
+
+/** aggregate fields of "goods_arrival_types" */
+export interface GoodsArrivalTypes_Aggregate_Fields {
+  count: Scalars['Int']
+  max: Maybe<GoodsArrivalTypes_Max_Fields>
+  min: Maybe<GoodsArrivalTypes_Min_Fields>
+}
+
+/** aggregate fields of "goods_arrival_types" */
+export interface GoodsArrivalTypes_Aggregate_FieldsCountArgs {
+  columns: InputMaybe<Array<GoodsArrivalTypes_Select_Column>>
+  distinct: InputMaybe<Scalars['Boolean']>
+}
+
+/** Boolean expression to filter rows from the table "goods_arrival_types". All fields are combined with a logical 'AND'. */
+export interface GoodsArrivalTypes_Bool_Exp {
+  _and: InputMaybe<Array<GoodsArrivalTypes_Bool_Exp>>
+  _not: InputMaybe<GoodsArrivalTypes_Bool_Exp>
+  _or: InputMaybe<Array<GoodsArrivalTypes_Bool_Exp>>
+  label: InputMaybe<String_Comparison_Exp>
+  type: InputMaybe<String_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "goods_arrival_types" */
+export enum GoodsArrivalTypes_Constraint {
+  /** unique or primary key constraint on columns "type" */
+  GoodsArrivalTypesPkey = 'goods_arrival_types_pkey',
+}
+
+/** input type for inserting data into table "goods_arrival_types" */
+export interface GoodsArrivalTypes_Insert_Input {
+  label: InputMaybe<Scalars['String']>
+  type: InputMaybe<Scalars['String']>
+}
+
+/** aggregate max on columns */
+export interface GoodsArrivalTypes_Max_Fields {
+  label: Maybe<Scalars['String']>
+  type: Maybe<Scalars['String']>
+}
+
+/** aggregate min on columns */
+export interface GoodsArrivalTypes_Min_Fields {
+  label: Maybe<Scalars['String']>
+  type: Maybe<Scalars['String']>
+}
+
+/** response of any mutation on the table "goods_arrival_types" */
+export interface GoodsArrivalTypes_Mutation_Response {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<GoodsArrivalTypes>
+}
+
+/** on_conflict condition type for table "goods_arrival_types" */
+export interface GoodsArrivalTypes_On_Conflict {
+  constraint: GoodsArrivalTypes_Constraint
+  update_columns: Array<GoodsArrivalTypes_Update_Column>
+  where: InputMaybe<GoodsArrivalTypes_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "goods_arrival_types". */
+export interface GoodsArrivalTypes_Order_By {
+  label: InputMaybe<Order_By>
+  type: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: goods_arrival_types */
+export interface GoodsArrivalTypes_Pk_Columns_Input {
+  type: Scalars['String']
+}
+
+/** select columns of table "goods_arrival_types" */
+export enum GoodsArrivalTypes_Select_Column {
+  /** column name */
+  Label = 'label',
+  /** column name */
+  Type = 'type',
+}
+
+/** input type for updating data in table "goods_arrival_types" */
+export interface GoodsArrivalTypes_Set_Input {
+  label: InputMaybe<Scalars['String']>
+  type: InputMaybe<Scalars['String']>
+}
+
+/** Streaming cursor of the table "goodsArrivalTypes" */
+export interface GoodsArrivalTypes_Stream_Cursor_Input {
+  /** Stream column input with initial value */
+  initial_value: GoodsArrivalTypes_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface GoodsArrivalTypes_Stream_Cursor_Value_Input {
+  label: InputMaybe<Scalars['String']>
+  type: InputMaybe<Scalars['String']>
+}
+
+/** update columns of table "goods_arrival_types" */
+export enum GoodsArrivalTypes_Update_Column {
+  /** column name */
+  Label = 'label',
+  /** column name */
+  Type = 'type',
+}
+
+export interface GoodsArrivalTypes_Updates {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<GoodsArrivalTypes_Set_Input>
+  where: GoodsArrivalTypes_Bool_Exp
+}
+
 export interface Jsonb_Cast_Exp {
   String: InputMaybe<String_Comparison_Exp>
 }
@@ -2785,22 +2952,54 @@ export interface Mutation_Root {
   deleteBucket: Maybe<Buckets>
   /** delete data from the table: "storage.buckets" */
   deleteBuckets: Maybe<Buckets_Mutation_Response>
-  /** delete data from the table: "dict_companies" */
-  deleteDictCompanies: Maybe<DictCompanies_Mutation_Response>
-  /** delete single row from the table: "dict_companies" */
-  deleteDictCompany: Maybe<DictCompanies>
+  /** delete data from the table: "companies" */
+  deleteCompanies: Maybe<Companies_Mutation_Response>
+  /** delete single row from the table: "companies" */
+  deleteCompany: Maybe<Companies>
   /** delete single row from the table: "storage.files" */
   deleteFile: Maybe<Files>
   /** delete data from the table: "storage.files" */
   deleteFiles: Maybe<Files_Mutation_Response>
+  /** delete single row from the table: "goods_arrival_types" */
+  deleteGoodsArrivalType: Maybe<GoodsArrivalTypes>
+  /** delete data from the table: "goods_arrival_types" */
+  deleteGoodsArrivalTypes: Maybe<GoodsArrivalTypes_Mutation_Response>
+  /** delete single row from the table: "products" */
+  deleteProduct: Maybe<Products>
+  /** delete single row from the table: "product_groups" */
+  deleteProductGroup: Maybe<ProductGroups>
+  /** delete data from the table: "product_groups" */
+  deleteProductGroups: Maybe<ProductGroups_Mutation_Response>
+  /** delete single row from the table: "product_passports" */
+  deleteProductPassport: Maybe<ProductPassports>
+  /** delete data from the table: "product_passports" */
+  deleteProductPassports: Maybe<ProductPassports_Mutation_Response>
+  /** delete data from the table: "products" */
+  deleteProducts: Maybe<Products_Mutation_Response>
   /** delete single row from the table: "auth.users" */
   deleteUser: Maybe<Users>
   /** delete data from the table: "auth.users" */
   deleteUsers: Maybe<Users_Mutation_Response>
+  /** delete single row from the table: "warehouses" */
+  deleteWarehouse: Maybe<Warehouses>
+  /** delete single row from the table: "warehouse_groups" */
+  deleteWarehouseGroup: Maybe<WarehouseGroups>
+  /** delete data from the table: "warehouse_groups" */
+  deleteWarehouseGroups: Maybe<WarehouseGroups_Mutation_Response>
+  /** delete single row from the table: "warehouse_storages" */
+  deleteWarehouseStorage: Maybe<WarehouseStorages>
+  /** delete data from the table: "warehouse_storages" */
+  deleteWarehouseStorages: Maybe<WarehouseStorages_Mutation_Response>
+  /** delete data from the table: "warehouses" */
+  deleteWarehouses: Maybe<Warehouses_Mutation_Response>
   /** delete data from the table: "auth.migrations" */
   delete_auth_migrations: Maybe<Auth_Migrations_Mutation_Response>
   /** delete single row from the table: "auth.migrations" */
   delete_auth_migrations_by_pk: Maybe<Auth_Migrations>
+  /** delete data from the table: "storage.schema_migrations" */
+  delete_storage_schema_migrations: Maybe<Storage_Schema_Migrations_Mutation_Response>
+  /** delete single row from the table: "storage.schema_migrations" */
+  delete_storage_schema_migrations_by_pk: Maybe<Storage_Schema_Migrations>
   /** insert a single row into the table: "auth.providers" */
   insertAuthProvider: Maybe<AuthProviders>
   /** insert a single row into the table: "auth.provider_requests" */
@@ -2833,22 +3032,54 @@ export interface Mutation_Root {
   insertBucket: Maybe<Buckets>
   /** insert data into the table: "storage.buckets" */
   insertBuckets: Maybe<Buckets_Mutation_Response>
-  /** insert data into the table: "dict_companies" */
-  insertDictCompanies: Maybe<DictCompanies_Mutation_Response>
-  /** insert a single row into the table: "dict_companies" */
-  insertDictCompany: Maybe<DictCompanies>
+  /** insert data into the table: "companies" */
+  insertCompanies: Maybe<Companies_Mutation_Response>
+  /** insert a single row into the table: "companies" */
+  insertCompany: Maybe<Companies>
   /** insert a single row into the table: "storage.files" */
   insertFile: Maybe<Files>
   /** insert data into the table: "storage.files" */
   insertFiles: Maybe<Files_Mutation_Response>
+  /** insert a single row into the table: "goods_arrival_types" */
+  insertGoodsArrivalType: Maybe<GoodsArrivalTypes>
+  /** insert data into the table: "goods_arrival_types" */
+  insertGoodsArrivalTypes: Maybe<GoodsArrivalTypes_Mutation_Response>
+  /** insert a single row into the table: "products" */
+  insertProduct: Maybe<Products>
+  /** insert a single row into the table: "product_groups" */
+  insertProductGroup: Maybe<ProductGroups>
+  /** insert data into the table: "product_groups" */
+  insertProductGroups: Maybe<ProductGroups_Mutation_Response>
+  /** insert a single row into the table: "product_passports" */
+  insertProductPassport: Maybe<ProductPassports>
+  /** insert data into the table: "product_passports" */
+  insertProductPassports: Maybe<ProductPassports_Mutation_Response>
+  /** insert data into the table: "products" */
+  insertProducts: Maybe<Products_Mutation_Response>
   /** insert a single row into the table: "auth.users" */
   insertUser: Maybe<Users>
   /** insert data into the table: "auth.users" */
   insertUsers: Maybe<Users_Mutation_Response>
+  /** insert a single row into the table: "warehouses" */
+  insertWarehouse: Maybe<Warehouses>
+  /** insert a single row into the table: "warehouse_groups" */
+  insertWarehouseGroup: Maybe<WarehouseGroups>
+  /** insert data into the table: "warehouse_groups" */
+  insertWarehouseGroups: Maybe<WarehouseGroups_Mutation_Response>
+  /** insert a single row into the table: "warehouse_storages" */
+  insertWarehouseStorage: Maybe<WarehouseStorages>
+  /** insert data into the table: "warehouse_storages" */
+  insertWarehouseStorages: Maybe<WarehouseStorages_Mutation_Response>
+  /** insert data into the table: "warehouses" */
+  insertWarehouses: Maybe<Warehouses_Mutation_Response>
   /** insert data into the table: "auth.migrations" */
   insert_auth_migrations: Maybe<Auth_Migrations_Mutation_Response>
   /** insert a single row into the table: "auth.migrations" */
   insert_auth_migrations_one: Maybe<Auth_Migrations>
+  /** insert data into the table: "storage.schema_migrations" */
+  insert_storage_schema_migrations: Maybe<Storage_Schema_Migrations_Mutation_Response>
+  /** insert a single row into the table: "storage.schema_migrations" */
+  insert_storage_schema_migrations_one: Maybe<Storage_Schema_Migrations>
   /** update single row of the table: "auth.providers" */
   updateAuthProvider: Maybe<AuthProviders>
   /** update single row of the table: "auth.provider_requests" */
@@ -2881,46 +3112,120 @@ export interface Mutation_Root {
   updateBucket: Maybe<Buckets>
   /** update data of the table: "storage.buckets" */
   updateBuckets: Maybe<Buckets_Mutation_Response>
-  /** update data of the table: "dict_companies" */
-  updateDictCompanies: Maybe<DictCompanies_Mutation_Response>
-  /** update single row of the table: "dict_companies" */
-  updateDictCompany: Maybe<DictCompanies>
+  /** update data of the table: "companies" */
+  updateCompanies: Maybe<Companies_Mutation_Response>
+  /** update single row of the table: "companies" */
+  updateCompany: Maybe<Companies>
   /** update single row of the table: "storage.files" */
   updateFile: Maybe<Files>
   /** update data of the table: "storage.files" */
   updateFiles: Maybe<Files_Mutation_Response>
+  /** update single row of the table: "goods_arrival_types" */
+  updateGoodsArrivalType: Maybe<GoodsArrivalTypes>
+  /** update data of the table: "goods_arrival_types" */
+  updateGoodsArrivalTypes: Maybe<GoodsArrivalTypes_Mutation_Response>
+  /** update single row of the table: "products" */
+  updateProduct: Maybe<Products>
+  /** update single row of the table: "product_groups" */
+  updateProductGroup: Maybe<ProductGroups>
+  /** update data of the table: "product_groups" */
+  updateProductGroups: Maybe<ProductGroups_Mutation_Response>
+  /** update single row of the table: "product_passports" */
+  updateProductPassport: Maybe<ProductPassports>
+  /** update data of the table: "product_passports" */
+  updateProductPassports: Maybe<ProductPassports_Mutation_Response>
+  /** update data of the table: "products" */
+  updateProducts: Maybe<Products_Mutation_Response>
   /** update single row of the table: "auth.users" */
   updateUser: Maybe<Users>
   /** update data of the table: "auth.users" */
   updateUsers: Maybe<Users_Mutation_Response>
+  /** update single row of the table: "warehouses" */
+  updateWarehouse: Maybe<Warehouses>
+  /** update single row of the table: "warehouse_groups" */
+  updateWarehouseGroup: Maybe<WarehouseGroups>
+  /** update data of the table: "warehouse_groups" */
+  updateWarehouseGroups: Maybe<WarehouseGroups_Mutation_Response>
+  /** update single row of the table: "warehouse_storages" */
+  updateWarehouseStorage: Maybe<WarehouseStorages>
+  /** update data of the table: "warehouse_storages" */
+  updateWarehouseStorages: Maybe<WarehouseStorages_Mutation_Response>
+  /** update data of the table: "warehouses" */
+  updateWarehouses: Maybe<Warehouses_Mutation_Response>
   /** update multiples rows of table: "auth.provider_requests" */
-  update_authProviderRequests_many: Maybe<Array<Maybe<AuthProviderRequests_Mutation_Response>>>
+  update_authProviderRequests_many: Maybe<
+    Array<Maybe<AuthProviderRequests_Mutation_Response>>
+  >
   /** update multiples rows of table: "auth.providers" */
-  update_authProviders_many: Maybe<Array<Maybe<AuthProviders_Mutation_Response>>>
+  update_authProviders_many: Maybe<
+    Array<Maybe<AuthProviders_Mutation_Response>>
+  >
   /** update multiples rows of table: "auth.refresh_tokens" */
-  update_authRefreshTokens_many: Maybe<Array<Maybe<AuthRefreshTokens_Mutation_Response>>>
+  update_authRefreshTokens_many: Maybe<
+    Array<Maybe<AuthRefreshTokens_Mutation_Response>>
+  >
   /** update multiples rows of table: "auth.roles" */
   update_authRoles_many: Maybe<Array<Maybe<AuthRoles_Mutation_Response>>>
   /** update multiples rows of table: "auth.user_providers" */
-  update_authUserProviders_many: Maybe<Array<Maybe<AuthUserProviders_Mutation_Response>>>
+  update_authUserProviders_many: Maybe<
+    Array<Maybe<AuthUserProviders_Mutation_Response>>
+  >
   /** update multiples rows of table: "auth.user_roles" */
-  update_authUserRoles_many: Maybe<Array<Maybe<AuthUserRoles_Mutation_Response>>>
+  update_authUserRoles_many: Maybe<
+    Array<Maybe<AuthUserRoles_Mutation_Response>>
+  >
   /** update multiples rows of table: "auth.user_security_keys" */
-  update_authUserSecurityKeys_many: Maybe<Array<Maybe<AuthUserSecurityKeys_Mutation_Response>>>
+  update_authUserSecurityKeys_many: Maybe<
+    Array<Maybe<AuthUserSecurityKeys_Mutation_Response>>
+  >
   /** update data of the table: "auth.migrations" */
   update_auth_migrations: Maybe<Auth_Migrations_Mutation_Response>
   /** update single row of the table: "auth.migrations" */
   update_auth_migrations_by_pk: Maybe<Auth_Migrations>
   /** update multiples rows of table: "auth.migrations" */
-  update_auth_migrations_many: Maybe<Array<Maybe<Auth_Migrations_Mutation_Response>>>
+  update_auth_migrations_many: Maybe<
+    Array<Maybe<Auth_Migrations_Mutation_Response>>
+  >
   /** update multiples rows of table: "storage.buckets" */
   update_buckets_many: Maybe<Array<Maybe<Buckets_Mutation_Response>>>
-  /** update multiples rows of table: "dict_companies" */
-  update_dictCompanies_many: Maybe<Array<Maybe<DictCompanies_Mutation_Response>>>
+  /** update multiples rows of table: "companies" */
+  update_companies_many: Maybe<Array<Maybe<Companies_Mutation_Response>>>
   /** update multiples rows of table: "storage.files" */
   update_files_many: Maybe<Array<Maybe<Files_Mutation_Response>>>
+  /** update multiples rows of table: "goods_arrival_types" */
+  update_goodsArrivalTypes_many: Maybe<
+    Array<Maybe<GoodsArrivalTypes_Mutation_Response>>
+  >
+  /** update multiples rows of table: "product_groups" */
+  update_productGroups_many: Maybe<
+    Array<Maybe<ProductGroups_Mutation_Response>>
+  >
+  /** update multiples rows of table: "product_passports" */
+  update_productPassports_many: Maybe<
+    Array<Maybe<ProductPassports_Mutation_Response>>
+  >
+  /** update multiples rows of table: "products" */
+  update_products_many: Maybe<Array<Maybe<Products_Mutation_Response>>>
+  /** update data of the table: "storage.schema_migrations" */
+  update_storage_schema_migrations: Maybe<Storage_Schema_Migrations_Mutation_Response>
+  /** update single row of the table: "storage.schema_migrations" */
+  update_storage_schema_migrations_by_pk: Maybe<Storage_Schema_Migrations>
+  /** update multiples rows of table: "storage.schema_migrations" */
+  update_storage_schema_migrations_many: Maybe<
+    Array<Maybe<Storage_Schema_Migrations_Mutation_Response>>
+  >
   /** update multiples rows of table: "auth.users" */
   update_users_many: Maybe<Array<Maybe<Users_Mutation_Response>>>
+  /** update multiples rows of table: "warehouse_groups" */
+  update_warehouseGroups_many: Maybe<
+    Array<Maybe<WarehouseGroups_Mutation_Response>>
+  >
+  /** update multiples rows of table: "warehouse_storages" */
+  update_warehouseStorages_many: Maybe<
+    Array<Maybe<WarehouseStorages_Mutation_Response>>
+  >
+  /** update multiples rows of table: "warehouses" */
+  update_warehouses_many: Maybe<Array<Maybe<Warehouses_Mutation_Response>>>
 }
 
 /** mutation root */
@@ -3004,12 +3309,12 @@ export interface Mutation_RootDeleteBucketsArgs {
 }
 
 /** mutation root */
-export interface Mutation_RootDeleteDictCompaniesArgs {
-  where: DictCompanies_Bool_Exp
+export interface Mutation_RootDeleteCompaniesArgs {
+  where: Companies_Bool_Exp
 }
 
 /** mutation root */
-export interface Mutation_RootDeleteDictCompanyArgs {
+export interface Mutation_RootDeleteCompanyArgs {
   id: Scalars['uuid']
 }
 
@@ -3024,6 +3329,46 @@ export interface Mutation_RootDeleteFilesArgs {
 }
 
 /** mutation root */
+export interface Mutation_RootDeleteGoodsArrivalTypeArgs {
+  type: Scalars['String']
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteGoodsArrivalTypesArgs {
+  where: GoodsArrivalTypes_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteProductArgs {
+  id: Scalars['uuid']
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteProductGroupArgs {
+  id: Scalars['uuid']
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteProductGroupsArgs {
+  where: ProductGroups_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteProductPassportArgs {
+  id: Scalars['uuid']
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteProductPassportsArgs {
+  where: ProductPassports_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteProductsArgs {
+  where: Products_Bool_Exp
+}
+
+/** mutation root */
 export interface Mutation_RootDeleteUserArgs {
   id: Scalars['uuid']
 }
@@ -3034,6 +3379,36 @@ export interface Mutation_RootDeleteUsersArgs {
 }
 
 /** mutation root */
+export interface Mutation_RootDeleteWarehouseArgs {
+  id: Scalars['uuid']
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteWarehouseGroupArgs {
+  id: Scalars['uuid']
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteWarehouseGroupsArgs {
+  where: WarehouseGroups_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteWarehouseStorageArgs {
+  id: Scalars['uuid']
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteWarehouseStoragesArgs {
+  where: WarehouseStorages_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootDeleteWarehousesArgs {
+  where: Warehouses_Bool_Exp
+}
+
+/** mutation root */
 export interface Mutation_RootDelete_Auth_MigrationsArgs {
   where: Auth_Migrations_Bool_Exp
 }
@@ -3041,6 +3416,16 @@ export interface Mutation_RootDelete_Auth_MigrationsArgs {
 /** mutation root */
 export interface Mutation_RootDelete_Auth_Migrations_By_PkArgs {
   id: Scalars['Int']
+}
+
+/** mutation root */
+export interface Mutation_RootDelete_Storage_Schema_MigrationsArgs {
+  where: Storage_Schema_Migrations_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootDelete_Storage_Schema_Migrations_By_PkArgs {
+  version: Scalars['bigint']
 }
 
 /** mutation root */
@@ -3140,15 +3525,15 @@ export interface Mutation_RootInsertBucketsArgs {
 }
 
 /** mutation root */
-export interface Mutation_RootInsertDictCompaniesArgs {
-  objects: Array<DictCompanies_Insert_Input>
-  on_conflict: InputMaybe<DictCompanies_On_Conflict>
+export interface Mutation_RootInsertCompaniesArgs {
+  objects: Array<Companies_Insert_Input>
+  on_conflict: InputMaybe<Companies_On_Conflict>
 }
 
 /** mutation root */
-export interface Mutation_RootInsertDictCompanyArgs {
-  object: DictCompanies_Insert_Input
-  on_conflict: InputMaybe<DictCompanies_On_Conflict>
+export interface Mutation_RootInsertCompanyArgs {
+  object: Companies_Insert_Input
+  on_conflict: InputMaybe<Companies_On_Conflict>
 }
 
 /** mutation root */
@@ -3164,6 +3549,54 @@ export interface Mutation_RootInsertFilesArgs {
 }
 
 /** mutation root */
+export interface Mutation_RootInsertGoodsArrivalTypeArgs {
+  object: GoodsArrivalTypes_Insert_Input
+  on_conflict: InputMaybe<GoodsArrivalTypes_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertGoodsArrivalTypesArgs {
+  objects: Array<GoodsArrivalTypes_Insert_Input>
+  on_conflict: InputMaybe<GoodsArrivalTypes_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertProductArgs {
+  object: Products_Insert_Input
+  on_conflict: InputMaybe<Products_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertProductGroupArgs {
+  object: ProductGroups_Insert_Input
+  on_conflict: InputMaybe<ProductGroups_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertProductGroupsArgs {
+  objects: Array<ProductGroups_Insert_Input>
+  on_conflict: InputMaybe<ProductGroups_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertProductPassportArgs {
+  object: ProductPassports_Insert_Input
+  on_conflict: InputMaybe<ProductPassports_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertProductPassportsArgs {
+  objects: Array<ProductPassports_Insert_Input>
+  on_conflict: InputMaybe<ProductPassports_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertProductsArgs {
+  objects: Array<Products_Insert_Input>
+  on_conflict: InputMaybe<Products_On_Conflict>
+}
+
+/** mutation root */
 export interface Mutation_RootInsertUserArgs {
   object: Users_Insert_Input
   on_conflict: InputMaybe<Users_On_Conflict>
@@ -3176,6 +3609,42 @@ export interface Mutation_RootInsertUsersArgs {
 }
 
 /** mutation root */
+export interface Mutation_RootInsertWarehouseArgs {
+  object: Warehouses_Insert_Input
+  on_conflict: InputMaybe<Warehouses_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertWarehouseGroupArgs {
+  object: WarehouseGroups_Insert_Input
+  on_conflict: InputMaybe<WarehouseGroups_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertWarehouseGroupsArgs {
+  objects: Array<WarehouseGroups_Insert_Input>
+  on_conflict: InputMaybe<WarehouseGroups_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertWarehouseStorageArgs {
+  object: WarehouseStorages_Insert_Input
+  on_conflict: InputMaybe<WarehouseStorages_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertWarehouseStoragesArgs {
+  objects: Array<WarehouseStorages_Insert_Input>
+  on_conflict: InputMaybe<WarehouseStorages_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsertWarehousesArgs {
+  objects: Array<Warehouses_Insert_Input>
+  on_conflict: InputMaybe<Warehouses_On_Conflict>
+}
+
+/** mutation root */
 export interface Mutation_RootInsert_Auth_MigrationsArgs {
   objects: Array<Auth_Migrations_Insert_Input>
   on_conflict: InputMaybe<Auth_Migrations_On_Conflict>
@@ -3185,6 +3654,18 @@ export interface Mutation_RootInsert_Auth_MigrationsArgs {
 export interface Mutation_RootInsert_Auth_Migrations_OneArgs {
   object: Auth_Migrations_Insert_Input
   on_conflict: InputMaybe<Auth_Migrations_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsert_Storage_Schema_MigrationsArgs {
+  objects: Array<Storage_Schema_Migrations_Insert_Input>
+  on_conflict: InputMaybe<Storage_Schema_Migrations_On_Conflict>
+}
+
+/** mutation root */
+export interface Mutation_RootInsert_Storage_Schema_Migrations_OneArgs {
+  object: Storage_Schema_Migrations_Insert_Input
+  on_conflict: InputMaybe<Storage_Schema_Migrations_On_Conflict>
 }
 
 /** mutation root */
@@ -3298,15 +3779,15 @@ export interface Mutation_RootUpdateBucketsArgs {
 }
 
 /** mutation root */
-export interface Mutation_RootUpdateDictCompaniesArgs {
-  _set: InputMaybe<DictCompanies_Set_Input>
-  where: DictCompanies_Bool_Exp
+export interface Mutation_RootUpdateCompaniesArgs {
+  _set: InputMaybe<Companies_Set_Input>
+  where: Companies_Bool_Exp
 }
 
 /** mutation root */
-export interface Mutation_RootUpdateDictCompanyArgs {
-  _set: InputMaybe<DictCompanies_Set_Input>
-  pk_columns: DictCompanies_Pk_Columns_Input
+export interface Mutation_RootUpdateCompanyArgs {
+  _set: InputMaybe<Companies_Set_Input>
+  pk_columns: Companies_Pk_Columns_Input
 }
 
 /** mutation root */
@@ -3321,6 +3802,56 @@ export interface Mutation_RootUpdateFilesArgs {
   _inc: InputMaybe<Files_Inc_Input>
   _set: InputMaybe<Files_Set_Input>
   where: Files_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateGoodsArrivalTypeArgs {
+  _set: InputMaybe<GoodsArrivalTypes_Set_Input>
+  pk_columns: GoodsArrivalTypes_Pk_Columns_Input
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateGoodsArrivalTypesArgs {
+  _set: InputMaybe<GoodsArrivalTypes_Set_Input>
+  where: GoodsArrivalTypes_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateProductArgs {
+  _set: InputMaybe<Products_Set_Input>
+  pk_columns: Products_Pk_Columns_Input
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateProductGroupArgs {
+  _set: InputMaybe<ProductGroups_Set_Input>
+  pk_columns: ProductGroups_Pk_Columns_Input
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateProductGroupsArgs {
+  _set: InputMaybe<ProductGroups_Set_Input>
+  where: ProductGroups_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateProductPassportArgs {
+  _inc: InputMaybe<ProductPassports_Inc_Input>
+  _set: InputMaybe<ProductPassports_Set_Input>
+  pk_columns: ProductPassports_Pk_Columns_Input
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateProductPassportsArgs {
+  _inc: InputMaybe<ProductPassports_Inc_Input>
+  _set: InputMaybe<ProductPassports_Set_Input>
+  where: ProductPassports_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateProductsArgs {
+  _set: InputMaybe<Products_Set_Input>
+  where: Products_Bool_Exp
 }
 
 /** mutation root */
@@ -3343,6 +3874,42 @@ export interface Mutation_RootUpdateUsersArgs {
   _prepend: InputMaybe<Users_Prepend_Input>
   _set: InputMaybe<Users_Set_Input>
   where: Users_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateWarehouseArgs {
+  _set: InputMaybe<Warehouses_Set_Input>
+  pk_columns: Warehouses_Pk_Columns_Input
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateWarehouseGroupArgs {
+  _set: InputMaybe<WarehouseGroups_Set_Input>
+  pk_columns: WarehouseGroups_Pk_Columns_Input
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateWarehouseGroupsArgs {
+  _set: InputMaybe<WarehouseGroups_Set_Input>
+  where: WarehouseGroups_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateWarehouseStorageArgs {
+  _set: InputMaybe<WarehouseStorages_Set_Input>
+  pk_columns: WarehouseStorages_Pk_Columns_Input
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateWarehouseStoragesArgs {
+  _set: InputMaybe<WarehouseStorages_Set_Input>
+  where: WarehouseStorages_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootUpdateWarehousesArgs {
+  _set: InputMaybe<Warehouses_Set_Input>
+  where: Warehouses_Bool_Exp
 }
 
 /** mutation root */
@@ -3405,8 +3972,8 @@ export interface Mutation_RootUpdate_Buckets_ManyArgs {
 }
 
 /** mutation root */
-export interface Mutation_RootUpdate_DictCompanies_ManyArgs {
-  updates: Array<DictCompanies_Updates>
+export interface Mutation_RootUpdate_Companies_ManyArgs {
+  updates: Array<Companies_Updates>
 }
 
 /** mutation root */
@@ -3415,8 +3982,62 @@ export interface Mutation_RootUpdate_Files_ManyArgs {
 }
 
 /** mutation root */
+export interface Mutation_RootUpdate_GoodsArrivalTypes_ManyArgs {
+  updates: Array<GoodsArrivalTypes_Updates>
+}
+
+/** mutation root */
+export interface Mutation_RootUpdate_ProductGroups_ManyArgs {
+  updates: Array<ProductGroups_Updates>
+}
+
+/** mutation root */
+export interface Mutation_RootUpdate_ProductPassports_ManyArgs {
+  updates: Array<ProductPassports_Updates>
+}
+
+/** mutation root */
+export interface Mutation_RootUpdate_Products_ManyArgs {
+  updates: Array<Products_Updates>
+}
+
+/** mutation root */
+export interface Mutation_RootUpdate_Storage_Schema_MigrationsArgs {
+  _inc: InputMaybe<Storage_Schema_Migrations_Inc_Input>
+  _set: InputMaybe<Storage_Schema_Migrations_Set_Input>
+  where: Storage_Schema_Migrations_Bool_Exp
+}
+
+/** mutation root */
+export interface Mutation_RootUpdate_Storage_Schema_Migrations_By_PkArgs {
+  _inc: InputMaybe<Storage_Schema_Migrations_Inc_Input>
+  _set: InputMaybe<Storage_Schema_Migrations_Set_Input>
+  pk_columns: Storage_Schema_Migrations_Pk_Columns_Input
+}
+
+/** mutation root */
+export interface Mutation_RootUpdate_Storage_Schema_Migrations_ManyArgs {
+  updates: Array<Storage_Schema_Migrations_Updates>
+}
+
+/** mutation root */
 export interface Mutation_RootUpdate_Users_ManyArgs {
   updates: Array<Users_Updates>
+}
+
+/** mutation root */
+export interface Mutation_RootUpdate_WarehouseGroups_ManyArgs {
+  updates: Array<WarehouseGroups_Updates>
+}
+
+/** mutation root */
+export interface Mutation_RootUpdate_WarehouseStorages_ManyArgs {
+  updates: Array<WarehouseStorages_Updates>
+}
+
+/** mutation root */
+export interface Mutation_RootUpdate_Warehouses_ManyArgs {
+  updates: Array<Warehouses_Updates>
 }
 
 /** column ordering options */
@@ -3433,6 +4054,703 @@ export enum Order_By {
   DescNullsFirst = 'desc_nulls_first',
   /** in descending order, nulls last */
   DescNullsLast = 'desc_nulls_last',
+}
+
+/** columns and relationships of "product_groups" */
+export interface ProductGroups {
+  createdAt: Scalars['timestamptz']
+  createdBy: Scalars['uuid']
+  disabled: Scalars['Boolean']
+  fullName: Maybe<Scalars['String']>
+  id: Scalars['uuid']
+  shortName: Scalars['String']
+  updatedAt: Scalars['timestamptz']
+  updatedBy: Scalars['uuid']
+}
+
+/** aggregated selection of "product_groups" */
+export interface ProductGroups_Aggregate {
+  aggregate: Maybe<ProductGroups_Aggregate_Fields>
+  nodes: Array<ProductGroups>
+}
+
+/** aggregate fields of "product_groups" */
+export interface ProductGroups_Aggregate_Fields {
+  count: Scalars['Int']
+  max: Maybe<ProductGroups_Max_Fields>
+  min: Maybe<ProductGroups_Min_Fields>
+}
+
+/** aggregate fields of "product_groups" */
+export interface ProductGroups_Aggregate_FieldsCountArgs {
+  columns: InputMaybe<Array<ProductGroups_Select_Column>>
+  distinct: InputMaybe<Scalars['Boolean']>
+}
+
+/** Boolean expression to filter rows from the table "product_groups". All fields are combined with a logical 'AND'. */
+export interface ProductGroups_Bool_Exp {
+  _and: InputMaybe<Array<ProductGroups_Bool_Exp>>
+  _not: InputMaybe<ProductGroups_Bool_Exp>
+  _or: InputMaybe<Array<ProductGroups_Bool_Exp>>
+  createdAt: InputMaybe<Timestamptz_Comparison_Exp>
+  createdBy: InputMaybe<Uuid_Comparison_Exp>
+  disabled: InputMaybe<Boolean_Comparison_Exp>
+  fullName: InputMaybe<String_Comparison_Exp>
+  id: InputMaybe<Uuid_Comparison_Exp>
+  shortName: InputMaybe<String_Comparison_Exp>
+  updatedAt: InputMaybe<Timestamptz_Comparison_Exp>
+  updatedBy: InputMaybe<Uuid_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "product_groups" */
+export enum ProductGroups_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ProductGroupsPkey = 'product_groups_pkey',
+  /** unique or primary key constraint on columns "short_name" */
+  ProductGroupsShortNameKey = 'product_groups_short_name_key',
+}
+
+/** input type for inserting data into table "product_groups" */
+export interface ProductGroups_Insert_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate max on columns */
+export interface ProductGroups_Max_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+}
+
+/** aggregate min on columns */
+export interface ProductGroups_Min_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+}
+
+/** response of any mutation on the table "product_groups" */
+export interface ProductGroups_Mutation_Response {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<ProductGroups>
+}
+
+/** on_conflict condition type for table "product_groups" */
+export interface ProductGroups_On_Conflict {
+  constraint: ProductGroups_Constraint
+  update_columns: Array<ProductGroups_Update_Column>
+  where: InputMaybe<ProductGroups_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "product_groups". */
+export interface ProductGroups_Order_By {
+  createdAt: InputMaybe<Order_By>
+  createdBy: InputMaybe<Order_By>
+  disabled: InputMaybe<Order_By>
+  fullName: InputMaybe<Order_By>
+  id: InputMaybe<Order_By>
+  shortName: InputMaybe<Order_By>
+  updatedAt: InputMaybe<Order_By>
+  updatedBy: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: product_groups */
+export interface ProductGroups_Pk_Columns_Input {
+  id: Scalars['uuid']
+}
+
+/** select columns of table "product_groups" */
+export enum ProductGroups_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+}
+
+/** input type for updating data in table "product_groups" */
+export interface ProductGroups_Set_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** Streaming cursor of the table "productGroups" */
+export interface ProductGroups_Stream_Cursor_Input {
+  /** Stream column input with initial value */
+  initial_value: ProductGroups_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface ProductGroups_Stream_Cursor_Value_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** update columns of table "product_groups" */
+export enum ProductGroups_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+}
+
+export interface ProductGroups_Updates {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<ProductGroups_Set_Input>
+  where: ProductGroups_Bool_Exp
+}
+
+/** columns and relationships of "product_passports" */
+export interface ProductPassports {
+  createdAt: Scalars['timestamptz']
+  createdBy: Scalars['uuid']
+  date: Scalars['timestamptz']
+  density: Scalars['Float']
+  disabled: Scalars['Boolean']
+  id: Scalars['uuid']
+  number: Scalars['String']
+  producerId: Scalars['uuid']
+  product_id: Scalars['uuid']
+  updatedAt: Scalars['timestamptz']
+  updatedBy: Scalars['uuid']
+}
+
+/** aggregated selection of "product_passports" */
+export interface ProductPassports_Aggregate {
+  aggregate: Maybe<ProductPassports_Aggregate_Fields>
+  nodes: Array<ProductPassports>
+}
+
+/** aggregate fields of "product_passports" */
+export interface ProductPassports_Aggregate_Fields {
+  avg: Maybe<ProductPassports_Avg_Fields>
+  count: Scalars['Int']
+  max: Maybe<ProductPassports_Max_Fields>
+  min: Maybe<ProductPassports_Min_Fields>
+  stddev: Maybe<ProductPassports_Stddev_Fields>
+  stddev_pop: Maybe<ProductPassports_Stddev_Pop_Fields>
+  stddev_samp: Maybe<ProductPassports_Stddev_Samp_Fields>
+  sum: Maybe<ProductPassports_Sum_Fields>
+  var_pop: Maybe<ProductPassports_Var_Pop_Fields>
+  var_samp: Maybe<ProductPassports_Var_Samp_Fields>
+  variance: Maybe<ProductPassports_Variance_Fields>
+}
+
+/** aggregate fields of "product_passports" */
+export interface ProductPassports_Aggregate_FieldsCountArgs {
+  columns: InputMaybe<Array<ProductPassports_Select_Column>>
+  distinct: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export interface ProductPassports_Avg_Fields {
+  density: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "product_passports". All fields are combined with a logical 'AND'. */
+export interface ProductPassports_Bool_Exp {
+  _and: InputMaybe<Array<ProductPassports_Bool_Exp>>
+  _not: InputMaybe<ProductPassports_Bool_Exp>
+  _or: InputMaybe<Array<ProductPassports_Bool_Exp>>
+  createdAt: InputMaybe<Timestamptz_Comparison_Exp>
+  createdBy: InputMaybe<Uuid_Comparison_Exp>
+  date: InputMaybe<Timestamptz_Comparison_Exp>
+  density: InputMaybe<Float_Comparison_Exp>
+  disabled: InputMaybe<Boolean_Comparison_Exp>
+  id: InputMaybe<Uuid_Comparison_Exp>
+  number: InputMaybe<String_Comparison_Exp>
+  producerId: InputMaybe<Uuid_Comparison_Exp>
+  product_id: InputMaybe<Uuid_Comparison_Exp>
+  updatedAt: InputMaybe<Timestamptz_Comparison_Exp>
+  updatedBy: InputMaybe<Uuid_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "product_passports" */
+export enum ProductPassports_Constraint {
+  /** unique or primary key constraint on columns "number" */
+  ProductPassportsNumberKey = 'product_passports_number_key',
+  /** unique or primary key constraint on columns "id" */
+  ProductPassportsPkey = 'product_passports_pkey',
+}
+
+/** input type for incrementing numeric columns in table "product_passports" */
+export interface ProductPassports_Inc_Input {
+  density: InputMaybe<Scalars['Float']>
+}
+
+/** input type for inserting data into table "product_passports" */
+export interface ProductPassports_Insert_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  date: InputMaybe<Scalars['timestamptz']>
+  density: InputMaybe<Scalars['Float']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  id: InputMaybe<Scalars['uuid']>
+  number: InputMaybe<Scalars['String']>
+  producerId: InputMaybe<Scalars['uuid']>
+  product_id: InputMaybe<Scalars['uuid']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate max on columns */
+export interface ProductPassports_Max_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  date: Maybe<Scalars['timestamptz']>
+  density: Maybe<Scalars['Float']>
+  id: Maybe<Scalars['uuid']>
+  number: Maybe<Scalars['String']>
+  producerId: Maybe<Scalars['uuid']>
+  product_id: Maybe<Scalars['uuid']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+}
+
+/** aggregate min on columns */
+export interface ProductPassports_Min_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  date: Maybe<Scalars['timestamptz']>
+  density: Maybe<Scalars['Float']>
+  id: Maybe<Scalars['uuid']>
+  number: Maybe<Scalars['String']>
+  producerId: Maybe<Scalars['uuid']>
+  product_id: Maybe<Scalars['uuid']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+}
+
+/** response of any mutation on the table "product_passports" */
+export interface ProductPassports_Mutation_Response {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<ProductPassports>
+}
+
+/** on_conflict condition type for table "product_passports" */
+export interface ProductPassports_On_Conflict {
+  constraint: ProductPassports_Constraint
+  update_columns: Array<ProductPassports_Update_Column>
+  where: InputMaybe<ProductPassports_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "product_passports". */
+export interface ProductPassports_Order_By {
+  createdAt: InputMaybe<Order_By>
+  createdBy: InputMaybe<Order_By>
+  date: InputMaybe<Order_By>
+  density: InputMaybe<Order_By>
+  disabled: InputMaybe<Order_By>
+  id: InputMaybe<Order_By>
+  number: InputMaybe<Order_By>
+  producerId: InputMaybe<Order_By>
+  product_id: InputMaybe<Order_By>
+  updatedAt: InputMaybe<Order_By>
+  updatedBy: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: product_passports */
+export interface ProductPassports_Pk_Columns_Input {
+  id: Scalars['uuid']
+}
+
+/** select columns of table "product_passports" */
+export enum ProductPassports_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Density = 'density',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Number = 'number',
+  /** column name */
+  ProducerId = 'producerId',
+  /** column name */
+  ProductId = 'product_id',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+}
+
+/** input type for updating data in table "product_passports" */
+export interface ProductPassports_Set_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  date: InputMaybe<Scalars['timestamptz']>
+  density: InputMaybe<Scalars['Float']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  id: InputMaybe<Scalars['uuid']>
+  number: InputMaybe<Scalars['String']>
+  producerId: InputMaybe<Scalars['uuid']>
+  product_id: InputMaybe<Scalars['uuid']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate stddev on columns */
+export interface ProductPassports_Stddev_Fields {
+  density: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export interface ProductPassports_Stddev_Pop_Fields {
+  density: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export interface ProductPassports_Stddev_Samp_Fields {
+  density: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "productPassports" */
+export interface ProductPassports_Stream_Cursor_Input {
+  /** Stream column input with initial value */
+  initial_value: ProductPassports_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface ProductPassports_Stream_Cursor_Value_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  date: InputMaybe<Scalars['timestamptz']>
+  density: InputMaybe<Scalars['Float']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  id: InputMaybe<Scalars['uuid']>
+  number: InputMaybe<Scalars['String']>
+  producerId: InputMaybe<Scalars['uuid']>
+  product_id: InputMaybe<Scalars['uuid']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate sum on columns */
+export interface ProductPassports_Sum_Fields {
+  density: Maybe<Scalars['Float']>
+}
+
+/** update columns of table "product_passports" */
+export enum ProductPassports_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Density = 'density',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Number = 'number',
+  /** column name */
+  ProducerId = 'producerId',
+  /** column name */
+  ProductId = 'product_id',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+}
+
+export interface ProductPassports_Updates {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc: InputMaybe<ProductPassports_Inc_Input>
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<ProductPassports_Set_Input>
+  where: ProductPassports_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export interface ProductPassports_Var_Pop_Fields {
+  density: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export interface ProductPassports_Var_Samp_Fields {
+  density: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export interface ProductPassports_Variance_Fields {
+  density: Maybe<Scalars['Float']>
+}
+
+/** columns and relationships of "products" */
+export interface Products {
+  createdAt: Scalars['timestamptz']
+  createdBy: Scalars['uuid']
+  disabled: Scalars['Boolean']
+  fullName: Maybe<Scalars['String']>
+  id: Scalars['uuid']
+  productGroupId: Scalars['uuid']
+  shortName: Scalars['String']
+  updatedAt: Scalars['timestamptz']
+  updatedBy: Scalars['uuid']
+}
+
+/** aggregated selection of "products" */
+export interface Products_Aggregate {
+  aggregate: Maybe<Products_Aggregate_Fields>
+  nodes: Array<Products>
+}
+
+/** aggregate fields of "products" */
+export interface Products_Aggregate_Fields {
+  count: Scalars['Int']
+  max: Maybe<Products_Max_Fields>
+  min: Maybe<Products_Min_Fields>
+}
+
+/** aggregate fields of "products" */
+export interface Products_Aggregate_FieldsCountArgs {
+  columns: InputMaybe<Array<Products_Select_Column>>
+  distinct: InputMaybe<Scalars['Boolean']>
+}
+
+/** Boolean expression to filter rows from the table "products". All fields are combined with a logical 'AND'. */
+export interface Products_Bool_Exp {
+  _and: InputMaybe<Array<Products_Bool_Exp>>
+  _not: InputMaybe<Products_Bool_Exp>
+  _or: InputMaybe<Array<Products_Bool_Exp>>
+  createdAt: InputMaybe<Timestamptz_Comparison_Exp>
+  createdBy: InputMaybe<Uuid_Comparison_Exp>
+  disabled: InputMaybe<Boolean_Comparison_Exp>
+  fullName: InputMaybe<String_Comparison_Exp>
+  id: InputMaybe<Uuid_Comparison_Exp>
+  productGroupId: InputMaybe<Uuid_Comparison_Exp>
+  shortName: InputMaybe<String_Comparison_Exp>
+  updatedAt: InputMaybe<Timestamptz_Comparison_Exp>
+  updatedBy: InputMaybe<Uuid_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "products" */
+export enum Products_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ProductsPkey = 'products_pkey',
+  /** unique or primary key constraint on columns "short_name" */
+  ProductsShortNameKey = 'products_short_name_key',
+}
+
+/** input type for inserting data into table "products" */
+export interface Products_Insert_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  productGroupId: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate max on columns */
+export interface Products_Max_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  productGroupId: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+}
+
+/** aggregate min on columns */
+export interface Products_Min_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  productGroupId: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+}
+
+/** response of any mutation on the table "products" */
+export interface Products_Mutation_Response {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<Products>
+}
+
+/** on_conflict condition type for table "products" */
+export interface Products_On_Conflict {
+  constraint: Products_Constraint
+  update_columns: Array<Products_Update_Column>
+  where: InputMaybe<Products_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "products". */
+export interface Products_Order_By {
+  createdAt: InputMaybe<Order_By>
+  createdBy: InputMaybe<Order_By>
+  disabled: InputMaybe<Order_By>
+  fullName: InputMaybe<Order_By>
+  id: InputMaybe<Order_By>
+  productGroupId: InputMaybe<Order_By>
+  shortName: InputMaybe<Order_By>
+  updatedAt: InputMaybe<Order_By>
+  updatedBy: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: products */
+export interface Products_Pk_Columns_Input {
+  id: Scalars['uuid']
+}
+
+/** select columns of table "products" */
+export enum Products_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ProductGroupId = 'productGroupId',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+}
+
+/** input type for updating data in table "products" */
+export interface Products_Set_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  productGroupId: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** Streaming cursor of the table "products" */
+export interface Products_Stream_Cursor_Input {
+  /** Stream column input with initial value */
+  initial_value: Products_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface Products_Stream_Cursor_Value_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  productGroupId: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** update columns of table "products" */
+export enum Products_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ProductGroupId = 'productGroupId',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+}
+
+export interface Products_Updates {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<Products_Set_Input>
+  where: Products_Bool_Exp
 }
 
 export interface Query_Root {
@@ -3490,24 +4808,72 @@ export interface Query_Root {
   buckets: Array<Buckets>
   /** fetch aggregated fields from the table: "storage.buckets" */
   bucketsAggregate: Buckets_Aggregate
-  /** fetch data from the table: "dict_companies" */
-  dictCompanies: Array<DictCompanies>
-  /** fetch aggregated fields from the table: "dict_companies" */
-  dictCompanies_aggregate: DictCompanies_Aggregate
-  /** fetch data from the table: "dict_companies" using primary key columns */
-  dictCompany: Maybe<DictCompanies>
+  /** fetch data from the table: "companies" */
+  companies: Array<Companies>
+  /** fetch aggregated fields from the table: "companies" */
+  companies_aggregate: Companies_Aggregate
+  /** fetch data from the table: "companies" using primary key columns */
+  company: Maybe<Companies>
   /** fetch data from the table: "storage.files" using primary key columns */
   file: Maybe<Files>
   /** An array relationship */
   files: Array<Files>
   /** fetch aggregated fields from the table: "storage.files" */
   filesAggregate: Files_Aggregate
+  /** fetch data from the table: "goods_arrival_types" using primary key columns */
+  goodsArrivalType: Maybe<GoodsArrivalTypes>
+  /** fetch data from the table: "goods_arrival_types" */
+  goodsArrivalTypes: Array<GoodsArrivalTypes>
+  /** fetch aggregated fields from the table: "goods_arrival_types" */
+  goodsArrivalTypes_aggregate: GoodsArrivalTypes_Aggregate
+  /** fetch data from the table: "products" using primary key columns */
+  product: Maybe<Products>
+  /** fetch data from the table: "product_groups" using primary key columns */
+  productGroup: Maybe<ProductGroups>
+  /** fetch data from the table: "product_groups" */
+  productGroups: Array<ProductGroups>
+  /** fetch aggregated fields from the table: "product_groups" */
+  productGroups_aggregate: ProductGroups_Aggregate
+  /** fetch data from the table: "product_passports" using primary key columns */
+  productPassport: Maybe<ProductPassports>
+  /** fetch data from the table: "product_passports" */
+  productPassports: Array<ProductPassports>
+  /** fetch aggregated fields from the table: "product_passports" */
+  productPassports_aggregate: ProductPassports_Aggregate
+  /** fetch data from the table: "products" */
+  products: Array<Products>
+  /** fetch aggregated fields from the table: "products" */
+  products_aggregate: Products_Aggregate
+  /** fetch data from the table: "storage.schema_migrations" */
+  storage_schema_migrations: Array<Storage_Schema_Migrations>
+  /** fetch aggregated fields from the table: "storage.schema_migrations" */
+  storage_schema_migrations_aggregate: Storage_Schema_Migrations_Aggregate
+  /** fetch data from the table: "storage.schema_migrations" using primary key columns */
+  storage_schema_migrations_by_pk: Maybe<Storage_Schema_Migrations>
   /** fetch data from the table: "auth.users" using primary key columns */
   user: Maybe<Users>
   /** fetch data from the table: "auth.users" */
   users: Array<Users>
   /** fetch aggregated fields from the table: "auth.users" */
   usersAggregate: Users_Aggregate
+  /** fetch data from the table: "warehouses" using primary key columns */
+  warehouse: Maybe<Warehouses>
+  /** fetch data from the table: "warehouse_groups" using primary key columns */
+  warehouseGroup: Maybe<WarehouseGroups>
+  /** fetch data from the table: "warehouse_groups" */
+  warehouseGroups: Array<WarehouseGroups>
+  /** fetch aggregated fields from the table: "warehouse_groups" */
+  warehouseGroups_aggregate: WarehouseGroups_Aggregate
+  /** fetch data from the table: "warehouse_storages" using primary key columns */
+  warehouseStorage: Maybe<WarehouseStorages>
+  /** fetch data from the table: "warehouse_storages" */
+  warehouseStorages: Array<WarehouseStorages>
+  /** fetch aggregated fields from the table: "warehouse_storages" */
+  warehouseStorages_aggregate: WarehouseStorages_Aggregate
+  /** fetch data from the table: "warehouses" */
+  warehouses: Array<Warehouses>
+  /** fetch aggregated fields from the table: "warehouses" */
+  warehouses_aggregate: Warehouses_Aggregate
 }
 
 export interface Query_RootAuthProviderArgs {
@@ -3690,23 +5056,23 @@ export interface Query_RootBucketsAggregateArgs {
   where: InputMaybe<Buckets_Bool_Exp>
 }
 
-export interface Query_RootDictCompaniesArgs {
-  distinct_on: InputMaybe<Array<DictCompanies_Select_Column>>
+export interface Query_RootCompaniesArgs {
+  distinct_on: InputMaybe<Array<Companies_Select_Column>>
   limit: InputMaybe<Scalars['Int']>
   offset: InputMaybe<Scalars['Int']>
-  order_by: InputMaybe<Array<DictCompanies_Order_By>>
-  where: InputMaybe<DictCompanies_Bool_Exp>
+  order_by: InputMaybe<Array<Companies_Order_By>>
+  where: InputMaybe<Companies_Bool_Exp>
 }
 
-export interface Query_RootDictCompanies_AggregateArgs {
-  distinct_on: InputMaybe<Array<DictCompanies_Select_Column>>
+export interface Query_RootCompanies_AggregateArgs {
+  distinct_on: InputMaybe<Array<Companies_Select_Column>>
   limit: InputMaybe<Scalars['Int']>
   offset: InputMaybe<Scalars['Int']>
-  order_by: InputMaybe<Array<DictCompanies_Order_By>>
-  where: InputMaybe<DictCompanies_Bool_Exp>
+  order_by: InputMaybe<Array<Companies_Order_By>>
+  where: InputMaybe<Companies_Bool_Exp>
 }
 
-export interface Query_RootDictCompanyArgs {
+export interface Query_RootCompanyArgs {
   id: Scalars['uuid']
 }
 
@@ -3730,6 +5096,106 @@ export interface Query_RootFilesAggregateArgs {
   where: InputMaybe<Files_Bool_Exp>
 }
 
+export interface Query_RootGoodsArrivalTypeArgs {
+  type: Scalars['String']
+}
+
+export interface Query_RootGoodsArrivalTypesArgs {
+  distinct_on: InputMaybe<Array<GoodsArrivalTypes_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<GoodsArrivalTypes_Order_By>>
+  where: InputMaybe<GoodsArrivalTypes_Bool_Exp>
+}
+
+export interface Query_RootGoodsArrivalTypes_AggregateArgs {
+  distinct_on: InputMaybe<Array<GoodsArrivalTypes_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<GoodsArrivalTypes_Order_By>>
+  where: InputMaybe<GoodsArrivalTypes_Bool_Exp>
+}
+
+export interface Query_RootProductArgs {
+  id: Scalars['uuid']
+}
+
+export interface Query_RootProductGroupArgs {
+  id: Scalars['uuid']
+}
+
+export interface Query_RootProductGroupsArgs {
+  distinct_on: InputMaybe<Array<ProductGroups_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<ProductGroups_Order_By>>
+  where: InputMaybe<ProductGroups_Bool_Exp>
+}
+
+export interface Query_RootProductGroups_AggregateArgs {
+  distinct_on: InputMaybe<Array<ProductGroups_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<ProductGroups_Order_By>>
+  where: InputMaybe<ProductGroups_Bool_Exp>
+}
+
+export interface Query_RootProductPassportArgs {
+  id: Scalars['uuid']
+}
+
+export interface Query_RootProductPassportsArgs {
+  distinct_on: InputMaybe<Array<ProductPassports_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<ProductPassports_Order_By>>
+  where: InputMaybe<ProductPassports_Bool_Exp>
+}
+
+export interface Query_RootProductPassports_AggregateArgs {
+  distinct_on: InputMaybe<Array<ProductPassports_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<ProductPassports_Order_By>>
+  where: InputMaybe<ProductPassports_Bool_Exp>
+}
+
+export interface Query_RootProductsArgs {
+  distinct_on: InputMaybe<Array<Products_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Products_Order_By>>
+  where: InputMaybe<Products_Bool_Exp>
+}
+
+export interface Query_RootProducts_AggregateArgs {
+  distinct_on: InputMaybe<Array<Products_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Products_Order_By>>
+  where: InputMaybe<Products_Bool_Exp>
+}
+
+export interface Query_RootStorage_Schema_MigrationsArgs {
+  distinct_on: InputMaybe<Array<Storage_Schema_Migrations_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Storage_Schema_Migrations_Order_By>>
+  where: InputMaybe<Storage_Schema_Migrations_Bool_Exp>
+}
+
+export interface Query_RootStorage_Schema_Migrations_AggregateArgs {
+  distinct_on: InputMaybe<Array<Storage_Schema_Migrations_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Storage_Schema_Migrations_Order_By>>
+  where: InputMaybe<Storage_Schema_Migrations_Bool_Exp>
+}
+
+export interface Query_RootStorage_Schema_Migrations_By_PkArgs {
+  version: Scalars['bigint']
+}
+
 export interface Query_RootUserArgs {
   id: Scalars['uuid']
 }
@@ -3748,6 +5214,245 @@ export interface Query_RootUsersAggregateArgs {
   offset: InputMaybe<Scalars['Int']>
   order_by: InputMaybe<Array<Users_Order_By>>
   where: InputMaybe<Users_Bool_Exp>
+}
+
+export interface Query_RootWarehouseArgs {
+  id: Scalars['uuid']
+}
+
+export interface Query_RootWarehouseGroupArgs {
+  id: Scalars['uuid']
+}
+
+export interface Query_RootWarehouseGroupsArgs {
+  distinct_on: InputMaybe<Array<WarehouseGroups_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<WarehouseGroups_Order_By>>
+  where: InputMaybe<WarehouseGroups_Bool_Exp>
+}
+
+export interface Query_RootWarehouseGroups_AggregateArgs {
+  distinct_on: InputMaybe<Array<WarehouseGroups_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<WarehouseGroups_Order_By>>
+  where: InputMaybe<WarehouseGroups_Bool_Exp>
+}
+
+export interface Query_RootWarehouseStorageArgs {
+  id: Scalars['uuid']
+}
+
+export interface Query_RootWarehouseStoragesArgs {
+  distinct_on: InputMaybe<Array<WarehouseStorages_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<WarehouseStorages_Order_By>>
+  where: InputMaybe<WarehouseStorages_Bool_Exp>
+}
+
+export interface Query_RootWarehouseStorages_AggregateArgs {
+  distinct_on: InputMaybe<Array<WarehouseStorages_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<WarehouseStorages_Order_By>>
+  where: InputMaybe<WarehouseStorages_Bool_Exp>
+}
+
+export interface Query_RootWarehousesArgs {
+  distinct_on: InputMaybe<Array<Warehouses_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Warehouses_Order_By>>
+  where: InputMaybe<Warehouses_Bool_Exp>
+}
+
+export interface Query_RootWarehouses_AggregateArgs {
+  distinct_on: InputMaybe<Array<Warehouses_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Warehouses_Order_By>>
+  where: InputMaybe<Warehouses_Bool_Exp>
+}
+
+/** columns and relationships of "storage.schema_migrations" */
+export interface Storage_Schema_Migrations {
+  dirty: Scalars['Boolean']
+  version: Scalars['bigint']
+}
+
+/** aggregated selection of "storage.schema_migrations" */
+export interface Storage_Schema_Migrations_Aggregate {
+  aggregate: Maybe<Storage_Schema_Migrations_Aggregate_Fields>
+  nodes: Array<Storage_Schema_Migrations>
+}
+
+/** aggregate fields of "storage.schema_migrations" */
+export interface Storage_Schema_Migrations_Aggregate_Fields {
+  avg: Maybe<Storage_Schema_Migrations_Avg_Fields>
+  count: Scalars['Int']
+  max: Maybe<Storage_Schema_Migrations_Max_Fields>
+  min: Maybe<Storage_Schema_Migrations_Min_Fields>
+  stddev: Maybe<Storage_Schema_Migrations_Stddev_Fields>
+  stddev_pop: Maybe<Storage_Schema_Migrations_Stddev_Pop_Fields>
+  stddev_samp: Maybe<Storage_Schema_Migrations_Stddev_Samp_Fields>
+  sum: Maybe<Storage_Schema_Migrations_Sum_Fields>
+  var_pop: Maybe<Storage_Schema_Migrations_Var_Pop_Fields>
+  var_samp: Maybe<Storage_Schema_Migrations_Var_Samp_Fields>
+  variance: Maybe<Storage_Schema_Migrations_Variance_Fields>
+}
+
+/** aggregate fields of "storage.schema_migrations" */
+export interface Storage_Schema_Migrations_Aggregate_FieldsCountArgs {
+  columns: InputMaybe<Array<Storage_Schema_Migrations_Select_Column>>
+  distinct: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export interface Storage_Schema_Migrations_Avg_Fields {
+  version: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "storage.schema_migrations". All fields are combined with a logical 'AND'. */
+export interface Storage_Schema_Migrations_Bool_Exp {
+  _and: InputMaybe<Array<Storage_Schema_Migrations_Bool_Exp>>
+  _not: InputMaybe<Storage_Schema_Migrations_Bool_Exp>
+  _or: InputMaybe<Array<Storage_Schema_Migrations_Bool_Exp>>
+  dirty: InputMaybe<Boolean_Comparison_Exp>
+  version: InputMaybe<Bigint_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "storage.schema_migrations" */
+export enum Storage_Schema_Migrations_Constraint {
+  /** unique or primary key constraint on columns "version" */
+  SchemaMigrationsPkey = 'schema_migrations_pkey',
+}
+
+/** input type for incrementing numeric columns in table "storage.schema_migrations" */
+export interface Storage_Schema_Migrations_Inc_Input {
+  version: InputMaybe<Scalars['bigint']>
+}
+
+/** input type for inserting data into table "storage.schema_migrations" */
+export interface Storage_Schema_Migrations_Insert_Input {
+  dirty: InputMaybe<Scalars['Boolean']>
+  version: InputMaybe<Scalars['bigint']>
+}
+
+/** aggregate max on columns */
+export interface Storage_Schema_Migrations_Max_Fields {
+  version: Maybe<Scalars['bigint']>
+}
+
+/** aggregate min on columns */
+export interface Storage_Schema_Migrations_Min_Fields {
+  version: Maybe<Scalars['bigint']>
+}
+
+/** response of any mutation on the table "storage.schema_migrations" */
+export interface Storage_Schema_Migrations_Mutation_Response {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<Storage_Schema_Migrations>
+}
+
+/** on_conflict condition type for table "storage.schema_migrations" */
+export interface Storage_Schema_Migrations_On_Conflict {
+  constraint: Storage_Schema_Migrations_Constraint
+  update_columns: Array<Storage_Schema_Migrations_Update_Column>
+  where: InputMaybe<Storage_Schema_Migrations_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "storage.schema_migrations". */
+export interface Storage_Schema_Migrations_Order_By {
+  dirty: InputMaybe<Order_By>
+  version: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: storage.schema_migrations */
+export interface Storage_Schema_Migrations_Pk_Columns_Input {
+  version: Scalars['bigint']
+}
+
+/** select columns of table "storage.schema_migrations" */
+export enum Storage_Schema_Migrations_Select_Column {
+  /** column name */
+  Dirty = 'dirty',
+  /** column name */
+  Version = 'version',
+}
+
+/** input type for updating data in table "storage.schema_migrations" */
+export interface Storage_Schema_Migrations_Set_Input {
+  dirty: InputMaybe<Scalars['Boolean']>
+  version: InputMaybe<Scalars['bigint']>
+}
+
+/** aggregate stddev on columns */
+export interface Storage_Schema_Migrations_Stddev_Fields {
+  version: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export interface Storage_Schema_Migrations_Stddev_Pop_Fields {
+  version: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export interface Storage_Schema_Migrations_Stddev_Samp_Fields {
+  version: Maybe<Scalars['Float']>
+}
+
+/** Streaming cursor of the table "storage_schema_migrations" */
+export interface Storage_Schema_Migrations_Stream_Cursor_Input {
+  /** Stream column input with initial value */
+  initial_value: Storage_Schema_Migrations_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface Storage_Schema_Migrations_Stream_Cursor_Value_Input {
+  dirty: InputMaybe<Scalars['Boolean']>
+  version: InputMaybe<Scalars['bigint']>
+}
+
+/** aggregate sum on columns */
+export interface Storage_Schema_Migrations_Sum_Fields {
+  version: Maybe<Scalars['bigint']>
+}
+
+/** update columns of table "storage.schema_migrations" */
+export enum Storage_Schema_Migrations_Update_Column {
+  /** column name */
+  Dirty = 'dirty',
+  /** column name */
+  Version = 'version',
+}
+
+export interface Storage_Schema_Migrations_Updates {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc: InputMaybe<Storage_Schema_Migrations_Inc_Input>
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<Storage_Schema_Migrations_Set_Input>
+  where: Storage_Schema_Migrations_Bool_Exp
+}
+
+/** aggregate var_pop on columns */
+export interface Storage_Schema_Migrations_Var_Pop_Fields {
+  version: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export interface Storage_Schema_Migrations_Var_Samp_Fields {
+  version: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export interface Storage_Schema_Migrations_Variance_Fields {
+  version: Maybe<Scalars['Float']>
 }
 
 export interface Subscription_Root {
@@ -3823,14 +5528,14 @@ export interface Subscription_Root {
   bucketsAggregate: Buckets_Aggregate
   /** fetch data from the table in a streaming manner: "storage.buckets" */
   buckets_stream: Array<Buckets>
-  /** fetch data from the table: "dict_companies" */
-  dictCompanies: Array<DictCompanies>
-  /** fetch aggregated fields from the table: "dict_companies" */
-  dictCompanies_aggregate: DictCompanies_Aggregate
-  /** fetch data from the table in a streaming manner: "dict_companies" */
-  dictCompanies_stream: Array<DictCompanies>
-  /** fetch data from the table: "dict_companies" using primary key columns */
-  dictCompany: Maybe<DictCompanies>
+  /** fetch data from the table: "companies" */
+  companies: Array<Companies>
+  /** fetch aggregated fields from the table: "companies" */
+  companies_aggregate: Companies_Aggregate
+  /** fetch data from the table in a streaming manner: "companies" */
+  companies_stream: Array<Companies>
+  /** fetch data from the table: "companies" using primary key columns */
+  company: Maybe<Companies>
   /** fetch data from the table: "storage.files" using primary key columns */
   file: Maybe<Files>
   /** An array relationship */
@@ -3839,6 +5544,46 @@ export interface Subscription_Root {
   filesAggregate: Files_Aggregate
   /** fetch data from the table in a streaming manner: "storage.files" */
   files_stream: Array<Files>
+  /** fetch data from the table: "goods_arrival_types" using primary key columns */
+  goodsArrivalType: Maybe<GoodsArrivalTypes>
+  /** fetch data from the table: "goods_arrival_types" */
+  goodsArrivalTypes: Array<GoodsArrivalTypes>
+  /** fetch aggregated fields from the table: "goods_arrival_types" */
+  goodsArrivalTypes_aggregate: GoodsArrivalTypes_Aggregate
+  /** fetch data from the table in a streaming manner: "goods_arrival_types" */
+  goodsArrivalTypes_stream: Array<GoodsArrivalTypes>
+  /** fetch data from the table: "products" using primary key columns */
+  product: Maybe<Products>
+  /** fetch data from the table: "product_groups" using primary key columns */
+  productGroup: Maybe<ProductGroups>
+  /** fetch data from the table: "product_groups" */
+  productGroups: Array<ProductGroups>
+  /** fetch aggregated fields from the table: "product_groups" */
+  productGroups_aggregate: ProductGroups_Aggregate
+  /** fetch data from the table in a streaming manner: "product_groups" */
+  productGroups_stream: Array<ProductGroups>
+  /** fetch data from the table: "product_passports" using primary key columns */
+  productPassport: Maybe<ProductPassports>
+  /** fetch data from the table: "product_passports" */
+  productPassports: Array<ProductPassports>
+  /** fetch aggregated fields from the table: "product_passports" */
+  productPassports_aggregate: ProductPassports_Aggregate
+  /** fetch data from the table in a streaming manner: "product_passports" */
+  productPassports_stream: Array<ProductPassports>
+  /** fetch data from the table: "products" */
+  products: Array<Products>
+  /** fetch aggregated fields from the table: "products" */
+  products_aggregate: Products_Aggregate
+  /** fetch data from the table in a streaming manner: "products" */
+  products_stream: Array<Products>
+  /** fetch data from the table: "storage.schema_migrations" */
+  storage_schema_migrations: Array<Storage_Schema_Migrations>
+  /** fetch aggregated fields from the table: "storage.schema_migrations" */
+  storage_schema_migrations_aggregate: Storage_Schema_Migrations_Aggregate
+  /** fetch data from the table: "storage.schema_migrations" using primary key columns */
+  storage_schema_migrations_by_pk: Maybe<Storage_Schema_Migrations>
+  /** fetch data from the table in a streaming manner: "storage.schema_migrations" */
+  storage_schema_migrations_stream: Array<Storage_Schema_Migrations>
   /** fetch data from the table: "auth.users" using primary key columns */
   user: Maybe<Users>
   /** fetch data from the table: "auth.users" */
@@ -3847,6 +5592,30 @@ export interface Subscription_Root {
   usersAggregate: Users_Aggregate
   /** fetch data from the table in a streaming manner: "auth.users" */
   users_stream: Array<Users>
+  /** fetch data from the table: "warehouses" using primary key columns */
+  warehouse: Maybe<Warehouses>
+  /** fetch data from the table: "warehouse_groups" using primary key columns */
+  warehouseGroup: Maybe<WarehouseGroups>
+  /** fetch data from the table: "warehouse_groups" */
+  warehouseGroups: Array<WarehouseGroups>
+  /** fetch aggregated fields from the table: "warehouse_groups" */
+  warehouseGroups_aggregate: WarehouseGroups_Aggregate
+  /** fetch data from the table in a streaming manner: "warehouse_groups" */
+  warehouseGroups_stream: Array<WarehouseGroups>
+  /** fetch data from the table: "warehouse_storages" using primary key columns */
+  warehouseStorage: Maybe<WarehouseStorages>
+  /** fetch data from the table: "warehouse_storages" */
+  warehouseStorages: Array<WarehouseStorages>
+  /** fetch aggregated fields from the table: "warehouse_storages" */
+  warehouseStorages_aggregate: WarehouseStorages_Aggregate
+  /** fetch data from the table in a streaming manner: "warehouse_storages" */
+  warehouseStorages_stream: Array<WarehouseStorages>
+  /** fetch data from the table: "warehouses" */
+  warehouses: Array<Warehouses>
+  /** fetch aggregated fields from the table: "warehouses" */
+  warehouses_aggregate: Warehouses_Aggregate
+  /** fetch data from the table in a streaming manner: "warehouses" */
+  warehouses_stream: Array<Warehouses>
 }
 
 export interface Subscription_RootAuthProviderArgs {
@@ -4083,29 +5852,29 @@ export interface Subscription_RootBuckets_StreamArgs {
   where: InputMaybe<Buckets_Bool_Exp>
 }
 
-export interface Subscription_RootDictCompaniesArgs {
-  distinct_on: InputMaybe<Array<DictCompanies_Select_Column>>
+export interface Subscription_RootCompaniesArgs {
+  distinct_on: InputMaybe<Array<Companies_Select_Column>>
   limit: InputMaybe<Scalars['Int']>
   offset: InputMaybe<Scalars['Int']>
-  order_by: InputMaybe<Array<DictCompanies_Order_By>>
-  where: InputMaybe<DictCompanies_Bool_Exp>
+  order_by: InputMaybe<Array<Companies_Order_By>>
+  where: InputMaybe<Companies_Bool_Exp>
 }
 
-export interface Subscription_RootDictCompanies_AggregateArgs {
-  distinct_on: InputMaybe<Array<DictCompanies_Select_Column>>
+export interface Subscription_RootCompanies_AggregateArgs {
+  distinct_on: InputMaybe<Array<Companies_Select_Column>>
   limit: InputMaybe<Scalars['Int']>
   offset: InputMaybe<Scalars['Int']>
-  order_by: InputMaybe<Array<DictCompanies_Order_By>>
-  where: InputMaybe<DictCompanies_Bool_Exp>
+  order_by: InputMaybe<Array<Companies_Order_By>>
+  where: InputMaybe<Companies_Bool_Exp>
 }
 
-export interface Subscription_RootDictCompanies_StreamArgs {
+export interface Subscription_RootCompanies_StreamArgs {
   batch_size: Scalars['Int']
-  cursor: Array<InputMaybe<DictCompanies_Stream_Cursor_Input>>
-  where: InputMaybe<DictCompanies_Bool_Exp>
+  cursor: Array<InputMaybe<Companies_Stream_Cursor_Input>>
+  where: InputMaybe<Companies_Bool_Exp>
 }
 
-export interface Subscription_RootDictCompanyArgs {
+export interface Subscription_RootCompanyArgs {
   id: Scalars['uuid']
 }
 
@@ -4135,6 +5904,136 @@ export interface Subscription_RootFiles_StreamArgs {
   where: InputMaybe<Files_Bool_Exp>
 }
 
+export interface Subscription_RootGoodsArrivalTypeArgs {
+  type: Scalars['String']
+}
+
+export interface Subscription_RootGoodsArrivalTypesArgs {
+  distinct_on: InputMaybe<Array<GoodsArrivalTypes_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<GoodsArrivalTypes_Order_By>>
+  where: InputMaybe<GoodsArrivalTypes_Bool_Exp>
+}
+
+export interface Subscription_RootGoodsArrivalTypes_AggregateArgs {
+  distinct_on: InputMaybe<Array<GoodsArrivalTypes_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<GoodsArrivalTypes_Order_By>>
+  where: InputMaybe<GoodsArrivalTypes_Bool_Exp>
+}
+
+export interface Subscription_RootGoodsArrivalTypes_StreamArgs {
+  batch_size: Scalars['Int']
+  cursor: Array<InputMaybe<GoodsArrivalTypes_Stream_Cursor_Input>>
+  where: InputMaybe<GoodsArrivalTypes_Bool_Exp>
+}
+
+export interface Subscription_RootProductArgs {
+  id: Scalars['uuid']
+}
+
+export interface Subscription_RootProductGroupArgs {
+  id: Scalars['uuid']
+}
+
+export interface Subscription_RootProductGroupsArgs {
+  distinct_on: InputMaybe<Array<ProductGroups_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<ProductGroups_Order_By>>
+  where: InputMaybe<ProductGroups_Bool_Exp>
+}
+
+export interface Subscription_RootProductGroups_AggregateArgs {
+  distinct_on: InputMaybe<Array<ProductGroups_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<ProductGroups_Order_By>>
+  where: InputMaybe<ProductGroups_Bool_Exp>
+}
+
+export interface Subscription_RootProductGroups_StreamArgs {
+  batch_size: Scalars['Int']
+  cursor: Array<InputMaybe<ProductGroups_Stream_Cursor_Input>>
+  where: InputMaybe<ProductGroups_Bool_Exp>
+}
+
+export interface Subscription_RootProductPassportArgs {
+  id: Scalars['uuid']
+}
+
+export interface Subscription_RootProductPassportsArgs {
+  distinct_on: InputMaybe<Array<ProductPassports_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<ProductPassports_Order_By>>
+  where: InputMaybe<ProductPassports_Bool_Exp>
+}
+
+export interface Subscription_RootProductPassports_AggregateArgs {
+  distinct_on: InputMaybe<Array<ProductPassports_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<ProductPassports_Order_By>>
+  where: InputMaybe<ProductPassports_Bool_Exp>
+}
+
+export interface Subscription_RootProductPassports_StreamArgs {
+  batch_size: Scalars['Int']
+  cursor: Array<InputMaybe<ProductPassports_Stream_Cursor_Input>>
+  where: InputMaybe<ProductPassports_Bool_Exp>
+}
+
+export interface Subscription_RootProductsArgs {
+  distinct_on: InputMaybe<Array<Products_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Products_Order_By>>
+  where: InputMaybe<Products_Bool_Exp>
+}
+
+export interface Subscription_RootProducts_AggregateArgs {
+  distinct_on: InputMaybe<Array<Products_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Products_Order_By>>
+  where: InputMaybe<Products_Bool_Exp>
+}
+
+export interface Subscription_RootProducts_StreamArgs {
+  batch_size: Scalars['Int']
+  cursor: Array<InputMaybe<Products_Stream_Cursor_Input>>
+  where: InputMaybe<Products_Bool_Exp>
+}
+
+export interface Subscription_RootStorage_Schema_MigrationsArgs {
+  distinct_on: InputMaybe<Array<Storage_Schema_Migrations_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Storage_Schema_Migrations_Order_By>>
+  where: InputMaybe<Storage_Schema_Migrations_Bool_Exp>
+}
+
+export interface Subscription_RootStorage_Schema_Migrations_AggregateArgs {
+  distinct_on: InputMaybe<Array<Storage_Schema_Migrations_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Storage_Schema_Migrations_Order_By>>
+  where: InputMaybe<Storage_Schema_Migrations_Bool_Exp>
+}
+
+export interface Subscription_RootStorage_Schema_Migrations_By_PkArgs {
+  version: Scalars['bigint']
+}
+
+export interface Subscription_RootStorage_Schema_Migrations_StreamArgs {
+  batch_size: Scalars['Int']
+  cursor: Array<InputMaybe<Storage_Schema_Migrations_Stream_Cursor_Input>>
+  where: InputMaybe<Storage_Schema_Migrations_Bool_Exp>
+}
+
 export interface Subscription_RootUserArgs {
   id: Scalars['uuid']
 }
@@ -4159,6 +6058,84 @@ export interface Subscription_RootUsers_StreamArgs {
   batch_size: Scalars['Int']
   cursor: Array<InputMaybe<Users_Stream_Cursor_Input>>
   where: InputMaybe<Users_Bool_Exp>
+}
+
+export interface Subscription_RootWarehouseArgs {
+  id: Scalars['uuid']
+}
+
+export interface Subscription_RootWarehouseGroupArgs {
+  id: Scalars['uuid']
+}
+
+export interface Subscription_RootWarehouseGroupsArgs {
+  distinct_on: InputMaybe<Array<WarehouseGroups_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<WarehouseGroups_Order_By>>
+  where: InputMaybe<WarehouseGroups_Bool_Exp>
+}
+
+export interface Subscription_RootWarehouseGroups_AggregateArgs {
+  distinct_on: InputMaybe<Array<WarehouseGroups_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<WarehouseGroups_Order_By>>
+  where: InputMaybe<WarehouseGroups_Bool_Exp>
+}
+
+export interface Subscription_RootWarehouseGroups_StreamArgs {
+  batch_size: Scalars['Int']
+  cursor: Array<InputMaybe<WarehouseGroups_Stream_Cursor_Input>>
+  where: InputMaybe<WarehouseGroups_Bool_Exp>
+}
+
+export interface Subscription_RootWarehouseStorageArgs {
+  id: Scalars['uuid']
+}
+
+export interface Subscription_RootWarehouseStoragesArgs {
+  distinct_on: InputMaybe<Array<WarehouseStorages_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<WarehouseStorages_Order_By>>
+  where: InputMaybe<WarehouseStorages_Bool_Exp>
+}
+
+export interface Subscription_RootWarehouseStorages_AggregateArgs {
+  distinct_on: InputMaybe<Array<WarehouseStorages_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<WarehouseStorages_Order_By>>
+  where: InputMaybe<WarehouseStorages_Bool_Exp>
+}
+
+export interface Subscription_RootWarehouseStorages_StreamArgs {
+  batch_size: Scalars['Int']
+  cursor: Array<InputMaybe<WarehouseStorages_Stream_Cursor_Input>>
+  where: InputMaybe<WarehouseStorages_Bool_Exp>
+}
+
+export interface Subscription_RootWarehousesArgs {
+  distinct_on: InputMaybe<Array<Warehouses_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Warehouses_Order_By>>
+  where: InputMaybe<Warehouses_Bool_Exp>
+}
+
+export interface Subscription_RootWarehouses_AggregateArgs {
+  distinct_on: InputMaybe<Array<Warehouses_Select_Column>>
+  limit: InputMaybe<Scalars['Int']>
+  offset: InputMaybe<Scalars['Int']>
+  order_by: InputMaybe<Array<Warehouses_Order_By>>
+  where: InputMaybe<Warehouses_Bool_Exp>
+}
+
+export interface Subscription_RootWarehouses_StreamArgs {
+  batch_size: Scalars['Int']
+  cursor: Array<InputMaybe<Warehouses_Stream_Cursor_Input>>
+  where: InputMaybe<Warehouses_Bool_Exp>
 }
 
 /** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
@@ -4865,39 +6842,692 @@ export interface Uuid_Comparison_Exp {
   _nin: InputMaybe<Array<Scalars['uuid']>>
 }
 
-export interface UserWithRolesFieldsFragment { id: string; email: string | null; displayName: string; locale: string; defaultRole: string; avatarUrl: string; lastSeen: string | null; metadata: string | null; isAnonymous: boolean; disabled: boolean; roles: Array<{ role: string }> }
+/** columns and relationships of "warehouse_groups" */
+export interface WarehouseGroups {
+  createdAt: Scalars['timestamptz']
+  createdBy: Scalars['uuid']
+  disabled: Scalars['Boolean']
+  fullName: Maybe<Scalars['String']>
+  id: Scalars['uuid']
+  shortName: Scalars['String']
+  updatedAt: Scalars['timestamptz']
+  updatedBy: Scalars['uuid']
+}
+
+/** aggregated selection of "warehouse_groups" */
+export interface WarehouseGroups_Aggregate {
+  aggregate: Maybe<WarehouseGroups_Aggregate_Fields>
+  nodes: Array<WarehouseGroups>
+}
+
+/** aggregate fields of "warehouse_groups" */
+export interface WarehouseGroups_Aggregate_Fields {
+  count: Scalars['Int']
+  max: Maybe<WarehouseGroups_Max_Fields>
+  min: Maybe<WarehouseGroups_Min_Fields>
+}
+
+/** aggregate fields of "warehouse_groups" */
+export interface WarehouseGroups_Aggregate_FieldsCountArgs {
+  columns: InputMaybe<Array<WarehouseGroups_Select_Column>>
+  distinct: InputMaybe<Scalars['Boolean']>
+}
+
+/** Boolean expression to filter rows from the table "warehouse_groups". All fields are combined with a logical 'AND'. */
+export interface WarehouseGroups_Bool_Exp {
+  _and: InputMaybe<Array<WarehouseGroups_Bool_Exp>>
+  _not: InputMaybe<WarehouseGroups_Bool_Exp>
+  _or: InputMaybe<Array<WarehouseGroups_Bool_Exp>>
+  createdAt: InputMaybe<Timestamptz_Comparison_Exp>
+  createdBy: InputMaybe<Uuid_Comparison_Exp>
+  disabled: InputMaybe<Boolean_Comparison_Exp>
+  fullName: InputMaybe<String_Comparison_Exp>
+  id: InputMaybe<Uuid_Comparison_Exp>
+  shortName: InputMaybe<String_Comparison_Exp>
+  updatedAt: InputMaybe<Timestamptz_Comparison_Exp>
+  updatedBy: InputMaybe<Uuid_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "warehouse_groups" */
+export enum WarehouseGroups_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  WarehouseGroupsPkey = 'warehouse_groups_pkey',
+  /** unique or primary key constraint on columns "short_name" */
+  WarehouseGroupsShortNameKey = 'warehouse_groups_short_name_key',
+}
+
+/** input type for inserting data into table "warehouse_groups" */
+export interface WarehouseGroups_Insert_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate max on columns */
+export interface WarehouseGroups_Max_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+}
+
+/** aggregate min on columns */
+export interface WarehouseGroups_Min_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+}
+
+/** response of any mutation on the table "warehouse_groups" */
+export interface WarehouseGroups_Mutation_Response {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<WarehouseGroups>
+}
+
+/** on_conflict condition type for table "warehouse_groups" */
+export interface WarehouseGroups_On_Conflict {
+  constraint: WarehouseGroups_Constraint
+  update_columns: Array<WarehouseGroups_Update_Column>
+  where: InputMaybe<WarehouseGroups_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "warehouse_groups". */
+export interface WarehouseGroups_Order_By {
+  createdAt: InputMaybe<Order_By>
+  createdBy: InputMaybe<Order_By>
+  disabled: InputMaybe<Order_By>
+  fullName: InputMaybe<Order_By>
+  id: InputMaybe<Order_By>
+  shortName: InputMaybe<Order_By>
+  updatedAt: InputMaybe<Order_By>
+  updatedBy: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: warehouse_groups */
+export interface WarehouseGroups_Pk_Columns_Input {
+  id: Scalars['uuid']
+}
+
+/** select columns of table "warehouse_groups" */
+export enum WarehouseGroups_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+}
+
+/** input type for updating data in table "warehouse_groups" */
+export interface WarehouseGroups_Set_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** Streaming cursor of the table "warehouseGroups" */
+export interface WarehouseGroups_Stream_Cursor_Input {
+  /** Stream column input with initial value */
+  initial_value: WarehouseGroups_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface WarehouseGroups_Stream_Cursor_Value_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+}
+
+/** update columns of table "warehouse_groups" */
+export enum WarehouseGroups_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+}
+
+export interface WarehouseGroups_Updates {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<WarehouseGroups_Set_Input>
+  where: WarehouseGroups_Bool_Exp
+}
+
+/** columns and relationships of "warehouse_storages" */
+export interface WarehouseStorages {
+  createdAt: Scalars['timestamptz']
+  createdBy: Scalars['uuid']
+  disabled: Scalars['Boolean']
+  fullName: Maybe<Scalars['String']>
+  id: Scalars['uuid']
+  shortName: Scalars['String']
+  updatedAt: Scalars['timestamptz']
+  updatedBy: Scalars['uuid']
+  warehouseId: Scalars['uuid']
+}
+
+/** aggregated selection of "warehouse_storages" */
+export interface WarehouseStorages_Aggregate {
+  aggregate: Maybe<WarehouseStorages_Aggregate_Fields>
+  nodes: Array<WarehouseStorages>
+}
+
+/** aggregate fields of "warehouse_storages" */
+export interface WarehouseStorages_Aggregate_Fields {
+  count: Scalars['Int']
+  max: Maybe<WarehouseStorages_Max_Fields>
+  min: Maybe<WarehouseStorages_Min_Fields>
+}
+
+/** aggregate fields of "warehouse_storages" */
+export interface WarehouseStorages_Aggregate_FieldsCountArgs {
+  columns: InputMaybe<Array<WarehouseStorages_Select_Column>>
+  distinct: InputMaybe<Scalars['Boolean']>
+}
+
+/** Boolean expression to filter rows from the table "warehouse_storages". All fields are combined with a logical 'AND'. */
+export interface WarehouseStorages_Bool_Exp {
+  _and: InputMaybe<Array<WarehouseStorages_Bool_Exp>>
+  _not: InputMaybe<WarehouseStorages_Bool_Exp>
+  _or: InputMaybe<Array<WarehouseStorages_Bool_Exp>>
+  createdAt: InputMaybe<Timestamptz_Comparison_Exp>
+  createdBy: InputMaybe<Uuid_Comparison_Exp>
+  disabled: InputMaybe<Boolean_Comparison_Exp>
+  fullName: InputMaybe<String_Comparison_Exp>
+  id: InputMaybe<Uuid_Comparison_Exp>
+  shortName: InputMaybe<String_Comparison_Exp>
+  updatedAt: InputMaybe<Timestamptz_Comparison_Exp>
+  updatedBy: InputMaybe<Uuid_Comparison_Exp>
+  warehouseId: InputMaybe<Uuid_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "warehouse_storages" */
+export enum WarehouseStorages_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  WarehouseStoragesPkey = 'warehouse_storages_pkey',
+  /** unique or primary key constraint on columns "short_name" */
+  WarehouseStoragesShortNameKey = 'warehouse_storages_short_name_key',
+}
+
+/** input type for inserting data into table "warehouse_storages" */
+export interface WarehouseStorages_Insert_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+  warehouseId: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate max on columns */
+export interface WarehouseStorages_Max_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+  warehouseId: Maybe<Scalars['uuid']>
+}
+
+/** aggregate min on columns */
+export interface WarehouseStorages_Min_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+  warehouseId: Maybe<Scalars['uuid']>
+}
+
+/** response of any mutation on the table "warehouse_storages" */
+export interface WarehouseStorages_Mutation_Response {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<WarehouseStorages>
+}
+
+/** on_conflict condition type for table "warehouse_storages" */
+export interface WarehouseStorages_On_Conflict {
+  constraint: WarehouseStorages_Constraint
+  update_columns: Array<WarehouseStorages_Update_Column>
+  where: InputMaybe<WarehouseStorages_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "warehouse_storages". */
+export interface WarehouseStorages_Order_By {
+  createdAt: InputMaybe<Order_By>
+  createdBy: InputMaybe<Order_By>
+  disabled: InputMaybe<Order_By>
+  fullName: InputMaybe<Order_By>
+  id: InputMaybe<Order_By>
+  shortName: InputMaybe<Order_By>
+  updatedAt: InputMaybe<Order_By>
+  updatedBy: InputMaybe<Order_By>
+  warehouseId: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: warehouse_storages */
+export interface WarehouseStorages_Pk_Columns_Input {
+  id: Scalars['uuid']
+}
+
+/** select columns of table "warehouse_storages" */
+export enum WarehouseStorages_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+  /** column name */
+  WarehouseId = 'warehouseId',
+}
+
+/** input type for updating data in table "warehouse_storages" */
+export interface WarehouseStorages_Set_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+  warehouseId: InputMaybe<Scalars['uuid']>
+}
+
+/** Streaming cursor of the table "warehouseStorages" */
+export interface WarehouseStorages_Stream_Cursor_Input {
+  /** Stream column input with initial value */
+  initial_value: WarehouseStorages_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface WarehouseStorages_Stream_Cursor_Value_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+  warehouseId: InputMaybe<Scalars['uuid']>
+}
+
+/** update columns of table "warehouse_storages" */
+export enum WarehouseStorages_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+  /** column name */
+  WarehouseId = 'warehouseId',
+}
+
+export interface WarehouseStorages_Updates {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<WarehouseStorages_Set_Input>
+  where: WarehouseStorages_Bool_Exp
+}
+
+/** columns and relationships of "warehouses" */
+export interface Warehouses {
+  createdAt: Scalars['timestamptz']
+  createdBy: Scalars['uuid']
+  disabled: Scalars['Boolean']
+  fullName: Maybe<Scalars['String']>
+  id: Scalars['uuid']
+  shortName: Scalars['String']
+  updatedAt: Scalars['timestamptz']
+  updatedBy: Scalars['uuid']
+  warehouseGroupId: Scalars['uuid']
+}
+
+/** aggregated selection of "warehouses" */
+export interface Warehouses_Aggregate {
+  aggregate: Maybe<Warehouses_Aggregate_Fields>
+  nodes: Array<Warehouses>
+}
+
+/** aggregate fields of "warehouses" */
+export interface Warehouses_Aggregate_Fields {
+  count: Scalars['Int']
+  max: Maybe<Warehouses_Max_Fields>
+  min: Maybe<Warehouses_Min_Fields>
+}
+
+/** aggregate fields of "warehouses" */
+export interface Warehouses_Aggregate_FieldsCountArgs {
+  columns: InputMaybe<Array<Warehouses_Select_Column>>
+  distinct: InputMaybe<Scalars['Boolean']>
+}
+
+/** Boolean expression to filter rows from the table "warehouses". All fields are combined with a logical 'AND'. */
+export interface Warehouses_Bool_Exp {
+  _and: InputMaybe<Array<Warehouses_Bool_Exp>>
+  _not: InputMaybe<Warehouses_Bool_Exp>
+  _or: InputMaybe<Array<Warehouses_Bool_Exp>>
+  createdAt: InputMaybe<Timestamptz_Comparison_Exp>
+  createdBy: InputMaybe<Uuid_Comparison_Exp>
+  disabled: InputMaybe<Boolean_Comparison_Exp>
+  fullName: InputMaybe<String_Comparison_Exp>
+  id: InputMaybe<Uuid_Comparison_Exp>
+  shortName: InputMaybe<String_Comparison_Exp>
+  updatedAt: InputMaybe<Timestamptz_Comparison_Exp>
+  updatedBy: InputMaybe<Uuid_Comparison_Exp>
+  warehouseGroupId: InputMaybe<Uuid_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "warehouses" */
+export enum Warehouses_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  WarehousesPkey = 'warehouses_pkey',
+  /** unique or primary key constraint on columns "short_name" */
+  WarehousesShortNameKey = 'warehouses_short_name_key',
+}
+
+/** input type for inserting data into table "warehouses" */
+export interface Warehouses_Insert_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+  warehouseGroupId: InputMaybe<Scalars['uuid']>
+}
+
+/** aggregate max on columns */
+export interface Warehouses_Max_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+  warehouseGroupId: Maybe<Scalars['uuid']>
+}
+
+/** aggregate min on columns */
+export interface Warehouses_Min_Fields {
+  createdAt: Maybe<Scalars['timestamptz']>
+  createdBy: Maybe<Scalars['uuid']>
+  fullName: Maybe<Scalars['String']>
+  id: Maybe<Scalars['uuid']>
+  shortName: Maybe<Scalars['String']>
+  updatedAt: Maybe<Scalars['timestamptz']>
+  updatedBy: Maybe<Scalars['uuid']>
+  warehouseGroupId: Maybe<Scalars['uuid']>
+}
+
+/** response of any mutation on the table "warehouses" */
+export interface Warehouses_Mutation_Response {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<Warehouses>
+}
+
+/** on_conflict condition type for table "warehouses" */
+export interface Warehouses_On_Conflict {
+  constraint: Warehouses_Constraint
+  update_columns: Array<Warehouses_Update_Column>
+  where: InputMaybe<Warehouses_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "warehouses". */
+export interface Warehouses_Order_By {
+  createdAt: InputMaybe<Order_By>
+  createdBy: InputMaybe<Order_By>
+  disabled: InputMaybe<Order_By>
+  fullName: InputMaybe<Order_By>
+  id: InputMaybe<Order_By>
+  shortName: InputMaybe<Order_By>
+  updatedAt: InputMaybe<Order_By>
+  updatedBy: InputMaybe<Order_By>
+  warehouseGroupId: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: warehouses */
+export interface Warehouses_Pk_Columns_Input {
+  id: Scalars['uuid']
+}
+
+/** select columns of table "warehouses" */
+export enum Warehouses_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+  /** column name */
+  WarehouseGroupId = 'warehouseGroupId',
+}
+
+/** input type for updating data in table "warehouses" */
+export interface Warehouses_Set_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+  warehouseGroupId: InputMaybe<Scalars['uuid']>
+}
+
+/** Streaming cursor of the table "warehouses" */
+export interface Warehouses_Stream_Cursor_Input {
+  /** Stream column input with initial value */
+  initial_value: Warehouses_Stream_Cursor_Value_Input
+  /** cursor ordering */
+  ordering: InputMaybe<Cursor_Ordering>
+}
+
+/** Initial value of the column from where the streaming should start */
+export interface Warehouses_Stream_Cursor_Value_Input {
+  createdAt: InputMaybe<Scalars['timestamptz']>
+  createdBy: InputMaybe<Scalars['uuid']>
+  disabled: InputMaybe<Scalars['Boolean']>
+  fullName: InputMaybe<Scalars['String']>
+  id: InputMaybe<Scalars['uuid']>
+  shortName: InputMaybe<Scalars['String']>
+  updatedAt: InputMaybe<Scalars['timestamptz']>
+  updatedBy: InputMaybe<Scalars['uuid']>
+  warehouseGroupId: InputMaybe<Scalars['uuid']>
+}
+
+/** update columns of table "warehouses" */
+export enum Warehouses_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  CreatedBy = 'createdBy',
+  /** column name */
+  Disabled = 'disabled',
+  /** column name */
+  FullName = 'fullName',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ShortName = 'shortName',
+  /** column name */
+  UpdatedAt = 'updatedAt',
+  /** column name */
+  UpdatedBy = 'updatedBy',
+  /** column name */
+  WarehouseGroupId = 'warehouseGroupId',
+}
+
+export interface Warehouses_Updates {
+  /** sets the columns of the filtered rows to the given values */
+  _set: InputMaybe<Warehouses_Set_Input>
+  where: Warehouses_Bool_Exp
+}
+
+export interface UserWithRolesFieldsFragment {
+  id: string
+  email: string | null
+  displayName: string
+  locale: string
+  defaultRole: string
+  avatarUrl: string
+  lastSeen: string | null
+  metadata: string | null
+  isAnonymous: boolean
+  disabled: boolean
+  roles: Array<{ role: string }>
+}
 
 export type UserWithRolesQueryVariables = Exact<{
   id: Scalars['uuid']
 }>
 
-export interface UserWithRolesQuery { user: { id: string; email: string | null; displayName: string; locale: string; defaultRole: string; avatarUrl: string; lastSeen: string | null; metadata: string | null; isAnonymous: boolean; disabled: boolean; roles: Array<{ role: string }> } | null }
+export interface UserWithRolesQuery {
+  user: {
+    id: string
+    email: string | null
+    displayName: string
+    locale: string
+    defaultRole: string
+    avatarUrl: string
+    lastSeen: string | null
+    metadata: string | null
+    isAnonymous: boolean
+    disabled: boolean
+    roles: Array<{ role: string }>
+  } | null
+}
 
 export const UserWithRolesFieldsFragmentDoc = gql`
-    fragment userWithRolesFields on users {
-  id
-  email
-  displayName
-  locale
-  defaultRole
-  roles {
-    role
+  fragment userWithRolesFields on users {
+    id
+    email
+    displayName
+    locale
+    defaultRole
+    roles {
+      role
+    }
+    avatarUrl
+    lastSeen
+    metadata
+    isAnonymous
+    disabled
   }
-  avatarUrl
-  lastSeen
-  metadata
-  isAnonymous
-  disabled
-}
-    `
+`
 export const UserWithRolesDocument = gql`
-    query userWithRoles($id: uuid!) {
-  user(id: $id) {
-    ...userWithRolesFields
+  query userWithRoles($id: uuid!) {
+    user(id: $id) {
+      ...userWithRolesFields
+    }
   }
-}
-    ${UserWithRolesFieldsFragmentDoc}`
+  ${UserWithRolesFieldsFragmentDoc}
+`
 
-export function useUserWithRolesQuery(options: Omit<Urql.UseQueryArgs<never, UserWithRolesQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<UserWithRolesQuery>({ query: UserWithRolesDocument, ...options })
+export function useUserWithRolesQuery(
+  options: Omit<
+    Urql.UseQueryArgs<never, UserWithRolesQueryVariables>,
+    'query'
+  > = {},
+) {
+  return Urql.useQuery<UserWithRolesQuery>({
+    query: UserWithRolesDocument,
+    ...options,
+  })
 }

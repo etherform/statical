@@ -2,8 +2,7 @@ export function domReady(condition: DocumentReadyState[] = ['complete', 'interac
   return new Promise((resolve) => {
     if (condition.includes(document.readyState)) {
       resolve(true)
-    }
-    else {
+    } else {
       document.addEventListener('readystatechange', () => {
         if (condition.includes(document.readyState))
           resolve(true)

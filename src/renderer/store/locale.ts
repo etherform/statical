@@ -24,7 +24,7 @@ export const useLocaleStore = defineStore({
   }),
   actions: {
     setLocale(s: string) {
-      const locale = this.elementLocaleArray.find((l) => l.name === s)
+      const locale = this.elementLocaleArray.find(l => l.name === s)
       if (locale) {
         appLocale.value = locale.name
         this.current.text = locale.name
