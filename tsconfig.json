@@ -20,14 +20,12 @@
       "vite/client",
       "vue/ref-macros",
       "element-plus/global",
-      "@intlify/unplugin-vue-i18n/messages"
+      "@intlify/unplugin-vue-i18n/messages",
+      "unplugin-vue-router/client"
     ],
-    "typeRoots": ["node_modules/@types", "src/renderer/types"],
+    "typeRoots": ["types"],
     "paths": {
-      "~/*": ["src/renderer/*"],
-      "@/*": ["src/main/*"],
-      "&/*": ["src/preload/*"],
-      "#/*": ["src/shared/*"]
+      "~/*": ["src/*"],
     }
   },
   "vueCompilerOptions": {
@@ -45,5 +43,5 @@
     },
   },
 
-  "exclude": ["build/**/*", "node_modules/**/*"]
+  "include": ["src"]
 }

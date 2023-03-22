@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useNhostClient } from '@nhost/vue'
 import { useTitle } from '@vueuse/core'
+import { invoke } from '@tauri-apps/api/tauri'
 import { logger } from '~/utils'
 
 const app = useAppStore()
@@ -12,11 +13,11 @@ const ws = useWSClient()
 
 useTitle(() => app.title)
 
-watch(
+/* watch(
   () => app.title,
   title => window.titlebar.setTitle(title),
   { immediate: true },
-)
+) */
 
 watch(
   () => user.locale,
@@ -24,8 +25,9 @@ watch(
   { immediate: true },
 )
 
-onMounted(() => {
-  window.api.finishLoadingAnimation()
+onMounted(async () => {
+  app.os = await invoke<string>('get_os')
+  /* window.api.finishLoadingAnimation() */
 
   nhost.auth.onAuthStateChanged(async (event, session) => {
     logger.debug(`AUTH_EVENT => ${event}`)
@@ -64,6 +66,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <titlebar v-if="app.os === 'windows' || app.os === 'linux' || app.os === 'macos'" />
   <el-config-provider :locale="locale.current.ui" size="default" :z-index="3000" :message="{ max: 3 }">
     <app-layout />
   </el-config-provider>

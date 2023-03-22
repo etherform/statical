@@ -9,7 +9,7 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-import { safelist, shortcuts } from './src/renderer/styles/unocss'
+import { safelist, shortcuts } from './src/styles/unocss'
 
 export default defineConfig({
   shortcuts,

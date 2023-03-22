@@ -13,7 +13,7 @@
     }
   ],
   "i18n-ally.localesPaths": [
-    "src/shared/locales"
+    "translations"
   ],
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "nested",

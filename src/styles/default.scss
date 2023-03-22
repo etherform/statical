@@ -1,5 +1,17 @@
 @import 'nprogress/nprogress.css';
 
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #333;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
 #app {
   display: flex;
   width: 100%;
@@ -7,8 +19,6 @@
   margin: 0;
   padding: 0;
 
-  /* -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility; */
 }
 
 #nprogress .bar {

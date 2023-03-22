@@ -44,4 +44,4 @@ export const useLocaleStore = defineStore({
 )
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useLocaleStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useLocaleStore as any, import.meta.hot))

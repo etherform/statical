@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useSignInEmailPassword } from '@nhost/vue'
+import { invoke } from '@tauri-apps/api'
 import { logger } from '~/utils/logger'
 import { icons } from '~/styles/icons'
 
@@ -32,6 +33,10 @@ const locales = {
 }
 
 const handleSignIn = async () => {
+  invoke<string>('get_os')
+    .then(os => logger.debug(`OS: ${os}`))
+    .catch(err => logger.error(`OS err: ${err}`))
+
   const { error } = await signInEmailPassword(form.email, form.password)
   if (error)
     logger.error(`Sign-in failed: ${error.message}`)

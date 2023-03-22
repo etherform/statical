@@ -1,13 +1,12 @@
 import type { RemovableRef } from '@vueuse/core'
 import { useStorage } from '@vueuse/core'
 import { acceptHMRUpdate, defineStore } from 'pinia'
-/* import type {  } from 'vue-router' */
-import type { RouteLocationNormalized } from 'vue-router'
-import type { RouteMeta, RouteRecordRaw } from 'vue-router/auto'
+import type { RouteLocationNormalized, RouteMeta, RouteRecordRaw } from 'vue-router/auto'
 import { routes } from 'vue-router/auto/routes'
 import { t, te } from '~/setup/i18n'
 
 export interface AppState {
+  os: string
   route: {
     previous: {
       path?: string
@@ -26,6 +25,7 @@ export interface AppState {
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
+    os: 'unknown',
     route: {
       previous: {},
       current: {},
@@ -76,4 +76,4 @@ export const useAppStore = defineStore({
 )
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useAppStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useAppStore as any, import.meta.hot))

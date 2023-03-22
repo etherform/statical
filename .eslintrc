@@ -4,17 +4,5 @@
   "extends": ["@antfu"],
   "rules": {
     "@typescript-eslint/brace-style": ["warn", "1tbs"]
-  },
-  "overrides": [
-    {
-      "files": ["*.graphql"],
-      "extends": [
-        "plugin:@graphql-eslint/schema-recommended",
-        "plugin:prettier/recommended"
-      ],
-      "rules": {
-        "@graphql-eslint/naming-convention": "off"
-      }
-    }
-  ]
+  }
 }

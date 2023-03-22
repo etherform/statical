@@ -2,9 +2,10 @@
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
     "beforeBuildCommand": "pnpm vite build",
-    "beforeDevCommand": "npm run dev",
-    "devPath": "http://localhost:8080",
-    "distDir": "../dist"
+    "beforeDevCommand": "pnpm vite",
+    "devPath": "http://localhost:3344",
+    "distDir": "../dist",
+    "withGlobalTauri": true
   },
   "package": {
     "productName": "statical",
@@ -12,7 +13,18 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": false,
+      "window": {
+        "all": false,
+        "close": true,
+        "hide": true,
+        "show": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "startDragging": true
+      }
     },
     "bundle": {
       "active": true,
@@ -55,11 +67,12 @@
     },
     "windows": [
       {
+        "decorations": false,
         "fullscreen": false,
-        "height": 600,
+        "width": 1280,
+        "height": 720,
         "resizable": true,
-        "title": "Statical",
-        "width": 800
+        "title": "Statical"
       }
     ]
   }

@@ -1,7 +1,7 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import type { RemovableRef } from '@vueuse/core'
 import { useStorage } from '@vueuse/core'
-import type { NhostSession } from '@nhost/core'
+import type { NhostSession } from '@nhost/vue'
 import { logger } from '~/utils/logger'
 import { nhost } from '~/setup/nhost'
 
@@ -71,4 +71,4 @@ export const useUserStore = defineStore({
 })
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useUserStore as any, import.meta.hot))
