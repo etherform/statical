@@ -4,14 +4,6 @@
   "typescript.preferences.autoImportFileExcludePatterns": [
     "vue-router"
   ],
-  "json.schemas": [
-    {
-      "fileMatch": [
-        "/*electron-builder.json"
-      ],
-      "url": "https://json.schemastore.org/electron-builder"
-    }
-  ],
   "i18n-ally.localesPaths": [
     "translations"
   ],

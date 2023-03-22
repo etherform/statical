@@ -12,4 +12,28 @@ export function getOs() {
     return invoke<string>("get_os")
 }
 
+export function setWindowTitle(title: string) {
+    return invoke<null>("set_window_title", { title })
+}
+
+export function minimizeWindow() {
+    return invoke<null>("minimize_window")
+}
+
+export function maximizeWindow() {
+    return invoke<null>("maximize_window")
+}
+
+export function unmaximizeWindow() {
+    return invoke<null>("unmaximize_window")
+}
+
+export function closeWindow() {
+    return invoke<null>("close_window")
+}
+
+export function windowIsMaximized() {
+    return invoke<boolean>("window_is_maximized")
+}
+
 

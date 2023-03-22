@@ -5,7 +5,7 @@
     "beforeDevCommand": "pnpm vite",
     "devPath": "http://localhost:3344",
     "distDir": "../dist",
-    "withGlobalTauri": true
+    "withGlobalTauri": false
   },
   "package": {
     "productName": "statical",
@@ -41,7 +41,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "dev.etherform.statical",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
