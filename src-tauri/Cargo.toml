@@ -5,14 +5,12 @@ version = "0.1.0"
 edition = "2021"
 rust-version = "1.68"
 
-[build]
-
 [dependencies]
 chrono = "0.4.24"
 lazy_static = "1.4.0"
 log = "0.4.17"
 specta = "1.0.2"
-tauri = { version = "1.2.4", features = ["window-close", "window-hide", "window-maximize", "window-minimize", "window-show", "window-start-dragging", "window-unmaximize", "window-unminimize"] }
+tauri = { version = "1.2.4", features = ["os-all", "window-close", "window-hide", "window-maximize", "window-minimize", "window-show", "window-start-dragging", "window-unmaximize", "window-unminimize"] }
 tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev", version = "0.1.0", features = ["colored"] }
 tauri-specta = { version = "1.0.0", features = ["typescript"] }
 window-shadows = "0.2.1"
@@ -24,4 +22,4 @@ tauri-build = { version = "1.2.1", features = [] }
 panic = "abort"
 lto = true
 incremental = false
-opt-level = "s"
+opt-level = 3

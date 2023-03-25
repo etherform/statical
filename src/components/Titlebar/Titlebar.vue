@@ -1,56 +1,85 @@
 <script setup lang="ts">
-import { closeWindow, maximizeWindow, minimizeWindow, unmaximizeWindow, windowIsMaximized } from '~/tauri'
+import { appWindow } from '@tauri-apps/api/window'
+import { icons } from '~/styles/icons'
+import { logger } from '~/utils'
 
-const handleMinimize = () => {
-  minimizeWindow()
-}
+/* const _eventHandle = await listen(TauriEvent.WINDOW_FOCUS, (event) => {
+  logger.trace(event.event)
+  logger.trace(JSON.stringify(event.payload))
+  event.
+}) */
 
-const handleMaximize = async () => {
-  if (await windowIsMaximized())
-    unmaximizeWindow()
-  else
-    maximizeWindow()
-}
+const app = useAppStore()
 
-const handleClose = () => {
-  closeWindow()
-}
+const handleMinimize = () => appWindow.minimize()
+const handleMaximize = () => appWindow.toggleMaximize()
+const handleClose = () => appWindow.close()
+
+onMounted(async () => {
+  app.window.isMaximized = await appWindow.isMaximized()
+
+  const _unlistenFocusEvent = await appWindow.onFocusChanged(({ payload: focused }) => {
+    logger.trace(`Focus changed, window is now ${focused ? 'focused' : 'unfocused'}.`)
+    app.window.isFocused = focused
+  })
+
+  const _unlistenResizeEvent = await appWindow.onResized(async () => {
+    // TODO: figure a way to delay firing this, so it won't fire a thousand times when manually resizing a window
+    // or find another way to change maximized window state
+    app.window.isMaximized = await appWindow.isMaximized()
+    logger.trace(`Window size change. Window is ${app.window.isMaximized ? 'maximized' : 'not maximized'}.`)
+  })
+})
 </script>
 
 <template>
-  <div data-tauri-drag-region class="titlebar">
-    <div id="titlebar-minimize" class="titlebar-button" @click="handleMinimize">
-      <svg viewBox="0 0 11 11"><path d="M11,4.9v1.1H0V4.399h11z" /></svg>
+  <el-header data-tauri-drag-region h-30px flex select-none bg-truegray-800 p-0 :class="app.window.isFocused ? 'text-white' : 'text-gray'">
+    <div class="titlebar-item-container" justify-start pl-4>
+      <div self-center ml-2 mr-2>
+        File
+      </div>
+      <div self-center ml-2 mr-2>
+        About
+      </div>
     </div>
-    <div id="titlebar-maximize" class="titlebar-button" @click="handleMaximize">
-      <svg viewBox="0 0 11 11"><path d="M0,1.7v7.6C0,10.2,0.8,11,1.7,11h7.6c0.9,0,1.7-0.8,1.7-1.7V1.7C11,0.8,10.2,0,9.3,0H1.7C0.8,0,0,0.8,0,1.7z M8.8,9.9H2.2c-0.6,0-1.1-0.5-1.1-1.1V2.2c0-0.6,0.5-1.1,1.1-1.1h6.7c0.6,0,1.1,0.5,1.1,1.1v6.7C9.9,9.4,9.4,9.9,8.8,9.9z" /></svg>
+    <div class="titlebar-item-container" justify-center>
+      <div self-center>
+        Hello
+      </div>
     </div>
-    <div id="titlebar-close" class="titlebar-button" @click="handleClose">
-      <svg viewBox="0 0 11 11"><path d="M6.279 5.5L11 10.221l-.779.779L5.5 6.279.779 11 0 10.221 4.721 5.5 0 .779.779 0 5.5 4.721 10.221 0 11 .779 6.279 5.5z" /></svg>
+    <div class="titlebar-item-container" justify-end>
+      <div class="titlebar-icon-container">
+        <el-icon class="titlebar-icon" :class="icons.minimize" @click="handleMinimize" />
+      </div>
+      <div class="titlebar-icon-container" @click="handleMaximize">
+        <el-icon class="titlebar-icon" :class="app.window.isMaximized ? icons.unmaximize : icons.maximize" />
+      </div>
+      <!-- TODO: Make red background on hover for close button. -->
+      <div class="titlebar-icon-container">
+        <el-icon class="titlebar-icon" :class="icons.close" @click="handleClose" />
+      </div>
     </div>
-  </div>
+  </el-header>
 </template>
 
-<style scoped>
-.titlebar {
-  height: 30px;
-  background: #329ea3;
-  user-select: none;
+<style lang="scss" scoped>
+.titlebar-item-container {
   display: flex;
-  justify-content: flex-end;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  flex: 1;
+  pointer-events: none;
 }
-.titlebar-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+.titlebar-icon-container {
+  display: flex;
+  pointer-events: all;
+  > &:hover {
+  background-color: rgba(82, 82, 82, 0.5);
+  }
+}
+.titlebar-icon {
+  height: 18px;
   width: 30px;
-  height: 30px;
-}
-.titlebar-button:hover {
-  background: #5bbec3;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  align-self: center;
 }
 </style>

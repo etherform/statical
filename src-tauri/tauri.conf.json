@@ -24,6 +24,9 @@
         "unmaximize": true,
         "unminimize": true,
         "startDragging": true
+      },
+      "os": {
+        "all": true
       }
     },
     "bundle": {
@@ -71,6 +74,7 @@
         "fullscreen": false,
         "width": 1280,
         "height": 720,
+        "titleBarStyle": "Overlay",
         "resizable": true,
         "title": "Statical"
       }

@@ -6,6 +6,7 @@ import VueRouter from 'unplugin-vue-router/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
+import CSP from 'vite-plugin-csp'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import UnoCSS from 'unocss/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
@@ -31,6 +32,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   }
 
   const build: UserConfig['build'] = {
+    // See https://tauri.app/v1/references/webview-versions for details
+    target: ['es2021', 'chrome100', 'safari13'],
     sourcemap: command === 'serve' ? 'inline' : false,
     emptyOutDir: true,
     rollupOptions: {
@@ -43,11 +46,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   }
 
   const css: UserConfig['css'] = {
-    /* preprocessorOptions: {
+    preprocessorOptions: {
       scss: {
         additionalData: '@use "~/styles/element.scss" as *;',
       },
-    }, */
+    },
   }
 
   const plugins: UserConfig['plugins'] = [
@@ -86,6 +89,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       runtimeOnly: true,
       compositionOnly: true,
       include: [path.resolve(projectRoot, 'translations/**')],
+    }),
+    // TODO: read into CSP and configure it later
+    CSP({
+      enabled: true,
+      onDev: 'permissive',
     }),
   ]
 

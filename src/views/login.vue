@@ -46,7 +46,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-container h-full bg-neutral-50 pointer-events-none>
+  <el-container h-full bg-gray-100 pointer-events-none>
     <el-header w-full />
     <el-main w-full flex-grow flex justify-center items-start>
       <el-form :model="form" autocomplete="on" w-sm size="large" pt-16 select-none pointer-events-auto>
@@ -110,7 +110,7 @@ onMounted(() => {
           </el-tooltip>
         </el-form-item>
         <el-form-item>
-          <el-button w-screen :loading="isLoading" type="primary" tabindex="3" @click="handleSignIn">
+          <el-button w-full :loading="isLoading" type="primary" tabindex="3" @click="handleSignIn">
             {{ t('buttons.login') }}
           </el-button>
         </el-form-item>

@@ -7,6 +7,10 @@ import { t, te } from '~/setup/i18n'
 
 export interface AppState {
   os: string
+  window: {
+    isMaximized: boolean
+    isFocused: boolean
+  }
   route: {
     previous: {
       path?: string
@@ -26,6 +30,10 @@ export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
     os: 'unknown',
+    window: {
+      isMaximized: false,
+      isFocused: false,
+    },
     route: {
       previous: {},
       current: {},

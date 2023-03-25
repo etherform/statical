@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { useNhostClient } from '@nhost/vue'
 import { useTitle } from '@vueuse/core'
-import { invoke } from '@tauri-apps/api/tauri'
+import { platform } from '@tauri-apps/api/os'
+import devtools from '@vue/devtools'
 import { logger } from '~/utils'
 
 const app = useAppStore()
@@ -10,6 +11,9 @@ const locale = useLocaleStore()
 const router = useRouter()
 const { nhost } = useNhostClient()
 const ws = useWSClient()
+
+if (import.meta.env.DEV)
+  devtools.connect('http://localhost', 8098)
 
 useTitle(() => app.title)
 
@@ -26,7 +30,7 @@ watch(
 )
 
 onMounted(async () => {
-  app.os = await invoke<string>('get_os')
+  app.os = await platform()
   /* window.api.finishLoadingAnimation() */
 
   nhost.auth.onAuthStateChanged(async (event, session) => {
@@ -66,8 +70,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <titlebar v-if="app.os === 'windows' || app.os === 'linux' || app.os === 'macos'" />
   <el-config-provider :locale="locale.current.ui" size="default" :z-index="3000" :message="{ max: 3 }">
-    <app-layout />
+    <el-container direction="vertical">
+      <titlebar v-if="app.os === 'win32' || app.os === 'linux' || app.os === 'macos'" />
+      <app-layout />
+    </el-container>
   </el-config-provider>
 </template>

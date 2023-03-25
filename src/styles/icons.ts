@@ -11,4 +11,12 @@ export const icons = {
   home: 'i-majesticons:home-line',
   dict: 'i-majesticons:book-open-line',
   locale: 'i-majesticons:translate-line',
+  // titlebar: close window
+  close: 'i-cil-x',
+  // titlebar: minimize window
+  minimize: 'i-cil-window-minimize',
+  // titlebar: unminimize window
+  maximize: 'i-cil-window-maximize',
+  // titlebar: restore window
+  unmaximize: 'i-cil-window-restore',
 }
