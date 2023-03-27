@@ -18,8 +18,13 @@ export interface UserState {
 export const useUserStore = defineStore({
   id: 'user',
   state: (): UserState => ({
+    id: undefined,
+    name: undefined,
+    email: undefined,
+    roles: undefined,
     locale: 'ru',
     refreshToken: useStorage('refreshToken', ''),
+    session: undefined,
   }),
   getters: {
     isAuthenticated(state) {
@@ -62,8 +67,12 @@ export const useUserStore = defineStore({
       if (error)
         logger.debug(`AUTH => Failed to refresh session: ${error.message}`)
 
-      if (session)
+      if (session) {
+        if (!this.session)
+          this.session = session
+
         return true
+      }
 
       return false
     },

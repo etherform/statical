@@ -2,7 +2,6 @@
 import { useSignInEmailPassword } from '@nhost/vue'
 import { logger } from '~/utils/logger'
 import { icons } from '~/styles/icons'
-import { setWindowTitle } from '~/tauri'
 
 const { t } = useI18n()
 const user = useUserStore()
@@ -33,8 +32,6 @@ const locales = {
 }
 
 const handleSignIn = async () => {
-  await setWindowTitle('Something')
-
   const { error } = await signInEmailPassword(form.email, form.password)
   if (error)
     logger.error(`Sign-in failed: ${error.message}`)

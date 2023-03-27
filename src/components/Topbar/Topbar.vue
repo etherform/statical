@@ -12,8 +12,8 @@ const handleSignOut = async () => await nhost.auth.signOut()
 </script>
 
 <template>
-  <el-header shadow h-12 flex items-center p-0 bg-white color-gray-700>
-    <el-icon :class="icons.sidebar" icon-btn-7 ml-2 @click="app.toggleSidebar" />
+  <q-header shadow h-12 flex items-center p-0 bg-white color-gray-700>
+    <q-icon :class="icons.sidebar" icon-btn-7 ml-2 @click="app.toggleSidebar" />
     <el-divider direction="vertical" h-6 />
     <div flex-grow />
     <el-divider direction="vertical" h-6 />
@@ -46,5 +46,5 @@ const handleSignOut = async () => await nhost.auth.signOut()
         </el-dropdown-menu>
       </template>
     </el-dropdown>
-  </el-header>
+  </q-header>
 </template>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { appWindow } from '@tauri-apps/api/window'
 import { icons } from '~/styles/icons'
 import { logger } from '~/utils'
 
@@ -11,29 +10,41 @@ import { logger } from '~/utils'
 
 const app = useAppStore()
 
-const handleMinimize = () => appWindow.minimize()
-const handleMaximize = () => appWindow.toggleMaximize()
-const handleClose = () => appWindow.close()
+const handleMinimize: Ref<() => Promise<void>> = ref(async () => {})
+const handleMaximize: Ref<() => Promise<void>> = ref(async () => {})
+const handleClose: Ref<() => Promise<void>> = ref(async () => {})
 
 onMounted(async () => {
-  app.window.isMaximized = await appWindow.isMaximized()
+  if (app.tauri) {
+    const { appWindow } = await import('@tauri-apps/api/window')
 
-  const _unlistenFocusEvent = await appWindow.onFocusChanged(({ payload: focused }) => {
-    logger.trace(`Focus changed, window is now ${focused ? 'focused' : 'unfocused'}.`)
-    app.window.isFocused = focused
-  })
+    handleMinimize.value = async () => appWindow.minimize()
+    handleMaximize.value = async () => appWindow.toggleMaximize()
+    handleClose.value = async () => appWindow.close()
 
-  const _unlistenResizeEvent = await appWindow.onResized(async () => {
+    app.tauri.isMaximized = await appWindow.isMaximized()
+
+    const _unlistenFocusEvent = await appWindow.onFocusChanged(({ payload: focused }) => {
+      if (app.tauri) {
+        app.tauri.isFocused = focused
+        logger.trace(`Focus changed, window is now ${focused ? 'focused' : 'unfocused'}.`)
+      }
+    })
+
+    const _unlistenResizeEvent = await appWindow.onResized(async () => {
     // TODO: figure a way to delay firing this, so it won't fire a thousand times when manually resizing a window
     // or find another way to change maximized window state
-    app.window.isMaximized = await appWindow.isMaximized()
-    logger.trace(`Window size change. Window is ${app.window.isMaximized ? 'maximized' : 'not maximized'}.`)
-  })
+      if (app.tauri) {
+        app.tauri.isMaximized = await appWindow.isMaximized()
+        logger.trace(`Window size change. Window is ${app.tauri.isMaximized ? 'maximized' : 'not maximized'}.`)
+      }
+    })
+  }
 })
 </script>
 
 <template>
-  <el-header data-tauri-drag-region h-30px flex select-none bg-truegray-800 p-0 :class="app.window.isFocused ? 'text-white' : 'text-gray'">
+  <q-header :bordered="true" data-tauri-drag-region flex select-none bg-truegray-800 p-0 :class="app.tauri?.isFocused ? 'text-white' : 'text-gray'">
     <div class="titlebar-item-container" justify-start pl-4>
       <div self-center ml-2 mr-2>
         File
@@ -49,17 +60,17 @@ onMounted(async () => {
     </div>
     <div class="titlebar-item-container" justify-end>
       <div class="titlebar-icon-container">
-        <el-icon class="titlebar-icon" :class="icons.minimize" @click="handleMinimize" />
+        <q-icon class="titlebar-icon" :class="icons.minimize" @click="handleMinimize" />
       </div>
       <div class="titlebar-icon-container" @click="handleMaximize">
-        <el-icon class="titlebar-icon" :class="app.window.isMaximized ? icons.unmaximize : icons.maximize" />
+        <q-icon class="titlebar-icon" :class="app.tauri?.isMaximized ? icons.unmaximize : icons.maximize" />
       </div>
       <!-- TODO: Make red background on hover for close button. -->
       <div class="titlebar-icon-container">
-        <el-icon class="titlebar-icon" :class="icons.close" @click="handleClose" />
+        <q-icon class="titlebar-icon" :class="icons.close" @click="handleClose" />
       </div>
     </div>
-  </el-header>
+  </q-header>
 </template>
 
 <style lang="scss" scoped>

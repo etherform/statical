@@ -1,6 +1,4 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.preferences.autoImportFileExcludePatterns": [
     "vue-router"
   ],
@@ -9,5 +7,10 @@
   ],
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "nested",
-  "grammarly.files.include": ["**/README.md", "**/readme.md", "**/*.txt"],
+  "grammarly.files.include": [
+    "**/README.md",
+    "**/readme.md",
+    "**/*.txt"
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
 }

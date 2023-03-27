@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { useNhostClient } from '@nhost/vue'
 import { useTitle } from '@vueuse/core'
-import { platform } from '@tauri-apps/api/os'
 import devtools from '@vue/devtools'
-import { logger } from '~/utils'
+import { initializeLogger, logger } from '~/utils'
 
 const app = useAppStore()
 const user = useUserStore()
@@ -11,9 +10,6 @@ const locale = useLocaleStore()
 const router = useRouter()
 const { nhost } = useNhostClient()
 const ws = useWSClient()
-
-if (import.meta.env.DEV)
-  devtools.connect('http://localhost', 8098)
 
 useTitle(() => app.title)
 
@@ -30,8 +26,26 @@ watch(
 )
 
 onMounted(async () => {
-  app.os = await platform()
-  /* window.api.finishLoadingAnimation() */
+  if (window.__TAURI__ !== undefined) {
+    const { platform } = await import('@tauri-apps/api/os')
+    const { getLogLevel } = await import('~/tauri')
+
+    app.tauri = {
+      os: await platform(),
+      isMaximized: false,
+      isFocused: false,
+      logLevel: await getLogLevel(),
+    }
+
+    await initializeLogger()
+
+    logger.debug('TAURI => Initialized.')
+
+    if (import.meta.env.DEV)
+      devtools.connect('http://localhost', 8098)
+
+    // TODO: Implement window loading splash/animation and finish it here.
+  }
 
   nhost.auth.onAuthStateChanged(async (event, session) => {
     logger.debug(`AUTH_EVENT => ${event}`)
@@ -70,10 +84,26 @@ onMounted(async () => {
 </script>
 
 <template>
-  <el-config-provider :locale="locale.current.ui" size="default" :z-index="3000" :message="{ max: 3 }">
-    <el-container direction="vertical">
-      <titlebar v-if="app.os === 'win32' || app.os === 'linux' || app.os === 'macos'" />
+  <q-layout class="main-container" view="hHh lpr fff">
+    <titlebar v-if="app.drawTitlebar" class="main-titlebar" />
+    <q-layout container :class="app.drawTitlebar ? 'app-container-with-titlebar' : 'app-container'">
       <app-layout />
-    </el-container>
-  </el-config-provider>
+    </q-layout>
+  </q-layout>
 </template>
+
+<style lang="scss" scoped>
+$main-titlebar-height: 30px;
+
+.main-titlebar {
+  height: $main-titlebar-height;
+}
+
+.app-container {
+  height: 100vh;
+}
+
+.app-container-with-titlebar {
+  height: calc(100vh - #{$main-titlebar-height});
+}
+</style>

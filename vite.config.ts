@@ -4,12 +4,12 @@ import { defineConfig, loadEnv } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import VueRouter from 'unplugin-vue-router/vite'
 import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import CSP from 'vite-plugin-csp'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import UnoCSS from 'unocss/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
+import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   /* const productionMode = mode === 'production' */
@@ -46,23 +46,27 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   }
 
   const css: UserConfig['css'] = {
-    preprocessorOptions: {
+    /* preprocessorOptions: {
       scss: {
         additionalData: '@use "~/styles/element.scss" as *;',
       },
-    },
+    }, */
   }
 
   const plugins: UserConfig['plugins'] = [
     VueRouter({
       routesFolder: 'src/views',
       routeBlockLang: 'yaml',
-      dts: 'types/typed-router.d.ts',
+      dts: 'src/types/typed-router.d.ts',
       importMode: 'async',
     }),
     Vue({
       include: [/\.vue$/, /\.md$/],
       reactivityTransform: true,
+      template: { transformAssetUrls },
+    }),
+    quasar({
+      sassVariables: 'src/styles/quasar.variables.scss',
     }),
     AutoImport({
       dts: 'types/auto-imports.d.ts',
@@ -76,13 +80,15 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       dirs: ['composables', 'store'],
       /* resolvers: [], */
       vueTemplate: true,
+      eslintrc: { enabled: true },
     }),
     Components({
       dirs: ['components'],
       dts: 'types/components.d.ts',
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      resolvers: [ElementPlusResolver({ importStyle: false /* 'sass' */ })],
+      resolvers: [],
+      version: 3,
     }),
     UnoCSS(),
     VueI18n({

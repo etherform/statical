@@ -3,7 +3,7 @@ const app = useAppStore()
 </script>
 
 <template>
-  <el-aside bg-bluegray-700 shadow h-full w-auto>
+  <q-drawer bg-bluegray-700 shadow h-full w-auto>
     <el-menu
       h-full
       :default-active="app.route.current.path"
@@ -18,7 +18,7 @@ const app = useAppStore()
         :item="item"
       />
     </el-menu>
-  </el-aside>
+  </q-drawer>
 </template>
 
 <style lang="scss" scoped>

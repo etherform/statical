@@ -6,10 +6,11 @@ import { routes } from 'vue-router/auto/routes'
 import { t, te } from '~/setup/i18n'
 
 export interface AppState {
-  os: string
-  window: {
+  tauri?: {
+    os: string
     isMaximized: boolean
     isFocused: boolean
+    logLevel: number
   }
   route: {
     previous: {
@@ -29,11 +30,7 @@ export interface AppState {
 export const useAppStore = defineStore({
   id: 'app',
   state: (): AppState => ({
-    os: 'unknown',
-    window: {
-      isMaximized: false,
-      isFocused: false,
-    },
+    tauri: undefined,
     route: {
       previous: {},
       current: {},
@@ -43,6 +40,12 @@ export const useAppStore = defineStore({
     },
   }),
   getters: {
+    drawTitlebar(state): boolean {
+      if (state.tauri && (state.tauri.os === 'win32' || state.tauri.os === 'linux' || state.tauri.os === 'macos'))
+        return true
+      else
+        return false
+    },
     title(state): string {
       if (state.route.current.meta?.title && te(state.route.current.meta?.title as string))
         return `Statical - ${t(state.route.current.meta.title as string)}`

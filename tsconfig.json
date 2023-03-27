@@ -23,25 +23,11 @@
       "@intlify/unplugin-vue-i18n/messages",
       "unplugin-vue-router/client"
     ],
-    "typeRoots": ["types"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "paths": {
       "~/*": ["src/*"],
     }
   },
-  "vueCompilerOptions": {
-    "target": 3,
-  },
-  "ts-node": {
-    "transpileOnly": true,
-    "files": true,
-    "compilerOptions": {
-      "module": "commonjs",
-      "target": "ES2022",
-      "esModuleInterop": true,
-      "sourceMap": false,
-      "resolveJsonModule": true,
-    },
-  },
-
-  "include": ["src"]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["build", "dist", "node_modules", "src-tauri"]
 }
