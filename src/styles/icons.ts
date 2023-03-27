@@ -1,7 +1,13 @@
 export const icons = {
   sidebar: 'i-quill:hamburger-sidebar',
+  // login: email inputfield icon
   login: 'i-majesticons:user-line',
+  // password: password inputfield prepend icon
   password: 'i-majesticons:lock-open-line',
+  // password: password inputfield append icon
+  eyeOpen: 'i-majesticons:eye-line',
+  // password: password inputfield append icon
+  eyeClosed: 'i-majesticons:eye-off-line',
   lock: 'i-majesticons:lock-line',
   unlock: 'i-majesticons:lock-open-line',
   expand: 'i-majesticons:arrows-expand-full-line',

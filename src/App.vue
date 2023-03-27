@@ -84,11 +84,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <q-layout class="main-container" view="hHh lpr fff">
+  <q-layout class="main-container" view="hHh Lpr fFf">
     <titlebar v-if="app.drawTitlebar" class="main-titlebar" />
-    <q-layout container :class="app.drawTitlebar ? 'app-container-with-titlebar' : 'app-container'">
-      <app-layout />
-    </q-layout>
+    <app-layout />
   </q-layout>
 </template>
 

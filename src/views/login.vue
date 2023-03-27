@@ -5,7 +5,6 @@ import { icons } from '~/styles/icons'
 
 const { t } = useI18n()
 const user = useUserStore()
-const locale = useLocaleStore()
 const { isLoading, signInEmailPassword } = useSignInEmailPassword()
 
 const email = ref()
@@ -14,22 +13,11 @@ const password = ref()
 const form = reactive({
   email: '',
   password: '',
+  passwordVisible: false,
+  // TODO: detect if caps lock is pressed
   passwordTooltip: false,
   isLoading: false,
-  selectedLocale: locale.elementLocaleArray.findIndex(e => e.name === user.locale),
 })
-
-watch(
-  () => form.selectedLocale,
-  () => user.locale = locale.elementLocaleArray[form.selectedLocale].name,
-  { immediate: true },
-)
-
-// maybe this could be done with i18n by referencing strings from different locales
-const locales = {
-  ru: 'Русский',
-  en: 'English',
-}
 
 const handleSignIn = async () => {
   const { error } = await signInEmailPassword(form.email, form.password)
@@ -43,82 +31,80 @@ onMounted(() => {
 </script>
 
 <template>
-  <el-container h-full bg-gray-100 pointer-events-none>
-    <el-header w-full />
-    <el-main w-full flex-grow flex justify-center items-start>
-      <el-form :model="form" autocomplete="on" w-sm size="large" pt-16 select-none pointer-events-auto>
-        <img src="/logo-transp-bg.png" w-sm pointer-events-none>
-        <div flex pb-4 w-full justify-between text-gray-600>
-          <h1 pointer-events-none text-2xl>
-            {{ t('labels.login') }}
-          </h1>
-          <div />
-          <el-dropdown text-bluegray-600 trigger="click" placement="top" size="small">
-            <el-icon :class="icons.locale" icon-btn-6 />
-            <template #dropdown>
-              <el-dropdown-menu class="no-select">
-                <el-radio-group v-model="form.selectedLocale">
-                  <el-dropdown-item>
-                    <el-radio :label="0" size="small">
-                      {{ locales.en }}
-                    </el-radio>
-                  </el-dropdown-item>
-                  <el-dropdown-item>
-                    <el-radio :label="1" size="small">
-                      {{ locales.ru }}
-                    </el-radio>
-                  </el-dropdown-item>
-                </el-radio-group>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </div>
-        <el-form-item prop="username">
-          <el-input
-            ref="email"
-            v-model="form.email"
-            :placeholder="t('strings_lower.email')"
-            type="text"
-            tabindex="1"
-            autocomplete="on"
-            @keyup.enter="handleSignIn"
-          >
-            <template #prefix>
-              <el-icon :class="icons.login" w-4 h-4 />
-            </template>
-          </el-input>
-        </el-form-item>
-        <el-form-item prop="password">
-          <el-tooltip :disabled="!form.passwordTooltip" :content="t('tooltips.caps')" placement="right" manual>
-            <el-input
-              ref="password"
-              v-model="form.password"
-              type="password"
-              :placeholder="t('strings_lower.password')"
-              tabindex="2"
-              autocomplete="on"
-              show-password
-              @keyup.enter="handleSignIn"
-            >
-              <template #prefix>
-                <el-icon :class="icons.lock" w-4 h-4 />
-              </template>
-            </el-input>
-          </el-tooltip>
-        </el-form-item>
-        <el-form-item>
-          <el-button w-full :loading="isLoading" type="primary" tabindex="3" @click="handleSignIn">
-            {{ t('buttons.login') }}
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </el-main>
-    <el-footer w-screen />
-  </el-container>
+  <div w-screen flex flex-col justify-around>
+    <div flex flex-1 self-center items-end select-none w-xs>
+      <img src="/logo-transp-bg.png" w-sx pointer-events-none mb-5>
+    </div>
+    <q-form select-none flex flex-col flex-1 self-center w-xs :model="form">
+      <div flex pb-2 justify-between text-gray-600 items-center>
+        <h5>
+          {{ t('labels.login') }}
+        </h5>
+        <div flex-grow />
+        <q-btn-dropdown flat class="dropdown-no-icon" pl-2 pr-2 menu-anchor="top middle" menu-self="bottom middle" :menu-offset="[0, 4]">
+          <template #label>
+            <q-icon :class="icons.locale" />
+          </template>
+          <div m-2 flex flex-row>
+            <!-- TODO: find a way to parse existing locale names from i18n to avoid using raw string -->
+            <q-radio v-model="user.locale" size="xs" val="en" label="English" />
+            <q-separator vertical ml-3 mr-1 />
+            <q-radio v-model="user.locale" size="xs" val="ru" label="Русский" />
+          </div>
+        </q-btn-dropdown>
+      </div>
+      <q-input
+        ref="email"
+        v-model="form.email"
+        class="form-item"
+        outlined
+        dense
+        :placeholder="t('strings_lower.email')"
+        type="email"
+        tabindex="1"
+        autocomplete="on"
+        @keyup.enter="handleSignIn"
+      >
+        <template #prepend>
+          <q-icon :class="icons.login" w-4 h-4 />
+        </template>
+      </q-input>
+      <q-input
+        ref="password"
+        v-model="form.password"
+        class="form-item"
+        outlined
+        dense
+        :type="form.passwordVisible ? 'text' : 'password'"
+        :placeholder="t('strings_lower.password')"
+        tabindex="2"
+        autocomplete="on"
+        show-password
+        @keyup.enter="handleSignIn"
+      >
+        <template #prepend>
+          <q-icon :class="icons.lock" w-4 h-4 />
+        </template>
+        <template #append>
+          <q-icon :class="form.passwordVisible ? icons.eyeClosed : icons.eyeOpen" w-4 h-4 @click="form.passwordVisible = !form.passwordVisible" />
+        </template>
+        <q-tooltip :model-value="form.passwordTooltip" anchor="center right" self="center left">
+          {{ t('tooltips.caps') }}
+        </q-tooltip>
+      </q-input>
+
+      <q-btn self-end class="form-item" color="primary" :loading="isLoading" type="submit" tabindex="3" @click.prevent="handleSignIn">
+        {{ t('buttons.login') }}
+      </q-btn>
+    </q-form>
+    <div flex-1 />
+  </div>
 </template>
 
 <style lang="scss" scoped>
-
+.form-item {
+  margin-top: 0.5rem;
+}
 </style>
 
 <route lang="yaml">
