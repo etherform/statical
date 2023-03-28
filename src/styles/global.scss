@@ -4,6 +4,16 @@
   }
 }
 
+.q-item {
+  min-height: 34px;
+
+  .q-item__section--avatar {
+    min-width: 30px;
+    opacity: 0.75;
+  }
+}
+
+
 .no-select {
   -ms-user-select: none;
   -moz-user-select: none;

@@ -23,7 +23,8 @@ export interface AppState {
     }
   }
   sidebar: {
-    collapsed: RemovableRef<boolean>
+    shown: RemovableRef<boolean>
+    mini: boolean
   }
 }
 
@@ -36,7 +37,8 @@ export const useAppStore = defineStore({
       current: {},
     },
     sidebar: {
-      collapsed: useStorage('sidebar-collapsed', false),
+      shown: useStorage('sidebar-shown', false),
+      mini: true,
     },
   }),
   getters: {
@@ -74,7 +76,7 @@ export const useAppStore = defineStore({
   },
   actions: {
     toggleSidebar() {
-      this.sidebar.collapsed = !this.sidebar.collapsed
+      this.sidebar.shown = !this.sidebar.shown
     },
     handleRouteChange(from: RouteLocationNormalized, to: RouteLocationNormalized) {
       this.route.previous.path = from.fullPath

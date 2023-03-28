@@ -2,7 +2,8 @@
 import { useNhostClient } from '@nhost/vue'
 import { useTitle } from '@vueuse/core'
 import devtools from '@vue/devtools'
-import { initializeLogger, logger } from '~/utils'
+import { useQuasar } from 'quasar'
+import { iconMapFn, initializeLogger, logger } from '~/utils'
 
 const app = useAppStore()
 const user = useUserStore()
@@ -10,7 +11,11 @@ const locale = useLocaleStore()
 const router = useRouter()
 const { nhost } = useNhostClient()
 const ws = useWSClient()
+const q = useQuasar()
 
+q.iconMapFn = iconMapFn
+
+/* q.iconSet.set() */
 useTitle(() => app.title)
 
 /* watch(
@@ -84,24 +89,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <q-layout class="main-container" view="hHh Lpr fFf">
-    <titlebar v-if="app.drawTitlebar" class="main-titlebar" />
+  <q-layout view="hHh Lpr fFf">
+    <titlebar v-if="app.drawTitlebar" h-30px z-9999 />
     <app-layout />
   </q-layout>
 </template>
 
-<style lang="scss" scoped>
-$main-titlebar-height: 30px;
+<style lang="scss">
 
-.main-titlebar {
-  height: $main-titlebar-height;
-}
-
-.app-container {
-  height: 100vh;
-}
-
-.app-container-with-titlebar {
-  height: calc(100vh - #{$main-titlebar-height});
-}
 </style>

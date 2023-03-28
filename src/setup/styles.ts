@@ -11,5 +11,8 @@ import '~/styles/hover.scss'
 import 'uno.css'
 
 export const setupStyles = (app: App) => {
-  app.use(Quasar, {})
+  app.use(Quasar, {
+    plugins: {},
+    config: {},
+  })
 }

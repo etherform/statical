@@ -31,7 +31,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div w-screen flex flex-col justify-around>
+  <q-page w-screen flex flex-col justify-around>
     <div flex flex-1 self-center items-end select-none w-xs>
       <img src="/logo-transp-bg.png" w-sx pointer-events-none mb-5>
     </div>
@@ -98,7 +98,7 @@ onMounted(() => {
       </q-btn>
     </q-form>
     <div flex-1 />
-  </div>
+  </q-page>
 </template>
 
 <style lang="scss" scoped>

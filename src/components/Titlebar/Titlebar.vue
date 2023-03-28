@@ -44,7 +44,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <q-header :bordered="true" data-tauri-drag-region flex select-none bg-truegray-800 p-0 :class="app.tauri?.isFocused ? 'text-white' : 'text-gray'">
+  <q-header bordered data-tauri-drag-region flex select-none bg-truegray-800 p-0 :class="app.tauri?.isFocused ? 'text-white' : 'text-gray'">
     <div class="titlebar-item-container" justify-start pl-4>
       <div self-center ml-2 mr-2>
         File
